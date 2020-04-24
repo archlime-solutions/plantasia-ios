@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */; };
+		AB7EDC52245328FD006BFEE6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7EDC51245328FD006BFEE6 /* Colors.xcassets */; };
+		ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8118F24531D6B006369C1 /* TutorialViewController.swift */; };
+		ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8119124531D98006369C1 /* BaseViewController.swift */; };
+		ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0524531551001849FD /* AppDelegate.swift */; };
+		ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0924531551001849FD /* LoadingViewController.swift */; };
+		ABE8CA0D24531551001849FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0B24531551001849FD /* Main.storyboard */; };
+		ABE8CA0F24531553001849FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0E24531553001849FD /* Assets.xcassets */; };
+		ABE8CA1224531553001849FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA1024531553001849FD /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.release.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.release.xcconfig"; sourceTree = "<group>"; };
+		8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.debug.xcconfig"; sourceTree = "<group>"; };
+		AB7EDC51245328FD006BFEE6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		ABA8118F24531D6B006369C1 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		ABA8119124531D98006369C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		ABE8CA0224531551001849FD /* Plantasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plantasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABE8CA0524531551001849FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABE8CA0924531551001849FD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		ABE8CA0C24531551001849FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ABE8CA0E24531553001849FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABE8CA1124531553001849FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ABE8CA1324531553001849FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plantasia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABE8C9FF24531551001849FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A67524212CC16FA52AF4731F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */,
+				0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ABE8C9F924531551001849FD = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA0424531551001849FD /* Plantasia */,
+				ABE8CA0324531551001849FD /* Products */,
+				A67524212CC16FA52AF4731F /* Pods */,
+				EE605B6E8F03911EFBB7896C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		ABE8CA0324531551001849FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA0224531551001849FD /* Plantasia.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABE8CA0424531551001849FD /* Plantasia */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA1A245315BD001849FD /* Models */,
+				ABE8CA1B2453164F001849FD /* Screens */,
+				ABE8CA1C24531657001849FD /* Resources */,
+				ABE8CA1D24531660001849FD /* Utils */,
+			);
+			path = Plantasia;
+			sourceTree = "<group>";
+		};
+		ABE8CA1A245315BD001849FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ABE8CA1B2453164F001849FD /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA1024531553001849FD /* LaunchScreen.storyboard */,
+				ABE8CA0B24531551001849FD /* Main.storyboard */,
+				ABE8CA0924531551001849FD /* LoadingViewController.swift */,
+				ABA8118F24531D6B006369C1 /* TutorialViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		ABE8CA1C24531657001849FD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA0524531551001849FD /* AppDelegate.swift */,
+				ABE8CA1324531553001849FD /* Info.plist */,
+				ABE8CA0E24531553001849FD /* Assets.xcassets */,
+				AB7EDC51245328FD006BFEE6 /* Colors.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ABE8CA1D24531660001849FD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ABA8119124531D98006369C1 /* BaseViewController.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EE605B6E8F03911EFBB7896C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABE8CA0124531551001849FD /* Plantasia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABE8CA1624531553001849FD /* Build configuration list for PBXNativeTarget "Plantasia" */;
+			buildPhases = (
+				60DB233FD6F074F2FA68997B /* [CP] Check Pods Manifest.lock */,
+				ABE8C9FE24531551001849FD /* Sources */,
+				ABE8C9FF24531551001849FD /* Frameworks */,
+				ABE8CA0024531551001849FD /* Resources */,
+				AB3EB61224531B1800203203 /* Swiftlint Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Plantasia;
+			productName = Plantasia;
+			productReference = ABE8CA0224531551001849FD /* Plantasia.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABE8C9FA24531551001849FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "archlime solutions";
+				TargetAttributes = {
+					ABE8CA0124531551001849FD = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = ABE8C9FD24531551001849FD /* Build configuration list for PBXProject "Plantasia" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABE8C9F924531551001849FD;
+			productRefGroup = ABE8CA0324531551001849FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABE8CA0124531551001849FD /* Plantasia */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABE8CA0024531551001849FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABE8CA1224531553001849FD /* LaunchScreen.storyboard in Resources */,
+				AB7EDC52245328FD006BFEE6 /* Colors.xcassets in Resources */,
+				ABE8CA0F24531553001849FD /* Assets.xcassets in Resources */,
+				ABE8CA0D24531551001849FD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		60DB233FD6F074F2FA68997B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Plantasia-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB3EB61224531B1800203203 /* Swiftlint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABE8C9FE24531551001849FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
+				ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */,
+				ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */,
+				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ABE8CA0B24531551001849FD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABE8CA0C24531551001849FD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ABE8CA1024531553001849FD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABE8CA1124531553001849FD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABE8CA1424531553001849FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABE8CA1524531553001849FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABE8CA1724531553001849FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V7C3R87KYJ;
+				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.Plantasia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABE8CA1824531553001849FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V7C3R87KYJ;
+				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.Plantasia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABE8C9FD24531551001849FD /* Build configuration list for PBXProject "Plantasia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABE8CA1424531553001849FD /* Debug */,
+				ABE8CA1524531553001849FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABE8CA1624531553001849FD /* Build configuration list for PBXNativeTarget "Plantasia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABE8CA1724531553001849FD /* Debug */,
+				ABE8CA1824531553001849FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABE8C9FA24531551001849FD /* Project object */;
+}

@@ -1,0 +1,39 @@
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+  - vendor
+disabled_rules:
+  - block_based_kvo
+  - discarded_notification_center_observer
+  - trailing_whitespace
+  - todo
+  - identifier_name
+  - implicit_getter
+  - valid_ibinspectable
+
+opt_in_rules:
+  - attributes
+  - closure_spacing
+  - contains_over_first_not_nil
+  - empty_count
+  - fatal_error_message
+  - joined_default_parameter
+  - literal_expression_end_indentation
+  - overridden_super_call
+  - override_in_extension
+  - redundant_nil_coalescing
+  - unneeded_parentheses_in_closure_argument
+  - yoda_condition
+  - empty_string
+  - first_where
+  - modifier_order
+  - toggle_bool
+  - unused_private_declaration
+  - unused_import
+  - unused_declaration
+  
+
+#explicit set of warning level
+type_length: 60
+line_length: 170
+force_cast: error
