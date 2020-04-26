@@ -3,14 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */; };
+		AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D209A24557945001C5103 /* GardenViewModel.swift */; };
+		AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD2424544AFE00EEAE2F /* GardenViewController.swift */; };
+		AB63DD2B24544DA500EEAE2F /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */; };
+		AB63DD2D24544ECF00EEAE2F /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD2C24544ECF00EEAE2F /* AddPlantViewController.swift */; };
+		AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */; };
+		AB63DD32245463AB00EEAE2F /* AddPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD31245463AB00EEAE2F /* AddPlantViewModel.swift */; };
+		AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD33245467D500EEAE2F /* MediaPicker.swift */; };
+		AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0B2454B9B60049966B /* AlertPresenter.swift */; };
+		AB748C0E2454BA740049966B /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0D2454BA740049966B /* GeneralError.swift */; };
+		AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */; };
+		AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C112454C21E0049966B /* UIViewExtensions.swift */; };
 		AB7EDC52245328FD006BFEE6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7EDC51245328FD006BFEE6 /* Colors.xcassets */; };
 		ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8118F24531D6B006369C1 /* TutorialViewController.swift */; };
 		ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8119124531D98006369C1 /* BaseViewController.swift */; };
+		ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C9492454A88000A7DEBA /* CustomTextField.swift */; };
+		ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C94B2454AC1900A7DEBA /* Plant.swift */; };
+		ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF7740245573EC0075133D /* BaseViewModel.swift */; };
+		ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF77422455740C0075133D /* EventTransmitter.swift */; };
 		ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0524531551001849FD /* AppDelegate.swift */; };
 		ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0924531551001849FD /* LoadingViewController.swift */; };
 		ABE8CA0D24531551001849FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0B24531551001849FD /* Main.storyboard */; };
@@ -21,9 +36,24 @@
 /* Begin PBXFileReference section */
 		0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.release.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.release.xcconfig"; sourceTree = "<group>"; };
 		8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.debug.xcconfig"; sourceTree = "<group>"; };
+		AB3D209A24557945001C5103 /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
+		AB63DD2424544AFE00EEAE2F /* GardenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewController.swift; sourceTree = "<group>"; };
+		AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueHandler.swift; sourceTree = "<group>"; };
+		AB63DD2C24544ECF00EEAE2F /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		AB63DD31245463AB00EEAE2F /* AddPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewModel.swift; sourceTree = "<group>"; };
+		AB63DD33245467D500EEAE2F /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
+		AB748C0B2454B9B60049966B /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		AB748C0D2454BA740049966B /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
+		AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewPresenter.swift; sourceTree = "<group>"; };
+		AB748C112454C21E0049966B /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		AB7EDC51245328FD006BFEE6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ABA8118F24531D6B006369C1 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ABA8119124531D98006369C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		ABB8C9492454A88000A7DEBA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		ABB8C94B2454AC1900A7DEBA /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		ABBF7740245573EC0075133D /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		ABBF77422455740C0075133D /* EventTransmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTransmitter.swift; sourceTree = "<group>"; };
 		ABE8CA0224531551001849FD /* Plantasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plantasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE8CA0524531551001849FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABE8CA0924531551001849FD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +83,41 @@
 				0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AB3D209C24557AA5001C5103 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8CA0924531551001849FD /* LoadingViewController.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		AB63DD2924544D9000EEAE2F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */,
+				AB748C112454C21E0049966B /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AB63DD302454639700EEAE2F /* AddPlant */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD2C24544ECF00EEAE2F /* AddPlantViewController.swift */,
+				AB63DD31245463AB00EEAE2F /* AddPlantViewModel.swift */,
+			);
+			path = AddPlant;
+			sourceTree = "<group>";
+		};
+		ABBF773F2455726E0075133D /* Garden */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD2424544AFE00EEAE2F /* GardenViewController.swift */,
+				AB3D209A24557945001C5103 /* GardenViewModel.swift */,
+			);
+			path = Garden;
 			sourceTree = "<group>";
 		};
 		ABE8C9F924531551001849FD = {
@@ -87,6 +152,7 @@
 		ABE8CA1A245315BD001849FD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ABB8C94B2454AC1900A7DEBA /* Plant.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -96,8 +162,10 @@
 			children = (
 				ABE8CA1024531553001849FD /* LaunchScreen.storyboard */,
 				ABE8CA0B24531551001849FD /* Main.storyboard */,
-				ABE8CA0924531551001849FD /* LoadingViewController.swift */,
 				ABA8118F24531D6B006369C1 /* TutorialViewController.swift */,
+				AB3D209C24557AA5001C5103 /* Loading */,
+				ABBF773F2455726E0075133D /* Garden */,
+				AB63DD302454639700EEAE2F /* AddPlant */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -116,7 +184,16 @@
 		ABE8CA1D24531660001849FD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				AB63DD2924544D9000EEAE2F /* Extensions */,
 				ABA8119124531D98006369C1 /* BaseViewController.swift */,
+				ABBF7740245573EC0075133D /* BaseViewModel.swift */,
+				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
+				AB63DD33245467D500EEAE2F /* MediaPicker.swift */,
+				ABB8C9492454A88000A7DEBA /* CustomTextField.swift */,
+				AB748C0B2454B9B60049966B /* AlertPresenter.swift */,
+				AB748C0D2454BA740049966B /* GeneralError.swift */,
+				AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */,
+				ABBF77422455740C0075133D /* EventTransmitter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -141,6 +218,7 @@
 				ABE8C9FF24531551001849FD /* Frameworks */,
 				ABE8CA0024531551001849FD /* Resources */,
 				AB3EB61224531B1800203203 /* Swiftlint Run Script */,
+				49D395D75EB99824D898B8D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,6 +277,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		49D395D75EB99824D898B8D0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plantasia/Pods-Plantasia-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plantasia/Pods-Plantasia-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Plantasia/Pods-Plantasia-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		60DB233FD6F074F2FA68997B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,10 +341,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */,
+				AB63DD32245463AB00EEAE2F /* AddPlantViewModel.swift in Sources */,
+				ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */,
+				ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */,
+				ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */,
+				AB63DD2B24544DA500EEAE2F /* SegueHandler.swift in Sources */,
+				AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */,
+				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
+				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
+				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
+				AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */,
+				AB63DD2D24544ECF00EEAE2F /* AddPlantViewController.swift in Sources */,
+				AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */,
+				AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */,
 				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
 				ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */,
 				ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */,
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
+				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -379,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
