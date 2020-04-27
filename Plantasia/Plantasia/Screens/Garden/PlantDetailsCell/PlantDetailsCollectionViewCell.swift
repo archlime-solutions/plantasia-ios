@@ -23,7 +23,7 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
             configurePlantDetails()
         }
     }
-
+    //TODO: add remove functionality when DND cards
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()

@@ -96,7 +96,6 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
 
         viewModel.error.observeNext { [weak self] value in
             guard let self = self, let value = value else { return }
-            self.hideLoadingView()
             self.showAlert(error: value)
         }.dispose(in: bag)
     }
@@ -274,6 +273,17 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                                textField.transform = CGAffineTransform.identity
                            }
                        })
+    }
+
+}
+
+// MARK: - UIScrollViewDelegate
+extension AddPlantViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
     }
 
 }

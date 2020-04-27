@@ -414,7 +414,7 @@ the + button below.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8n-U4-rcH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="tin-eH-wMh">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="tin-eH-wMh">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="708"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fK-rr-raP">
@@ -607,6 +607,9 @@ the + button below.</string>
                                             <constraint firstAttribute="bottom" secondItem="3fK-rr-raP" secondAttribute="bottom" id="Ou6-Jh-FaD"/>
                                             <constraint firstAttribute="trailing" secondItem="3fK-rr-raP" secondAttribute="trailing" id="PQh-Im-T0l"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="tCu-W9-ksO" id="mST-ig-kqi"/>
+                                        </connections>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2B-mr-T0A">
                                         <rect key="frame" x="0.0" y="708" width="375" height="104"/>
@@ -706,7 +709,7 @@ the + button below.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="GIr-nK-eH6">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="GIr-nK-eH6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="708"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ak9-hw-b61">
@@ -880,6 +883,9 @@ the + button below.</string>
                                     <constraint firstAttribute="bottom" secondItem="Ak9-hw-b61" secondAttribute="bottom" id="UUM-iQ-d0b"/>
                                     <constraint firstItem="Ak9-hw-b61" firstAttribute="top" secondItem="GIr-nK-eH6" secondAttribute="top" id="ejj-cq-tSf"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="5xK-IQ-zlF" id="h5u-rb-D4h"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cm-rX-MIR">
                                 <rect key="frame" x="0.0" y="708" width="375" height="104"/>

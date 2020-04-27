@@ -166,6 +166,13 @@
 			path = AddPlant;
 			sourceTree = "<group>";
 		};
+		AB8779CA245723EA00171ECE /* EditPlant */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditPlant;
+			sourceTree = "<group>";
+		};
 		ABBF773F2455726E0075133D /* Garden */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +232,7 @@
 				ABBF773F2455726E0075133D /* Garden */,
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
+				AB8779CA245723EA00171ECE /* EditPlant */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

@@ -8,7 +8,11 @@
 
 import UIKit
 
-class PlantDetailsViewController: BaseViewController {
+protocol PlantDetailsViewControllerDelegate: class {
+    func plantDetailsViewControllerDidRemovePlant()
+}
+
+class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     @IBOutlet weak var actionBarShadowContainerView: UIView!
     @IBOutlet weak var actionBarRoundedContainerView: UIView!
@@ -25,11 +29,13 @@ class PlantDetailsViewController: BaseViewController {
     @IBOutlet weak var deleteButton: UIButton!
 
     var viewModel: PlantDetailsViewModel!
+    weak var delegate: PlantDetailsViewControllerDelegate?
     private var gradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupBindings()
         setupPlantData()
     }
 
@@ -51,7 +57,31 @@ class PlantDetailsViewController: BaseViewController {
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        //TODO: implement
+        let handler: () -> Void = {
+            self.viewModel.deletePlant()
+        }
+        showAlert(title: "Are you sure you want to remove this plant?",
+                  message: "Removing this plant will also remove its photo gallery.",
+                  buttonText: "Remove",
+                  buttonHandler: handler,
+                  buttonStyle: .destructive,
+                  showCancelButton: true)
+    }
+
+    private func setupBindings() {
+        viewModel.event.observeNext { [weak self] event in
+            guard let self = self, let event = event else { return }
+            switch event {
+            case .didRemovePlant:
+                self.navigationController?.popToRootViewController(animated: true)
+                self.delegate?.plantDetailsViewControllerDidRemovePlant()
+            }
+        }.dispose(in: bag)
+
+        viewModel.error.observeNext { [weak self] value in
+            guard let self = self, let value = value else { return }
+            self.showAlert(error: value)
+        }.dispose(in: bag)
     }
 
     private func setupPlantData() {
@@ -160,6 +190,17 @@ class PlantDetailsViewController: BaseViewController {
     @objc
     private func editButtonPressed() {
         //TODO: implement
+    }
+
+}
+
+// MARK: - UIScrollViewDelegate
+extension PlantDetailsViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
     }
 
 }

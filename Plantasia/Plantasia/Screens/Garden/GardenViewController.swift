@@ -159,6 +159,7 @@ extension GardenViewController: SegueHandler {
         case .pushPlantDetails:
             guard let selectedPlant = viewModel.selectedPlant, let nextVC = segue.destination as? PlantDetailsViewController else { return }
             nextVC.viewModel = PlantDetailsViewModel(plant: selectedPlant)
+            nextVC.delegate = self
         }
     }
 
@@ -285,6 +286,15 @@ extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
 extension GardenViewController: AddPlantViewControllerDelegate {
 
     func addPlantViewControllerDidAddPlant() {
+        viewModel.loadPlants()
+    }
+
+}
+
+// MARK: - PlantDetailsViewControllerDelegate
+extension GardenViewController: PlantDetailsViewControllerDelegate {
+
+    func plantDetailsViewControllerDidRemovePlant() {
         viewModel.loadPlants()
     }
 
