@@ -147,13 +147,18 @@ extension GardenViewController: SegueHandler {
 
     enum SegueIdentifier: String {
         case presentAddPlant
+        case pushPlantDetails
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .presentAddPlant:
             guard let nextVC = segue.destination as? AddPlantViewController else { return }
+            nextVC.viewModel = AddPlantViewModel()
             nextVC.delegate = self
+        case .pushPlantDetails:
+            guard let selectedPlant = viewModel.selectedPlant, let nextVC = segue.destination as? PlantDetailsViewController else { return }
+            nextVC.viewModel = PlantDetailsViewModel(plant: selectedPlant)
         }
     }
 
@@ -231,6 +236,11 @@ extension GardenViewController: UICollectionViewDelegate, UICollectionViewDataSo
             } else {
                 return UICollectionViewDropProposal(operation: .forbidden)
             }
+        }
+
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            viewModel.selectedPlant = viewModel.plants[indexPath.row]
+            performSegue(withIdentifier: .pushPlantDetails)
         }
 
 }

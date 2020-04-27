@@ -32,8 +32,8 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
     private func configurePlantDetails() {
         let plant = viewModel.plant
         nameLabel.text = plant.name
-        wateringLabel.text = "\(plant.getWateringPercent())%"
-        fertilizingLabel.text = "\(plant.getFertilizingPercent())%"
+        wateringLabel.text = "\(plant.getWateringPercentage())%"
+        fertilizingLabel.text = "\(plant.getFertilizingPercentage())%"
         self.plantImageView.image = plant.getThumbnailImage()
     }
 

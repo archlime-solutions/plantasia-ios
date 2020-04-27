@@ -47,7 +47,7 @@ class Plant: Object {
         return "id"
     }
 
-    func getWateringPercent() -> Int {
+    func getWateringPercentage() -> Int {
         guard let lastWateringDate = lastWateringDate,
             let wateringFrequencyDays = wateringFrequencyDays.value,
             let endDate = Calendar.current.date(byAdding: .day, value: wateringFrequencyDays, to: lastWateringDate) else { return 100 }
@@ -58,7 +58,7 @@ class Plant: Object {
         return Int(percent.rounded(.up))
     }
 
-    func getFertilizingPercent() -> Int {
+    func getFertilizingPercentage() -> Int {
         guard let lastFertilizingDate = lastFertilizingDate,
             let fertilizingFrequencyDays = fertilizingFrequencyDays.value,
             let endDate = Calendar.current.date(byAdding: .day, value: fertilizingFrequencyDays, to: lastFertilizingDate) else { return 100 }
@@ -67,6 +67,38 @@ class Plant: Object {
         let percent = (duration - timePassed) / duration * 100
 
         return Int(percent.rounded(.up))
+    }
+
+    func getWateringRemainingDays() -> Int {
+        guard let lastWateringDate = lastWateringDate,
+            let wateringFrequencyDays = wateringFrequencyDays.value,
+            let wateringDate = Calendar.current.date(byAdding: .day, value: wateringFrequencyDays, to: lastWateringDate)
+            else { return 0 }
+        let calendar = Calendar.current
+        let wateringDay = calendar.startOfDay(for: wateringDate)
+        let currentDay = calendar.startOfDay(for: Date())
+
+        if let result = calendar.dateComponents([.day], from: currentDay, to: wateringDay).day, result >= 0 {
+            return result
+        } else {
+            return 0
+        }
+    }
+
+    func getFertilizingRemainingDays() -> Int {
+        guard let lastFertilizingDate = lastFertilizingDate,
+            let fertilizingFrequencyDays = fertilizingFrequencyDays.value,
+            let fertilizingDate = Calendar.current.date(byAdding: .day, value: fertilizingFrequencyDays, to: lastFertilizingDate)
+            else { return 0 }
+        let calendar = Calendar.current
+        let fertilizingDay = calendar.startOfDay(for: fertilizingDate)
+        let currentDay = calendar.startOfDay(for: Date())
+
+        if let result = calendar.dateComponents([.day], from: currentDay, to: fertilizingDay).day, result >= 0 {
+            return result
+        } else {
+            return 0
+        }
     }
 
     func nextId() -> Int {

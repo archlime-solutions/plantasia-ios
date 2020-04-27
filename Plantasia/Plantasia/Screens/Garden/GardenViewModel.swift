@@ -19,12 +19,12 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         case hydration
         case fertilization
         case dateAdded
-        case custom
     }
 
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
     var plants = [Plant]()
+    var selectedPlant: Plant?
 
     var sortingCriteria: SortingCriteria = .dateAdded {
         didSet {
@@ -35,9 +35,6 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
                 sortByFertilization()
             case .dateAdded:
                 sortByDateAdded()
-            case .custom:
-                //TODO: implement
-                break
             }
         }
     }
@@ -67,7 +64,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
     }
 
     private func sortByHydration() {
-        plants = plants.sorted(by: { $0.getWateringPercent() < $1.getWateringPercent() })
+        plants = plants.sorted(by: { $0.getWateringPercentage() < $1.getWateringPercentage() })
         if let realm = try? Realm() {
             for (index, plant) in plants.enumerated() {
                 try? realm.write {
@@ -79,7 +76,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
     }
 
     private func sortByFertilization() {
-        plants = plants.sorted(by: { $0.getFertilizingPercent() < $1.getFertilizingPercent() })
+        plants = plants.sorted(by: { $0.getFertilizingPercentage() < $1.getFertilizingPercentage() })
         if let realm = try? Realm() {
             for (index, plant) in plants.enumerated() {
                 try? realm.write {

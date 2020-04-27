@@ -29,8 +29,8 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     @IBOutlet weak var fertilizingTextField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
 
+    var viewModel: AddPlantViewModel!
     weak var delegate: AddPlantViewControllerDelegate?
-    private let viewModel = AddPlantViewModel()
     private var gradientLayer: CAGradientLayer?
     private var mediaPicker = MediaPicker()
     private var daysPicker = UIPickerView()
@@ -108,9 +108,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         setupImageShadowContainerView()
         setupDoneButton()
         setupPhotoGalleryButton()
-//        setupCancelButton()
         setupDaysPicker()
-
     }
 
     private func setupDaysPicker() {
@@ -184,8 +182,6 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     private func setupCancelButton() {
         cancelButton.snp.makeConstraints { maker in
             maker.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
-//            maker.top.equalToSuperview().offset(10)
-//            self.view.safeAreaInsets.top
         }
     }
 

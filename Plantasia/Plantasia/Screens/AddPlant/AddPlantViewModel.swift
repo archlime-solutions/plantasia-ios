@@ -22,6 +22,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
+    //TODO: isRequestInProgress is not used
     var isRequestInProgress = Observable<Bool>(false)
     var name = Observable<String?>(nil)
     var description = Observable<String?>(nil)

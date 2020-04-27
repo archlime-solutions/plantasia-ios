@@ -37,7 +37,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="3z8-pK-IJw" secondAttribute="bottom" id="EG4-12-vQv"/>
                         <constraint firstItem="3z8-pK-IJw" firstAttribute="leading" secondItem="h7p-h1-ab8" secondAttribute="leading" id="S3B-OZ-ZW4"/>
@@ -46,7 +46,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="h7p-h1-ab8" firstAttribute="leading" secondItem="A6o-vd-YXJ" secondAttribute="leading" id="1fN-73-Yqf"/>
                 <constraint firstItem="h7p-h1-ab8" firstAttribute="top" secondItem="Wtr-A0-5Xp" secondAttribute="top" id="UG5-ks-Qgz"/>
