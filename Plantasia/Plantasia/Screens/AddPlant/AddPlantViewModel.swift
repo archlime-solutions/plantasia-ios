@@ -38,7 +38,13 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     func saveValidatedPlant() {
         if isInputDataComplete() {
             isRequestInProgress.value = true
-            let plant = Plant(name: name.value, descr: description.value, watering: watering.value, fertilizing: fertilizing.value, image: plantImage)
+            let plant = Plant(name: name.value,
+                              descr: description.value,
+                              wateringFrequencyDays: watering.value,
+                              fertilizingFrequencyDays: fertilizing.value,
+                              image: plantImage,
+                              lastWateringDate: Date(),
+                              lastFertilizingDate: Date())
             savePlant(plant) {
                 self.isRequestInProgress.value = false
                 self.event.value = .didSavePlant
@@ -56,6 +62,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     private func savePlant(_ plant: Plant, completion: (() -> Void)?) {
         if let realm = try? Realm() {
             try? realm.write {
+                plant.index = realm.objects(Plant.self).count
                 realm.add(plant)
                 completion?()
             }

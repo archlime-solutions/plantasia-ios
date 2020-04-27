@@ -22,4 +22,13 @@ extension UIView {
         }
     }
 
+    static var className: String {
+        return String(describing: self)
+    }
+
+    class func fromNib<T: UIView>(owner: Any? = nil) -> T {
+        // swiftlint:disable:next force_cast
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: owner, options: nil)![0] as! T
+    }
+
 }

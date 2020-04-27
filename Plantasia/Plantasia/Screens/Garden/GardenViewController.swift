@@ -17,6 +17,7 @@ class GardenViewController: BaseViewController {
     @IBOutlet weak var quickActionsContainerView: UIView!
     @IBOutlet weak var waterAllView: UIView!
     @IBOutlet weak var fertilizeAllView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     private let viewModel = GardenViewModel()
 
@@ -24,11 +25,11 @@ class GardenViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupBindings()
+        viewModel.loadPlants()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getPlants()
         setupInitialViewsVisibility()
     }
 
@@ -47,9 +48,7 @@ class GardenViewController: BaseViewController {
     }
 
     private func setupUI() {
-        plusButton.layer.cornerRadius = plusButton.bounds.height / 2
-        setupWaterAllView()
-        setupFertilizeAllView()
+        //TODO: remove or impl
     }
 
     private func setupBindings() {
@@ -57,7 +56,8 @@ class GardenViewController: BaseViewController {
             guard let self = self else { return }
             if let event = event {
                 switch event {
-                case .didGetPlants: self.setupInitialViewsVisibility()
+                case .didLoadPlants:
+                    self.setupInitialViewsVisibility()
                 }
             }
         }.dispose(in: bag)
@@ -99,24 +99,183 @@ class GardenViewController: BaseViewController {
         plusButton.layer.add(animation, forKey: nil)
     }
 
+    private func setupAddPlantBarButtonItem() {
+        let addPlantView: AddPlantBarButtonItemView = AddPlantBarButtonItemView.fromNib()
+        addPlantView.delegate = self
+        let button = UIBarButtonItem(customView: addPlantView)
+        navigationItem.rightBarButtonItem = button
+    }
+
+    private func setupSortPlantsBarButtonItem() {
+        let sortPlantsView: SortPlantsBarButtonItemView = SortPlantsBarButtonItemView.fromNib()
+        sortPlantsView.delegate = self
+        let button = UIBarButtonItem(customView: sortPlantsView)
+        navigationItem.leftBarButtonItem = button
+    }
+
     private func setupInitialViewsVisibility() {
         if viewModel.plants.isEmpty {
             filledGardenContainerView.isHidden = true
             emptyGardenContainerView.isHidden = false
             quickActionsContainerView.isHidden = true
+            plusButton.layer.cornerRadius = plusButton.bounds.height / 2
         } else {
             filledGardenContainerView.isHidden = false
             emptyGardenContainerView.isHidden = true
             quickActionsContainerView.isHidden = false
+            setupQuickActionsContainerView()
+            setupWaterAllView()
+            setupFertilizeAllView()
+            setupAddPlantBarButtonItem()
+            setupSortPlantsBarButtonItem()
+            collectionView.dragInteractionEnabled = true
+            collectionView.reloadData()
+        }
+    }
+
+    private func setupQuickActionsContainerView() {
+        quickActionsContainerView.layer.shadowRadius = 1
+        quickActionsContainerView.layer.shadowColor = UIColor.black.cgColor
+        quickActionsContainerView.layer.shadowOpacity = 0.1
+        quickActionsContainerView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+    }
+
+}
+
+// MARK: - SegueHandler
+extension GardenViewController: SegueHandler {
+
+    enum SegueIdentifier: String {
+        case presentAddPlant
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .presentAddPlant:
+            guard let nextVC = segue.destination as? AddPlantViewController else { return }
+            nextVC.delegate = self
         }
     }
 
 }
 
-extension GardenViewController: SegueHandler {
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate
+extension GardenViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,
+    UICollectionViewDragDelegate, UICollectionViewDropDelegate {
 
-    enum SegueIdentifier: String {
-        case presentAddPlant
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return viewModel.plants.count
+        }
+
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            guard let cell =
+                collectionView.dequeueReusableCell(withReuseIdentifier: "PlantDetailsCollectionViewCell", for: indexPath) as? PlantDetailsCollectionViewCell else {
+                    return UICollectionViewCell()
+            }
+            cell.viewModel = PlantDetailsCollectionViewCellViewModel(plant: viewModel.plants[indexPath.row])
+            return cell
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 156, height: 200)
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                            minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return 20
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                            minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 20
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        }
+
+        func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+            print("dragged at index \(indexPath)")
+            let item = viewModel.plants[indexPath.row]
+            let itemProvider = NSItemProvider(object: item)
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.localObject = item
+            return [dragItem]
+        }
+
+        func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+            guard let destinationIndexPath = coordinator.destinationIndexPath,
+                destinationIndexPath.row >= 0, coordinator.items.count == 1,
+                let item = coordinator.items.first,
+                let sourceIndexPath = item.sourceIndexPath,
+                let draggedPlant = item.dragItem.localObject as? Plant
+                else { return }
+
+            collectionView.performBatchUpdates({
+                self.viewModel.movePlant(draggedPlant, fromPosition: sourceIndexPath.row, toPosition: destinationIndexPath.row)
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+            })
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        }
+
+        func collectionView(_ collectionView: UICollectionView,
+                            dropSessionDidUpdate session: UIDropSession,
+                            withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+            guard let destinationIndexPath = destinationIndexPath else {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+
+            if session.localDragSession != nil, destinationIndexPath.row >= 0 {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            } else {
+                return UICollectionViewDropProposal(operation: .forbidden)
+            }
+        }
+
+}
+
+// MARK: - AddPlantBarButtonItemViewDelegate
+extension GardenViewController: AddPlantBarButtonItemViewDelegate {
+
+    func addPlantBarButtonItemViewPressed() {
+        performSegue(withIdentifier: .presentAddPlant)
+    }
+
+}
+
+// MARK: - SortPlantsBarButtonItemViewDelegate
+extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
+
+    func sortPlantsBarButtonItemViewPressed() {
+        let alert = UIAlertController(title: "Select a sorting criteria", message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Hydration", style: .default, handler: { _ in
+            self.viewModel.sortingCriteria = .hydration
+        }))
+
+        alert.addAction(UIAlertAction(title: "Fertilization", style: .default, handler: { _ in
+            self.viewModel.sortingCriteria = .fertilization
+        }))
+
+        alert.addAction(UIAlertAction(title: "Date Added", style: .default, handler: { _ in
+            self.viewModel.sortingCriteria = .dateAdded
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("User click Dismiss button")
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - AddPlantViewControllerDelegate
+extension GardenViewController: AddPlantViewControllerDelegate {
+
+    func addPlantViewControllerDidAddPlant() {
+        viewModel.loadPlants()
     }
 
 }

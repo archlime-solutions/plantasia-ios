@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import RealmSwift
 
+protocol AddPlantViewControllerDelegate: class {
+    func addPlantViewControllerDidAddPlant()
+}
+
 class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPresenter {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -25,6 +29,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     @IBOutlet weak var fertilizingTextField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
 
+    weak var delegate: AddPlantViewControllerDelegate?
     private let viewModel = AddPlantViewModel()
     private var gradientLayer: CAGradientLayer?
     private var mediaPicker = MediaPicker()
@@ -40,6 +45,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer?.frame = imageTopGradientView.bounds
+        setupCancelButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,11 +80,12 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         }.dispose(in: bag)
 
         viewModel.event.observeNext { [weak self] event in
-            if let event = event {
-                switch event {
-                case .didSavePlant:
-                    self?.navigationController?.dismiss(animated: true, completion: nil)
-                }
+            guard let self = self, let event = event else { return }
+            switch event {
+            case .didSavePlant:
+                self.dismiss(animated: true, completion: {
+                    self.delegate?.addPlantViewControllerDidAddPlant()
+                })
             }
         }.dispose(in: bag)
 
@@ -101,7 +108,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         setupImageShadowContainerView()
         setupDoneButton()
         setupPhotoGalleryButton()
-        setupCancelButton()
+//        setupCancelButton()
         setupDaysPicker()
 
     }
@@ -176,7 +183,9 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
 
     private func setupCancelButton() {
         cancelButton.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().offset(10 + (UIApplication.shared.windows.first { $0.isKeyWindow }?.safeAreaInsets.top ?? 0))
+            maker.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
+//            maker.top.equalToSuperview().offset(10)
+//            self.view.safeAreaInsets.top
         }
     }
 
@@ -250,9 +259,25 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         guard let currentPickerSelection = viewModel.currentPickerSelection else { return }
         let numberOfDays = viewModel.pickerOptions[row]
         switch currentPickerSelection {
-        case .watering: viewModel.watering.value = numberOfDays
-        case .fertilizing: viewModel.fertilizing.value = numberOfDays
+        case .watering:
+            viewModel.watering.value = numberOfDays
+            animate(wateringTextField)
+        case .fertilizing:
+            viewModel.fertilizing.value = numberOfDays
+            animate(fertilizingTextField)
         }
+    }
+
+    private func animate(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                           textField.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                       },
+                       completion: { _ in
+                           UIView.animate(withDuration: 0.2) {
+                               textField.transform = CGAffineTransform.identity
+                           }
+                       })
     }
 
 }

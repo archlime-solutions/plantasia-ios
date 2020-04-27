@@ -14,42 +14,59 @@ class Plant: Object {
     @objc dynamic var id: Int = -1
     @objc dynamic var name: String?
     @objc dynamic var descr: String?
-    dynamic var watering = RealmOptional<Int>()
-    dynamic var fertilizing = RealmOptional<Int>()
-    @objc dynamic var photoPath: String?
-    var image: UIImage? {
-        get {
-            guard let photoPath = photoPath else { return nil }
-            let image = UIImage(contentsOfFile: photoPath as String)
-            return image
-        }
-        set {
-            guard let photo = newValue else { return }
-            photoPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("plant")
-            FileManager.default.createFile(atPath: photoPath! as String, contents: photo.pngData(), attributes: nil)
-        }
-    }
+    dynamic var wateringFrequencyDays = RealmOptional<Int>()
+    dynamic var fertilizingFrequencyDays = RealmOptional<Int>()
+    @objc dynamic var photoUUID: String?
+    @objc dynamic var lastWateringDate: Date?
+    @objc dynamic var lastFertilizingDate: Date?
+    @objc dynamic var index: Int = 0
+    private var image: UIImage?
+    private var thumbnailImage: UIImage?
 
     convenience init (
         name: String?,
         descr: String?,
-        watering: Int?,
-        fertilizing: Int?,
-        image: UIImage?
+        wateringFrequencyDays: Int?,
+        fertilizingFrequencyDays: Int?,
+        image: UIImage?,
+        lastWateringDate: Date?,
+        lastFertilizingDate: Date?
     ) {
         self.init()
         self.id = nextId()
         self.name = name
         self.descr = descr
-        self.watering.value = watering
-        self.fertilizing.value = fertilizing
-        self.image = image
+        self.wateringFrequencyDays.value = wateringFrequencyDays
+        self.fertilizingFrequencyDays.value = fertilizingFrequencyDays
+        setImage(image)
+        self.lastWateringDate = lastWateringDate
+        self.lastFertilizingDate = lastFertilizingDate
     }
-
-    //TODO razvan: ceva cu original image in loc de edited din picker
 
     override static func primaryKey() -> String? {
         return "id"
+    }
+
+    func getWateringPercent() -> Int {
+        guard let lastWateringDate = lastWateringDate,
+            let wateringFrequencyDays = wateringFrequencyDays.value,
+            let endDate = Calendar.current.date(byAdding: .day, value: wateringFrequencyDays, to: lastWateringDate) else { return 100 }
+        let duration = endDate.timeIntervalSince(lastWateringDate)
+        let timePassed = Date().timeIntervalSince(lastWateringDate)
+        let percent = (duration - timePassed) / duration * 100
+
+        return Int(percent.rounded(.up))
+    }
+
+    func getFertilizingPercent() -> Int {
+        guard let lastFertilizingDate = lastFertilizingDate,
+            let fertilizingFrequencyDays = fertilizingFrequencyDays.value,
+            let endDate = Calendar.current.date(byAdding: .day, value: fertilizingFrequencyDays, to: lastFertilizingDate) else { return 100 }
+        let duration = endDate.timeIntervalSince(lastFertilizingDate)
+        let timePassed = Date().timeIntervalSince(lastFertilizingDate)
+        let percent = (duration - timePassed) / duration * 100
+
+        return Int(percent.rounded(.up))
     }
 
     func nextId() -> Int {
@@ -64,4 +81,65 @@ class Plant: Object {
         }
     }
 
+    func getImage() -> UIImage? {
+        if let image = image {
+            return image
+        } else {
+            return loadImage()
+        }
+    }
+
+    func setImage(_ image: UIImage?) {
+        guard let photo = image?.fixOrientation(),
+            let pngRepresentation = photo.pngData(),
+            case let uuidString = UUID().uuidString else { return }
+        photoUUID = uuidString
+        if let filePath = imageFilePath() {
+            try? pngRepresentation.write(to: filePath,
+                                         options: .atomic)
+        }
+    }
+
+    func getThumbnailImage() -> UIImage? {
+        if let image = thumbnailImage {
+            return image
+        } else {
+            loadImage()
+            return thumbnailImage
+        }
+    }
+
+    @discardableResult
+    func loadImage() -> UIImage? {
+        guard let filePath = imageFilePath(),
+            let fileData = FileManager.default.contents(atPath: filePath.path),
+            let image = UIImage(data: fileData)
+            else { return nil }
+        self.image = image
+
+        if let lowQualityData = image.jpegData(compressionQuality: 0.1),
+            let thumbnailImage = UIImage(data: lowQualityData) {
+            self.thumbnailImage = thumbnailImage
+        }
+
+        return self.image
+    }
+
+    private func imageFilePath() -> URL? {
+        guard let photoUUID = self.photoUUID,
+            let documentURL = FileManager.default.urls(for: .documentDirectory,
+                                                       in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+        return documentURL.appendingPathComponent(photoUUID + ".png")
+    }
+
+}
+
+extension Plant: NSItemProviderWriting {
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return []
+    }
+
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        return nil
+    }
 }
