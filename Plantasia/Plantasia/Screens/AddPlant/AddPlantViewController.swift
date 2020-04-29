@@ -14,7 +14,7 @@ protocol AddPlantViewControllerDelegate: class {
     func addPlantViewControllerDidCreatePlant()
 }
 
-class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPresenter {
+class AddPlantViewController: BaseViewController, AlertPresenter {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -115,11 +115,6 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
                 gardenViewController.loadPlants()
                 self.navigationController?.popToRootViewController(animated: true)
             }
-        }.dispose(in: bag)
-
-        viewModel.isRequestInProgress.observeNext { [weak self] value in
-            guard let self = self else { return }
-            value ? self.showLoadingView() : self.hideLoadingView()
         }.dispose(in: bag)
 
         viewModel.error.observeNext { [weak self] value in

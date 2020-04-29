@@ -17,9 +17,7 @@ class SettingsViewModel: BaseViewModel, EventTransmitter {
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
 
-    //TODO: trimite notificari cu emojii cu plante random de fiecare data :D 
     func setReminderTime(_ date: Date) {
-        print(date)
         UserDefaults.standard.set(remindersTime: date)
         event.value = .didSetReminderTime
     }

@@ -18,6 +18,7 @@ class SettingsViewController: BaseViewController {
     @IBOutlet weak var writeAReviewButton: UIButton!
     @IBOutlet weak var contactUsButton: UIButton!
     @IBOutlet weak var shareAppButton: UIButton!
+    @IBOutlet weak var versionLabel: UILabel!
 
     private var timePicker = UIDatePicker()
     private var viewModel = SettingsViewModel()
@@ -65,6 +66,16 @@ class SettingsViewController: BaseViewController {
         setReminderTextFieldText()
         setupTimePicker()
         setupButtons()
+        setupVersionLabel()
+    }
+
+    private func setupVersionLabel() {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"],
+            let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] {
+            versionLabel.text = "Version \(version) (\(buildNumber))"
+        } else {
+            versionLabel.isHidden = true
+        }
     }
 
     private func setupButtons() {
@@ -81,12 +92,13 @@ class SettingsViewController: BaseViewController {
             switch value {
             case .didSetReminderTime:
                 self.setReminderTextFieldText()
+                self.reminderTextField.animateScale()
             }
         }.dispose(in: bag)
     }
 
     private func setReminderTextFieldText() {
-        let attrs1 = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.black232323]
+        let attrs1 = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold), NSAttributedString.Key.foregroundColor: UIColor.black232323]
         let attrs2 = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.green90D599]
         let attributedString1 = NSMutableAttributedString(string: "Send a reminder at ", attributes: attrs1)
         let attributedString2 = NSMutableAttributedString(string: UserDefaults.standard.getRemindersTime().toHoursMinutesString(), attributes: attrs2)

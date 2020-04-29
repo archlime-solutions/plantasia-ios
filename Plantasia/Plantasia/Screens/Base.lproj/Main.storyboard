@@ -18,19 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Edv-iB-EWU">
-                                <rect key="frame" x="87" y="265" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plantasia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYA-Ap-xTE">
-                                <rect key="frame" x="173" y="460" width="69" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="ngq-MM-4sO">
+                                <rect key="frame" x="37.666666666666657" y="207.66666666666663" width="300" height="397"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Edv-iB-EWU">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plantasia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYA-Ap-xTE">
+                                        <rect key="frame" x="101" y="367" width="97.666666666666686" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ngq-MM-4sO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ba2-L0-efG"/>
+                            <constraint firstItem="ngq-MM-4sO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIF-Py-Y1D"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="xoW-CH-7xH"/>
@@ -69,10 +76,10 @@
                                 <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ife-Z8-vKO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-fz-3Ef">
-                                                <rect key="frame" x="30" y="40" width="315" height="435"/>
+                                                <rect key="frame" x="30" y="40" width="315" height="493"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="f5Q-aC-SQc">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="75"/>
@@ -104,7 +111,7 @@
                                                                                     <constraint firstAttribute="height" constant="20" id="UK2-o2-ZBC"/>
                                                                                 </constraints>
                                                                                 <color key="textColor" name="black-232323"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                         </subviews>
@@ -189,6 +196,12 @@
                                                             <action selector="shareAppButtonPressed:" destination="k0n-Tz-gYX" eventType="touchUpInside" id="2Yh-3k-tLD"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtA-yQ-biu">
+                                                        <rect key="frame" x="0.0" y="475" width="315" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" name="grey-C4C4C4"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -226,6 +239,7 @@
                         <outlet property="replayTutorialButton" destination="DFn-SU-2wm" id="zwk-1C-nAM"/>
                         <outlet property="scrollView" destination="Y9e-vY-JtT" id="qrx-vg-8EZ"/>
                         <outlet property="shareAppButton" destination="PgY-o0-iN9" id="YDc-PN-cVD"/>
+                        <outlet property="versionLabel" destination="wtA-yQ-biu" id="AUN-Wa-YxB"/>
                         <outlet property="writeAReviewButton" destination="ES3-KP-HV0" id="k4I-Rn-WXp"/>
                     </connections>
                 </viewController>
@@ -1180,7 +1194,7 @@ the + button below.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zfa-G1-pbn"/>
+        <segue reference="vKY-ka-9Sj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>

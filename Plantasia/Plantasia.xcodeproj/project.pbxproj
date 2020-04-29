@@ -26,7 +26,6 @@
 		AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD33245467D500EEAE2F /* MediaPicker.swift */; };
 		AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0B2454B9B60049966B /* AlertPresenter.swift */; };
 		AB748C0E2454BA740049966B /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0D2454BA740049966B /* GeneralError.swift */; };
-		AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */; };
 		AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C112454C21E0049966B /* UIViewExtensions.swift */; };
 		AB7EDC52245328FD006BFEE6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7EDC51245328FD006BFEE6 /* Colors.xcassets */; };
 		AB90177E245869F00031369C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB90177D245869F00031369C /* SettingsViewController.swift */; };
@@ -68,7 +67,6 @@
 		AB63DD33245467D500EEAE2F /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
 		AB748C0B2454B9B60049966B /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		AB748C0D2454BA740049966B /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
-		AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewPresenter.swift; sourceTree = "<group>"; };
 		AB748C112454C21E0049966B /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		AB7EDC51245328FD006BFEE6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		AB90177D245869F00031369C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -160,11 +158,11 @@
 		AB63DD2924544D9000EEAE2F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AB901785245872E90031369C /* DateExtensions.swift */,
 				AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */,
 				AB536ECA2455CF0A00B942B9 /* UIImageExtensions.swift */,
 				AB748C112454C21E0049966B /* UIViewExtensions.swift */,
 				AB9017832458723E0031369C /* UserDefaultsExtensions.swift */,
-				AB901785245872E90031369C /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,10 +270,9 @@
 				ABB8C9492454A88000A7DEBA /* CustomTextField.swift */,
 				ABBF77422455740C0075133D /* EventTransmitter.swift */,
 				AB748C0D2454BA740049966B /* GeneralError.swift */,
-				AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */,
 				AB63DD33245467D500EEAE2F /* MediaPicker.swift */,
-				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
 				AB901787245947BC0031369C /* PushNotificationService.swift */,
+				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -436,7 +433,6 @@
 				ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */,
 				AB63DD2B24544DA500EEAE2F /* SegueHandler.swift in Sources */,
 				AB9017842458723E0031369C /* UserDefaultsExtensions.swift in Sources */,
-				AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */,
 				AB901786245872E90031369C /* DateExtensions.swift in Sources */,
 				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
 				AB4B06A62455BEF80058174D /* SortPlantsBarButtonItemView.swift in Sources */,
@@ -601,13 +597,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V7C3R87KYJ;
+				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.Plantasia;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.archlime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -620,13 +616,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V7C3R87KYJ;
+				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.Plantasia;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.archlime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

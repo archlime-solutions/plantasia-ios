@@ -24,8 +24,6 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
-    //TODO: isRequestInProgress is not used
-    var isRequestInProgress = Observable<Bool>(false)
     var isEditingExistingPlant: Bool {
         get {
             return plant != nil
@@ -57,7 +55,6 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     func saveValidatedPlant() {
         if isInputDataComplete() {
-            isRequestInProgress.value = true
             if isEditingExistingPlant {
                 updatePlant()
                 event.value = .didUpdatePlant
@@ -72,7 +69,6 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                 create(plant)
                 event.value = .didCreatePlant
             }
-            isRequestInProgress.value = false
             PushNotificationService.shared.requestPushNotificationAuthorization()
         } else {
             error.value = GeneralError(title: "Missing information", message: "Please take an image of your plant and give it a name.")
