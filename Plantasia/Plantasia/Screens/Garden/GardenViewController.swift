@@ -77,7 +77,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         let handler: () -> Void = {
             self.viewModel.waterAllPlants()
         }
-        showAlert(title: "Are you sure you want to water all plants?",
+        showAlert(title: "Are you sure you want mark all plants as watered?",
                   message: nil,
                   buttonText: "Water",
                   buttonHandler: handler,
@@ -97,7 +97,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         let handler: () -> Void = {
             self.viewModel.fertilizeAllPlants()
         }
-        showAlert(title: "Are you sure you want to fertilize all plants?",
+        showAlert(title: "Are you sure you want to mark all plants as fertilized?",
                   message: nil,
                   buttonText: "Fertilize",
                   buttonHandler: handler,
@@ -130,7 +130,6 @@ class GardenViewController: BaseViewController, AlertPresenter {
 
     private func setupInitialViewsVisibility() {
         if viewModel.plants.isEmpty {
-            setupNavigationBarShadow()
             filledGardenContainerView.isHidden = true
             emptyGardenContainerView.isHidden = false
             quickActionsContainerView.isHidden = true
@@ -147,14 +146,6 @@ class GardenViewController: BaseViewController, AlertPresenter {
             collectionView.dragInteractionEnabled = true
             collectionView.reloadData()
         }
-    }
-
-    private func setupNavigationBarShadow() {
-        navigationController?.navigationBar.layer.masksToBounds = false
-        navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        navigationController?.navigationBar.layer.shadowOpacity = 0.1
-        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-        navigationController?.navigationBar.layer.shadowRadius = 1
     }
 
     private func setupQuickActionsContainerView() {

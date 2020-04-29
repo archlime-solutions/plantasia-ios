@@ -64,8 +64,14 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         viewModel.event.observeNext { [weak self] value in
             guard let self = self, let value = value else { return }
             switch value {
-            case .didFertilizePlant, .didWaterPlant:
+            case .didFertilizePlant:
                 self.setupPlantData()
+                self.fertilizingLabel.animateScale()
+                self.fertilizingPercentageLabel.animateScale()
+            case .didWaterPlant:
+                self.setupPlantData()
+                self.wateringLabel.animateScale()
+                self.wateringPercentageLabel.animateScale()
             }
         }.dispose(in: bag)
 

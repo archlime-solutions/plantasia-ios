@@ -18,7 +18,6 @@ class SettingsViewController: BaseViewController {
     @IBOutlet weak var writeAReviewButton: UIButton!
     @IBOutlet weak var contactUsButton: UIButton!
     @IBOutlet weak var shareAppButton: UIButton!
-    @IBOutlet weak var navigationBarShadowView: UIView!
 
     private var timePicker = UIDatePicker()
     private var viewModel = SettingsViewModel()
@@ -66,15 +65,6 @@ class SettingsViewController: BaseViewController {
         setReminderTextFieldText()
         setupTimePicker()
         setupButtons()
-        setupNavigationBarShadow()
-    }
-
-    private func setupNavigationBarShadow() {
-        navigationController?.navigationBar.layer.masksToBounds = false
-        navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        navigationController?.navigationBar.layer.shadowOpacity = 0.1
-        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-        navigationController?.navigationBar.layer.shadowRadius = 1
     }
 
     private func setupButtons() {
@@ -108,10 +98,10 @@ class SettingsViewController: BaseViewController {
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         timePicker.datePickerMode = .time
         timePicker.setDate(UserDefaults.standard.getRemindersTime(), animated: true)
-        timePicker.backgroundColor = .white
+        timePicker.backgroundColor = .whiteFFFFFF
         let timePickerToolbar = UIToolbar()
-        timePickerToolbar.barTintColor = .white
-        timePickerToolbar.tintColor = .green90D599
+        timePickerToolbar.barTintColor = .whiteFFFFFF
+        timePickerToolbar.tintColor = .black232323
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
         timePickerToolbar.setItems([flexButton, doneButton], animated: true)

@@ -141,13 +141,15 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
 
     private func setupDaysPicker() {
         daysPicker.delegate = self
+        daysPicker.backgroundColor = .whiteFFFFFF
         wateringTextField.inputView = daysPicker
         fertilizingTextField.inputView = daysPicker
 
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black232323
+        toolBar.tintColor = .black232323
+        toolBar.barTintColor = .whiteFFFFFF
         toolBar.sizeToFit()
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.pickerDoneButtonTapped))
@@ -302,23 +304,11 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch currentPickerSelection {
         case .watering:
             viewModel.watering.value = numberOfDays
-            animate(wateringTextField)
+            wateringTextField.animateScale()
         case .fertilizing:
             viewModel.fertilizing.value = numberOfDays
-            animate(fertilizingTextField)
+            fertilizingTextField.animateScale()
         }
-    }
-
-    private func animate(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.2,
-                       animations: {
-                           textField.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                       },
-                       completion: { _ in
-                           UIView.animate(withDuration: 0.2) {
-                               textField.transform = CGAffineTransform.identity
-                           }
-                       })
     }
 
 }

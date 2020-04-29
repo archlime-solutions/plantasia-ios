@@ -15,5 +15,6 @@ extension UIColor {
     static let black232323 = UIColor(named: "black-232323") ?? .clear
     static let blue69A8AD = UIColor(named: "blue-69A8AD") ?? .clear
     static let orangeFE865D = UIColor(named: "orange-FE865D") ?? .clear
+    static let whiteFFFFFF = UIColor(named: "white-FFFFFF") ?? .clear
 
 }
