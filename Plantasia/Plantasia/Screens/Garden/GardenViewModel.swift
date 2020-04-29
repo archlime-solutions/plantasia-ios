@@ -47,8 +47,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
             plants.forEach { $0.loadImage() }
             event.value = .didLoadPlants
         } else {
-            //TODO: change these texts
-            error.value = GeneralError(title: "error", message: "error")
+            error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
         }
     }
 

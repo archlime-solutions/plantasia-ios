@@ -32,7 +32,6 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     var name = Observable<String?>(nil)
     var description = Observable<String?>(nil)
     var descriptionPlaceholder = "Description"
-    //TODO: check the internet on how often do people water and fertilize their plants
     var watering = Observable<Int>(2)
     var fertilizing = Observable<Int>(14)
     var currentPickerSelection: CurrentPickerSelection?

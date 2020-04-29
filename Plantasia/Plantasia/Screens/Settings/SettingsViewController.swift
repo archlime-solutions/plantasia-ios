@@ -22,6 +22,7 @@ class SettingsViewController: BaseViewController {
 
     private var timePicker = UIDatePicker()
     private var viewModel = SettingsViewModel()
+    private var appID = "1510768461"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,9 @@ class SettingsViewController: BaseViewController {
     }
 
     @IBAction func writeAReviewButtonPressed(_ sender: Any) {
-        SKStoreReviewController.requestReview()
+        let urlStr = "https://itunes.apple.com/app/id\(appID)?action=write-review"
+        guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     @IBAction func contactButtonPressed(_ sender: Any) {
@@ -42,19 +45,15 @@ class SettingsViewController: BaseViewController {
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             mailComposerVC.setToRecipients(["contact@archlime.com"])
-            //TODO: change this text
-            mailComposerVC.setSubject("CHANGE THIS")
             present(mailComposerVC, animated: true, completion: nil)
         }
     }
 
     @IBAction func shareAppButtonPressed(_ sender: Any) {
-        //TODO: change text
-        let textToShare = "Check out my app"
-
         //TODO: change link
-        if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {
+        if let myWebsite = URL(string: "http://itunes.apple.com/app/id\(appID)") {
             //TODO: change image from placeholder to logo
+            let textToShare = "Check out Plantasia, a really cool app 😎. Download link 👉"
             let objectsToShare = [textToShare, myWebsite, #imageLiteral(resourceName: "placeholder")] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.popoverPresentationController?.sourceView = view
@@ -100,7 +99,7 @@ class SettingsViewController: BaseViewController {
     private func setReminderTextFieldText() {
         let attrs1 = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold), NSAttributedString.Key.foregroundColor: UIColor.black232323]
         let attrs2 = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.green90D599]
-        let attributedString1 = NSMutableAttributedString(string: "Send a reminder at ", attributes: attrs1)
+        let attributedString1 = NSMutableAttributedString(string: "I want to be reminded at ", attributes: attrs1)
         let attributedString2 = NSMutableAttributedString(string: UserDefaults.standard.getRemindersTime().toHoursMinutesString(), attributes: attrs2)
         attributedString1.append(attributedString2)
         reminderTextField.attributedText = attributedString1
