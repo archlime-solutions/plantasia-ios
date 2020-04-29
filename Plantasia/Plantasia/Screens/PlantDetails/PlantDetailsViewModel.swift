@@ -9,25 +9,35 @@
 import Bond
 import RealmSwift
 
-class PlantDetailsViewModel: BaseViewModel {
+class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
 
     enum Event {
-        case didRemovePlant
+        case didWaterPlant
+        case didFertilizePlant
     }
 
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
-    var plant: Plant
+    var plant: Observable<Plant>
 
     init(plant: Plant) {
-        self.plant = plant
+        self.plant = Observable<Plant>(plant)
     }
 
-    func deletePlant() {
+    func waterPlant() {
         if let realm = try? Realm() {
             try? realm.write {
-                realm.delete(plant)
-                self.event.value = .didRemovePlant
+                plant.value.water()
+                event.value = .didWaterPlant
+            }
+        }
+    }
+
+    func fertilizePlant() {
+        if let realm = try? Realm() {
+            try? realm.write {
+                plant.value.fertilize()
+                event.value = .didFertilizePlant
             }
         }
     }

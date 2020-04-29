@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class GardenViewController: BaseViewController {
+class GardenViewController: BaseViewController, AlertPresenter {
 
     @IBOutlet weak var emptyGardenContainerView: UIView!
     @IBOutlet weak var plusButton: UIButton!
@@ -23,7 +23,6 @@ class GardenViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupBindings()
         viewModel.loadPlants()
     }
@@ -47,8 +46,8 @@ class GardenViewController: BaseViewController {
         performSegue(withIdentifier: .presentAddPlant)
     }
 
-    private func setupUI() {
-        //TODO: remove or impl
+    func loadPlants() {
+        viewModel.loadPlants()
     }
 
     private func setupBindings() {
@@ -58,6 +57,8 @@ class GardenViewController: BaseViewController {
                 switch event {
                 case .didLoadPlants:
                     self.setupInitialViewsVisibility()
+                case .didWaterAllPlants, .didFertilizeAllPlants:
+                    self.collectionView.reloadData()
                 }
             }
         }.dispose(in: bag)
@@ -73,7 +74,14 @@ class GardenViewController: BaseViewController {
     @objc
     private func waterAllViewPressed() {
         waterAllView.flash()
-        //TODO: implement
+        let handler: () -> Void = {
+            self.viewModel.waterAllPlants()
+        }
+        showAlert(title: "Are you sure you want to water all plants?",
+                  message: nil,
+                  buttonText: "Water",
+                  buttonHandler: handler,
+                  showCancelButton: true)
     }
 
     private func setupFertilizeAllView() {
@@ -86,7 +94,14 @@ class GardenViewController: BaseViewController {
     @objc
     private func fertilizeAllViewPressed() {
         fertilizeAllView.flash()
-        //TODO: implement
+        let handler: () -> Void = {
+            self.viewModel.fertilizeAllPlants()
+        }
+        showAlert(title: "Are you sure you want to fertilize all plants?",
+                  message: nil,
+                  buttonText: "Fertilize",
+                  buttonHandler: handler,
+                  showCancelButton: true)
     }
 
     private func setupPlusButtonAnimation() {
@@ -115,6 +130,7 @@ class GardenViewController: BaseViewController {
 
     private func setupInitialViewsVisibility() {
         if viewModel.plants.isEmpty {
+            setupNavigationBarShadow()
             filledGardenContainerView.isHidden = true
             emptyGardenContainerView.isHidden = false
             quickActionsContainerView.isHidden = true
@@ -131,6 +147,14 @@ class GardenViewController: BaseViewController {
             collectionView.dragInteractionEnabled = true
             collectionView.reloadData()
         }
+    }
+
+    private func setupNavigationBarShadow() {
+        navigationController?.navigationBar.layer.masksToBounds = false
+        navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
+        navigationController?.navigationBar.layer.shadowOpacity = 0.1
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+        navigationController?.navigationBar.layer.shadowRadius = 1
     }
 
     private func setupQuickActionsContainerView() {
@@ -154,12 +178,11 @@ extension GardenViewController: SegueHandler {
         switch segueIdentifier(for: segue) {
         case .presentAddPlant:
             guard let nextVC = segue.destination as? AddPlantViewController else { return }
-            nextVC.viewModel = AddPlantViewModel()
+            nextVC.viewModel = AddPlantViewModel(plant: nil)
             nextVC.delegate = self
         case .pushPlantDetails:
             guard let selectedPlant = viewModel.selectedPlant, let nextVC = segue.destination as? PlantDetailsViewController else { return }
             nextVC.viewModel = PlantDetailsViewModel(plant: selectedPlant)
-            nextVC.delegate = self
         }
     }
 
@@ -285,16 +308,7 @@ extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
 // MARK: - AddPlantViewControllerDelegate
 extension GardenViewController: AddPlantViewControllerDelegate {
 
-    func addPlantViewControllerDidAddPlant() {
-        viewModel.loadPlants()
-    }
-
-}
-
-// MARK: - PlantDetailsViewControllerDelegate
-extension GardenViewController: PlantDetailsViewControllerDelegate {
-
-    func plantDetailsViewControllerDidRemovePlant() {
+    func addPlantViewControllerDidCreatePlant() {
         viewModel.loadPlants()
     }
 

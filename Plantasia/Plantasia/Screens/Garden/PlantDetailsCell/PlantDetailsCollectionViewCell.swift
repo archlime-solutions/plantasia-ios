@@ -23,7 +23,7 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
             configurePlantDetails()
         }
     }
-    //TODO: add remove functionality when DND cards
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
@@ -34,12 +34,13 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
         nameLabel.text = plant.name
         wateringLabel.text = "\(plant.getWateringPercentage())%"
         fertilizingLabel.text = "\(plant.getFertilizingPercentage())%"
-        self.plantImageView.image = plant.getThumbnailImage()
+        plantImageView.image = plant.getThumbnailImage()
+        setupShadowContainerView()
     }
 
     private func setupUI() {
         setupGradientView()
-        setupShadowContainerView()
+
         roundedContainerView.layer.cornerRadius = 10
     }
 
@@ -51,9 +52,17 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupShadowContainerView() {
-        shadowContainerView.layer.shadowRadius = 5
-        shadowContainerView.layer.shadowColor = UIColor.black.cgColor
-        shadowContainerView.layer.shadowOpacity = 0.4
-        shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        if viewModel.plant.getWateringPercentage() <= 10
+            || viewModel.plant.getFertilizingPercentage() <= 10 {
+            shadowContainerView.layer.shadowRadius = 15
+            shadowContainerView.layer.shadowColor = UIColor.orangeFE865D.cgColor
+            shadowContainerView.layer.shadowOpacity = 1
+            shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        } else {
+            shadowContainerView.layer.shadowRadius = 5
+            shadowContainerView.layer.shadowColor = UIColor.black.cgColor
+            shadowContainerView.layer.shadowOpacity = 0.4
+            shadowContainerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        }
     }
 }

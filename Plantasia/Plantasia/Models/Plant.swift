@@ -11,6 +11,8 @@ import RealmSwift
 
 class Plant: Object {
 
+    private static let criticalPercentageThreshold = 10
+
     @objc dynamic var id: Int = -1
     @objc dynamic var name: String?
     @objc dynamic var descr: String?
@@ -47,6 +49,18 @@ class Plant: Object {
         return "id"
     }
 
+    func requiresAttention() -> Bool {
+        return requiresWatering() || requiresFertilizing()
+    }
+
+    func requiresWatering() -> Bool {
+        return getWateringRemainingDays() <= Plant.criticalPercentageThreshold
+    }
+
+    func requiresFertilizing() -> Bool {
+        return getFertilizingPercentage() <= Plant.criticalPercentageThreshold
+    }
+
     func getWateringPercentage() -> Int {
         guard let lastWateringDate = lastWateringDate,
             let wateringFrequencyDays = wateringFrequencyDays.value,
@@ -55,7 +69,12 @@ class Plant: Object {
         let timePassed = Date().timeIntervalSince(lastWateringDate)
         let percent = (duration - timePassed) / duration * 100
 
-        return Int(percent.rounded(.up))
+        let result = Int(percent.rounded(.up))
+        if result < 0 {
+            return 0
+        } else {
+            return result
+        }
     }
 
     func getFertilizingPercentage() -> Int {
@@ -66,7 +85,12 @@ class Plant: Object {
         let timePassed = Date().timeIntervalSince(lastFertilizingDate)
         let percent = (duration - timePassed) / duration * 100
 
-        return Int(percent.rounded(.up))
+        let result = Int(percent.rounded(.up))
+        if result < 0 {
+            return 0
+        } else {
+            return result
+        }
     }
 
     func getWateringRemainingDays() -> Int {
@@ -99,6 +123,14 @@ class Plant: Object {
         } else {
             return 0
         }
+    }
+
+    func water() {
+        lastWateringDate = Date()
+    }
+
+    func fertilize() {
+        lastFertilizingDate = Date()
     }
 
     func nextId() -> Int {

@@ -18,7 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black232323]
         setupRealmConfiguration()
+        UNUserNotificationCenter.current().delegate = PushNotificationService.shared
+        UIApplication.shared.applicationIconBadgeNumber = 0
         return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        PushNotificationService.shared.scheduleNotifications()
     }
 
     /// Set the new schema version. This must be greater than the previously used version.

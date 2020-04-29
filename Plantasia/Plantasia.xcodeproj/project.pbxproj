@@ -29,6 +29,11 @@
 		AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */; };
 		AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C112454C21E0049966B /* UIViewExtensions.swift */; };
 		AB7EDC52245328FD006BFEE6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7EDC51245328FD006BFEE6 /* Colors.xcassets */; };
+		AB90177E245869F00031369C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB90177D245869F00031369C /* SettingsViewController.swift */; };
+		AB901780245870100031369C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB90177F245870100031369C /* SettingsViewModel.swift */; };
+		AB9017842458723E0031369C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9017832458723E0031369C /* UserDefaultsExtensions.swift */; };
+		AB901786245872E90031369C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901785245872E90031369C /* DateExtensions.swift */; };
+		AB901788245947BC0031369C /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
 		ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8118F24531D6B006369C1 /* TutorialViewController.swift */; };
 		ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8119124531D98006369C1 /* BaseViewController.swift */; };
 		ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C9492454A88000A7DEBA /* CustomTextField.swift */; };
@@ -66,6 +71,11 @@
 		AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewPresenter.swift; sourceTree = "<group>"; };
 		AB748C112454C21E0049966B /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		AB7EDC51245328FD006BFEE6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		AB90177D245869F00031369C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		AB90177F245870100031369C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		AB9017832458723E0031369C /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
+		AB901785245872E90031369C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		AB901787245947BC0031369C /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
 		ABA8118F24531D6B006369C1 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ABA8119124531D98006369C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		ABB8C9492454A88000A7DEBA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -153,6 +163,8 @@
 				AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */,
 				AB536ECA2455CF0A00B942B9 /* UIImageExtensions.swift */,
 				AB748C112454C21E0049966B /* UIViewExtensions.swift */,
+				AB9017832458723E0031369C /* UserDefaultsExtensions.swift */,
+				AB901785245872E90031369C /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -166,11 +178,13 @@
 			path = AddPlant;
 			sourceTree = "<group>";
 		};
-		AB8779CA245723EA00171ECE /* EditPlant */ = {
+		AB90177C245869DE0031369C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AB90177D245869F00031369C /* SettingsViewController.swift */,
+				AB90177F245870100031369C /* SettingsViewModel.swift */,
 			);
-			path = EditPlant;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		ABBF773F2455726E0075133D /* Garden */ = {
@@ -232,7 +246,7 @@
 				ABBF773F2455726E0075133D /* Garden */,
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
-				AB8779CA245723EA00171ECE /* EditPlant */,
+				AB90177C245869DE0031369C /* Settings */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -261,6 +275,7 @@
 				AB748C0F2454BBC00049966B /* LoadingViewPresenter.swift */,
 				AB63DD33245467D500EEAE2F /* MediaPicker.swift */,
 				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
+				AB901787245947BC0031369C /* PushNotificationService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -410,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB901788245947BC0031369C /* PushNotificationService.swift in Sources */,
 				ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */,
 				AB63DD32245463AB00EEAE2F /* AddPlantViewModel.swift in Sources */,
 				ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */,
@@ -419,7 +435,9 @@
 				ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */,
 				ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */,
 				AB63DD2B24544DA500EEAE2F /* SegueHandler.swift in Sources */,
+				AB9017842458723E0031369C /* UserDefaultsExtensions.swift in Sources */,
 				AB748C102454BBC00049966B /* LoadingViewPresenter.swift in Sources */,
+				AB901786245872E90031369C /* DateExtensions.swift in Sources */,
 				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
 				AB4B06A62455BEF80058174D /* SortPlantsBarButtonItemView.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
@@ -436,6 +454,8 @@
 				ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */,
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
 				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,
+				AB90177E245869F00031369C /* SettingsViewController.swift in Sources */,
+				AB901780245870100031369C /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import SnapKit
 import RealmSwift
 
 protocol AddPlantViewControllerDelegate: class {
-    func addPlantViewControllerDidAddPlant()
+    func addPlantViewControllerDidCreatePlant()
 }
 
 class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPresenter {
@@ -28,6 +28,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     @IBOutlet weak var wateringTextField: UITextField!
     @IBOutlet weak var fertilizingTextField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var deletePlantButton: UIButton!
 
     var viewModel: AddPlantViewModel!
     weak var delegate: AddPlantViewControllerDelegate?
@@ -65,6 +66,22 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         viewModel.saveValidatedPlant()
     }
 
+    @IBAction func photoGalleryButtonPressed(_ sender: Any) {
+        //TODO: implement
+    }
+
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        let handler: () -> Void = {
+            self.viewModel.deletePlant()
+        }
+        showAlert(title: "Are you sure you want to remove this plant?",
+                  message: "Removing this plant will also remove its photo gallery.",
+                  buttonText: "Remove",
+                  buttonHandler: handler,
+                  buttonStyle: .destructive,
+                  showCancelButton: true)
+    }
+
     private func setupBindings() {
         viewModel.name.bidirectionalBind(to: nameTextField.reactive.text).dispose(in: bag)
         viewModel.description.bidirectionalBind(to: descriptionTextView.reactive.text).dispose(in: bag)
@@ -79,13 +96,24 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
             self.fertilizingTextField.text = "Fertilizing every \(value) \(value > 1 ? "days" : "day")"
         }.dispose(in: bag)
 
+        viewModel.plantImage.observeNext { [weak self] value in
+            guard let self = self else { return }
+            self.imageView.image = value ?? #imageLiteral(resourceName: "placeholder")
+        }.dispose(in: bag)
+
         viewModel.event.observeNext { [weak self] event in
             guard let self = self, let event = event else { return }
             switch event {
-            case .didSavePlant:
+            case .didCreatePlant:
                 self.dismiss(animated: true, completion: {
-                    self.delegate?.addPlantViewControllerDidAddPlant()
+                    self.delegate?.addPlantViewControllerDidCreatePlant()
                 })
+            case .didUpdatePlant:
+                self.navigationController?.popViewController(animated: true)
+            case .didRemovePlant:
+                guard let gardenViewController = self.navigationController?.viewControllers.first as? GardenViewController else { return }
+                gardenViewController.loadPlants()
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }.dispose(in: bag)
 
@@ -107,6 +135,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         setupImageShadowContainerView()
         setupDoneButton()
         setupPhotoGalleryButton()
+        setupDeletePlantButton()
         setupDaysPicker()
     }
 
@@ -137,8 +166,7 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     @objc
     private func imageViewPressed(_ sender: UITapGestureRecognizer) {
         mediaPicker.pickImage(self, { image in
-            self.imageView.image = image
-            self.viewModel.plantImage = image
+            self.viewModel.plantImage.value = image
         })
     }
 
@@ -168,9 +196,13 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
     }
 
     private func setupPhotoGalleryButton() {
-        photoGalleryButton.layer.cornerRadius = 10
-        photoGalleryButton.layer.borderWidth = 2
-        photoGalleryButton.layer.borderColor = UIColor.green90D599.cgColor
+        if viewModel.isEditingExistingPlant {
+            photoGalleryButton.isHidden = true
+        } else {
+            photoGalleryButton.layer.cornerRadius = 10
+            photoGalleryButton.layer.borderWidth = 2
+            photoGalleryButton.layer.borderColor = UIColor.green90D599.cgColor
+        }
     }
 
     private func setupDescriptionTextView() {
@@ -178,9 +210,23 @@ class AddPlantViewController: BaseViewController, LoadingViewPresenter, AlertPre
         descriptionTextView.text = (viewModel.description.value ?? "").isEmpty ? viewModel.descriptionPlaceholder : viewModel.description.value
     }
 
+    private func setupDeletePlantButton() {
+        if viewModel.isEditingExistingPlant {
+            deletePlantButton.layer.cornerRadius = 10
+            deletePlantButton.layer.borderWidth = 2
+            deletePlantButton.layer.borderColor = UIColor.orangeFE865D.cgColor
+        } else {
+            deletePlantButton.isHidden = true
+        }
+    }
+
     private func setupCancelButton() {
-        cancelButton.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
+        if viewModel.isEditingExistingPlant {
+            cancelButton.isHidden = true
+        } else {
+            cancelButton.snp.makeConstraints { maker in
+                maker.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
+            }
         }
     }
 
@@ -217,9 +263,9 @@ extension AddPlantViewController: UITextViewDelegate {
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == viewModel.placeholderTextColor {
+        textView.textColor = viewModel.inputTextColor
+        if textView.text == viewModel.descriptionPlaceholder {
             textView.text = nil
-            textView.textColor = viewModel.inputTextColor
         }
     }
 

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol PlantDetailsViewControllerDelegate: class {
-    func plantDetailsViewControllerDidRemovePlant()
-}
-
 class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     @IBOutlet weak var actionBarShadowContainerView: UIView!
@@ -20,22 +16,25 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var imageTopGradientView: UIView!
     @IBOutlet weak var imageShadowContainerView: UIView!
     @IBOutlet weak var imageRoundedCornersContainerView: UIView!
+    @IBOutlet weak var descriptionStackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var wateringLabel: UILabel!
     @IBOutlet weak var fertilizingLabel: UILabel!
     @IBOutlet weak var wateringPercentageLabel: UILabel!
     @IBOutlet weak var fertilizingPercentageLabel: UILabel!
     @IBOutlet weak var photoGalleryButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
 
     var viewModel: PlantDetailsViewModel!
-    weak var delegate: PlantDetailsViewControllerDelegate?
     private var gradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupPlantData()
     }
 
@@ -45,36 +44,28 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     @IBAction func waterButtonPressed(_ sender: Any) {
-        //TODO: implement
+        viewModel.waterPlant()
     }
 
     @IBAction func fertilizeButtonPressed(_ sender: Any) {
-        //TODO: implement
+        viewModel.fertilizePlant()
     }
 
     @IBAction func photoGalleryButtonPressed(_ sender: Any) {
         //TODO: implement
     }
 
-    @IBAction func deleteButtonPressed(_ sender: Any) {
-        let handler: () -> Void = {
-            self.viewModel.deletePlant()
-        }
-        showAlert(title: "Are you sure you want to remove this plant?",
-                  message: "Removing this plant will also remove its photo gallery.",
-                  buttonText: "Remove",
-                  buttonHandler: handler,
-                  buttonStyle: .destructive,
-                  showCancelButton: true)
-    }
-
     private func setupBindings() {
-        viewModel.event.observeNext { [weak self] event in
-            guard let self = self, let event = event else { return }
-            switch event {
-            case .didRemovePlant:
-                self.navigationController?.popToRootViewController(animated: true)
-                self.delegate?.plantDetailsViewControllerDidRemovePlant()
+        viewModel.plant.observeNext { [weak self] _ in
+            guard let self = self else { return }
+            self.setupPlantData()
+        }.dispose(in: bag)
+
+        viewModel.event.observeNext { [weak self] value in
+            guard let self = self, let value = value else { return }
+            switch value {
+            case .didFertilizePlant, .didWaterPlant:
+                self.setupPlantData()
             }
         }.dispose(in: bag)
 
@@ -85,10 +76,10 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupPlantData() {
-        let plant = viewModel.plant
+        let plant = viewModel.plant.value
         title = plant.name
         descriptionLabel.text = plant.descr
-        descriptionLabel.isHidden = plant.descr == nil
+        descriptionStackView.isHidden = (plant.descr ?? "").isEmpty
         setupWateringLabel()
         setupFertilizingLabel()
         imageView.image = plant.getImage()
@@ -97,7 +88,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupWateringLabel() {
-        let remainingWateringDays = viewModel.plant.getWateringRemainingDays()
+        let remainingWateringDays = viewModel.plant.value.getWateringRemainingDays()
         if remainingWateringDays == 0 {
             wateringLabel.text = "Watering: Today"
         } else if remainingWateringDays == 1 {
@@ -108,7 +99,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupFertilizingLabel() {
-        let remainingFertilizingDays = viewModel.plant.getFertilizingRemainingDays()
+        let remainingFertilizingDays = viewModel.plant.value.getFertilizingRemainingDays()
         if remainingFertilizingDays == 0 {
             fertilizingLabel.text = "Fertilizing: Today"
         } else if remainingFertilizingDays == 1 {
@@ -127,19 +118,12 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         setupImageRounderCornersContainerView()
         setupImageShadowContainerView()
         setupPhotoGalleryButton()
-        setupDeleteButton()
     }
 
     private func setupPhotoGalleryButton() {
         photoGalleryButton.layer.cornerRadius = 10
         photoGalleryButton.layer.borderColor = UIColor.green90D599.cgColor
         photoGalleryButton.layer.borderWidth = 2
-    }
-
-    private func setupDeleteButton() {
-        deleteButton.layer.cornerRadius = 10
-        deleteButton.layer.borderColor = UIColor.orangeFE865D.cgColor
-        deleteButton.layer.borderWidth = 2
     }
 
     private func setupNavigationBar() {
@@ -189,7 +173,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     @objc
     private func editButtonPressed() {
-        //TODO: implement
+        performSegue(withIdentifier: .pushEditPlant)
     }
 
 }
@@ -200,6 +184,23 @@ extension PlantDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
             scrollView.contentOffset.y = 0
+        }
+    }
+
+}
+
+// MARK: - SegueHandler
+extension PlantDetailsViewController: SegueHandler {
+
+    enum SegueIdentifier: String {
+        case pushEditPlant
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .pushEditPlant:
+            guard let nextVC = segue.destination as? AddPlantViewController else { return }
+            nextVC.viewModel = AddPlantViewModel(plant: viewModel.plant.value)
         }
     }
 

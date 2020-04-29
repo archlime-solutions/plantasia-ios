@@ -12,7 +12,9 @@ import RealmSwift
 class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     enum Event {
-        case didSavePlant
+        case didCreatePlant
+        case didUpdatePlant
+        case didRemovePlant
     }
 
     enum CurrentPickerSelection {
@@ -24,6 +26,11 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     var event = Observable<Event?>(nil)
     //TODO: isRequestInProgress is not used
     var isRequestInProgress = Observable<Bool>(false)
+    var isEditingExistingPlant: Bool {
+        get {
+            return plant != nil
+        }
+    }
     var name = Observable<String?>(nil)
     var description = Observable<String?>(nil)
     var descriptionPlaceholder = "Description"
@@ -32,42 +39,79 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     var fertilizing = Observable<Int>(14)
     var currentPickerSelection: CurrentPickerSelection?
     var pickerOptions: [Int] = Array(1...31)
-    var plantImage: UIImage?
+    var plantImage = Observable<UIImage?>(nil)
     var placeholderTextColor = UIColor.greyC4C4C4
-    var inputTextColor = UIColor.black
+    var inputTextColor = UIColor.black232323
+    private var plant: Plant?
+
+    init(plant: Plant?) {
+        self.plant = plant
+        if let plant = plant {
+            name.value = plant.name
+            description.value = plant.descr
+            watering.value = plant.wateringFrequencyDays.value ?? 2
+            fertilizing.value = plant.fertilizingFrequencyDays.value ?? 14
+            plantImage.value = plant.getImage()
+        }
+    }
 
     func saveValidatedPlant() {
         if isInputDataComplete() {
             isRequestInProgress.value = true
-            let plant = Plant(name: name.value,
-                              descr: description.value,
-                              wateringFrequencyDays: watering.value,
-                              fertilizingFrequencyDays: fertilizing.value,
-                              image: plantImage,
-                              lastWateringDate: Date(),
-                              lastFertilizingDate: Date())
-            savePlant(plant) {
-                self.isRequestInProgress.value = false
-                self.event.value = .didSavePlant
+            if isEditingExistingPlant {
+                updatePlant()
+                event.value = .didUpdatePlant
+            } else {
+                let plant = Plant(name: name.value,
+                                  descr: description.value,
+                                  wateringFrequencyDays: watering.value,
+                                  fertilizingFrequencyDays: fertilizing.value,
+                                  image: plantImage.value,
+                                  lastWateringDate: Date(),
+                                  lastFertilizingDate: Date())
+                create(plant)
+                event.value = .didCreatePlant
             }
+            isRequestInProgress.value = false
+            PushNotificationService.shared.requestPushNotificationAuthorization()
         } else {
             error.value = GeneralError(title: "Missing information", message: "Please take an image of your plant and give it a name.")
         }
-
     }
 
-    private func isInputDataComplete() -> Bool {
-        return name.value != nil && plantImage != nil
+    func deletePlant() {
+        guard let plant = plant else { return }
+        if let realm = try? Realm() {
+            try? realm.write {
+                realm.delete(plant)
+                self.event.value = .didRemovePlant
+            }
+        }
     }
 
-    private func savePlant(_ plant: Plant, completion: (() -> Void)?) {
+    private func create(_ plant: Plant) {
         if let realm = try? Realm() {
             try? realm.write {
                 plant.index = realm.objects(Plant.self).count
                 realm.add(plant)
-                completion?()
             }
         }
+    }
+
+    private func updatePlant() {
+        if let realm = try? Realm() {
+            try? realm.write {
+                plant?.name = name.value
+                plant?.descr = description.value
+                plant?.wateringFrequencyDays.value = watering.value
+                plant?.fertilizingFrequencyDays.value = fertilizing.value
+                plant?.setImage(plantImage.value)
+            }
+        }
+    }
+
+    private func isInputDataComplete() -> Bool {
+        return name.value != nil && plantImage.value != nil
     }
 
 }
