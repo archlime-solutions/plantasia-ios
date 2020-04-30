@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTPhotoViewerController
 
 protocol PhotoGalleryViewControllerDelegate: class {
     func photoGalleryViewControllerDidSavePhotos(_: [PlantPhoto])
@@ -119,6 +120,7 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension PhotoGalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -153,7 +155,16 @@ extension PhotoGalleryViewController: UICollectionViewDelegate, UICollectionView
         UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
 
-    //TODO: implement didSelect cu ceva screen cu poza full screen, numele si data plm... vezi tu un design rapid
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell =
+            collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else { return }
+        let image = viewModel.photos[indexPath.row].getImage()
+
+        let viewController = DTPhotoViewerController(referencedView: cell.plantImageView, image: image)
+        present(viewController, animated: true, completion: nil)
+
+    }
+
     //TODO: implement drag and drop? nu am index, vad eu cum fac
 
 }

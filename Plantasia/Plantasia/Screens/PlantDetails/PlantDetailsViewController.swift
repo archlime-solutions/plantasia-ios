@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTPhotoViewerController
 
 class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
@@ -125,6 +126,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         setupImageRounderCornersContainerView()
         setupImageShadowContainerView()
         setupPhotoGalleryButton()
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewPressed)))
     }
 
     private func setupPhotoGalleryButton() {
@@ -181,6 +183,12 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     @objc
     private func editButtonPressed() {
         performSegue(withIdentifier: .pushEditPlant)
+    }
+
+    @objc
+    private func imageViewPressed(_ sender: UITapGestureRecognizer) {
+        let viewController = DTPhotoViewerController(referencedView: imageView, image: imageView.image)
+        present(viewController, animated: true, completion: nil)
     }
 
 }

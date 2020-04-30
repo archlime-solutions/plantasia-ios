@@ -56,7 +56,7 @@ class Plant: Object {
     }
 
     func requiresWatering() -> Bool {
-        return getWateringRemainingDays() <= Plant.criticalPercentageThreshold
+        return getWateringPercentage() <= Plant.criticalPercentageThreshold
     }
 
     func requiresFertilizing() -> Bool {
