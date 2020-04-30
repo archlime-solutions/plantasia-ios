@@ -42,4 +42,15 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
         }
     }
 
+    func setPhotos(_ photos: [PlantPhoto]) {
+        if let realm = try? Realm() {
+            for photo in photos {
+                try? realm.write {
+                    if !plant.value.photos.contains(photo) {
+                        plant.value.photos.append(photo)
+                    }
+                }
+            }
+        }
+    }
 }

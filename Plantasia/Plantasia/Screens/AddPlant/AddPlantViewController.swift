@@ -27,7 +27,6 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var wateringTextField: UITextField!
     @IBOutlet weak var fertilizingTextField: UITextField!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var deletePlantButton: UIButton!
 
     var viewModel: AddPlantViewModel!
@@ -41,12 +40,17 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         setupUI()
         setupBindings()
         setupDescriptionTextView()
+
+        //TODO: fix this navigation bar on Add Plant; add large title on gallery!
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.isTranslucent = true
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer?.frame = imageTopGradientView.bounds
-        setupCancelButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,16 +62,12 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         scrollView.contentInset.bottom = height
     }
 
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
     @IBAction func doneButtonPressed(_ sender: Any) {
         viewModel.saveValidatedPlant()
     }
 
     @IBAction func photoGalleryButtonPressed(_ sender: Any) {
-        //TODO: implement
+        performSegue(withIdentifier: .pushPhotoGallery)
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
@@ -132,6 +132,21 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         setupPhotoGalleryButton()
         setupDeletePlantButton()
         setupDaysPicker()
+        setupCancelBarButtonItem()
+    }
+
+    private func setupCancelBarButtonItem() {
+        if !viewModel.isEditingExistingPlant {
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
+            cancelButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .normal)
+            navigationItem.rightBarButtonItem = cancelButton
+        }
+    }
+
+    @objc
+    private func cancelButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
     private func setupDaysPicker() {
@@ -214,16 +229,6 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
             deletePlantButton.layer.borderColor = UIColor.orangeFE865D.cgColor
         } else {
             deletePlantButton.isHidden = true
-        }
-    }
-
-    private func setupCancelButton() {
-        if viewModel.isEditingExistingPlant {
-            cancelButton.isHidden = true
-        } else {
-            cancelButton.snp.makeConstraints { maker in
-                maker.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
-            }
         }
     }
 
@@ -314,6 +319,23 @@ extension AddPlantViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
             scrollView.contentOffset.y = 0
+        }
+    }
+
+}
+
+// MARK: - SegueHandler
+extension AddPlantViewController: SegueHandler {
+
+    enum SegueIdentifier: String {
+        case pushPhotoGallery
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .pushPhotoGallery:
+            guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
+            nextVC.viewModel = PhotoGalleryViewModel(plantName: nil, photos: viewModel.photos)
         }
     }
 

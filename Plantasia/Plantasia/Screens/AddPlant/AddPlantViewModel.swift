@@ -37,6 +37,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     var currentPickerSelection: CurrentPickerSelection?
     var pickerOptions: [Int] = Array(1...31)
     var plantImage = Observable<UIImage?>(nil)
+    var photos = [PlantPhoto]()
     var placeholderTextColor = UIColor.greyC4C4C4
     var inputTextColor = UIColor.black232323
     private var plant: Plant?
@@ -64,7 +65,8 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                                   fertilizingFrequencyDays: fertilizing.value,
                                   image: plantImage.value,
                                   lastWateringDate: Date(),
-                                  lastFertilizingDate: Date())
+                                  lastFertilizingDate: Date(),
+                                  photos: photos)
                 create(plant)
                 event.value = .didCreatePlant
             }

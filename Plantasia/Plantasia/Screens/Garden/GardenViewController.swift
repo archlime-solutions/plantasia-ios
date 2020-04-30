@@ -29,7 +29,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupInitialViewsVisibility()
+        setupContainerViewsVisibility()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -56,7 +56,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
             if let event = event {
                 switch event {
                 case .didLoadPlants:
-                    self.setupInitialViewsVisibility()
+                    self.setupContainerViewsVisibility()
                 case .didWaterAllPlants, .didFertilizeAllPlants:
                     self.collectionView.reloadData()
                 }
@@ -128,7 +128,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         navigationItem.leftBarButtonItem = button
     }
 
-    private func setupInitialViewsVisibility() {
+    private func setupContainerViewsVisibility() {
         if viewModel.plants.isEmpty {
             filledGardenContainerView.isHidden = true
             emptyGardenContainerView.isHidden = false
@@ -168,7 +168,7 @@ extension GardenViewController: SegueHandler {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .presentAddPlant:
-            guard let nextVC = segue.destination as? AddPlantViewController else { return }
+            guard let nextVC = (segue.destination as? UINavigationController)?.viewControllers.first as? AddPlantViewController else { return }
             nextVC.viewModel = AddPlantViewModel(plant: nil)
             nextVC.delegate = self
         case .pushPlantDetails:

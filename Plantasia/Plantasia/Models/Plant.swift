@@ -22,8 +22,8 @@ class Plant: Object {
     @objc dynamic var lastWateringDate: Date?
     @objc dynamic var lastFertilizingDate: Date?
     @objc dynamic var index: Int = 0
+    var photos = List<PlantPhoto>()
     private var image: UIImage?
-    private var thumbnailImage: UIImage?
 
     convenience init (
         name: String?,
@@ -32,7 +32,8 @@ class Plant: Object {
         fertilizingFrequencyDays: Int?,
         image: UIImage?,
         lastWateringDate: Date?,
-        lastFertilizingDate: Date?
+        lastFertilizingDate: Date?,
+        photos: [PlantPhoto]
     ) {
         self.init()
         self.id = nextId()
@@ -43,6 +44,7 @@ class Plant: Object {
         setImage(image)
         self.lastWateringDate = lastWateringDate
         self.lastFertilizingDate = lastFertilizingDate
+        self.photos.append(objectsIn: photos)
     }
 
     override static func primaryKey() -> String? {
@@ -133,7 +135,27 @@ class Plant: Object {
         lastFertilizingDate = Date()
     }
 
-    func nextId() -> Int {
+    func getImage() -> UIImage? {
+        if let image = image {
+            return image
+        } else {
+            loadImage()
+            return image
+        }
+    }
+
+    func setImage(_ image: UIImage?) {
+        guard let photo = image?.fixOrientation(),
+            let jpegRepresentation = photo.jpegData(compressionQuality: 0.1) else { return }
+        let uuid = UUID().uuidString
+        if let filePath = imageFilePath(imageUUID: uuid) {
+            photoUUID = uuid
+            try? jpegRepresentation.write(to: filePath,
+                                          options: .atomic)
+        }
+    }
+
+    private func nextId() -> Int {
         if let realm = try? Realm() {
             if let retNext = realm.objects(Plant.self).sorted(byKeyPath: "id", ascending: false).first?.id {
                 return retNext + 1
@@ -145,55 +167,19 @@ class Plant: Object {
         }
     }
 
-    func getImage() -> UIImage? {
-        if let image = image {
-            return image
-        } else {
-            return loadImage()
-        }
-    }
-
-    func setImage(_ image: UIImage?) {
-        guard let photo = image?.fixOrientation(),
-            let pngRepresentation = photo.pngData(),
-            case let uuidString = UUID().uuidString else { return }
-        photoUUID = uuidString
-        if let filePath = imageFilePath() {
-            try? pngRepresentation.write(to: filePath,
-                                         options: .atomic)
-        }
-    }
-
-    func getThumbnailImage() -> UIImage? {
-        if let image = thumbnailImage {
-            return image
-        } else {
-            loadImage()
-            return thumbnailImage
-        }
-    }
-
-    @discardableResult
-    func loadImage() -> UIImage? {
-        guard let filePath = imageFilePath(),
+    private func loadImage() {
+        guard let photoUUID = photoUUID,
+            let filePath = imageFilePath(imageUUID: photoUUID),
             let fileData = FileManager.default.contents(atPath: filePath.path),
             let image = UIImage(data: fileData)
-            else { return nil }
+            else { return }
         self.image = image
-
-        if let lowQualityData = image.jpegData(compressionQuality: 0.1),
-            let thumbnailImage = UIImage(data: lowQualityData) {
-            self.thumbnailImage = thumbnailImage
-        }
-
-        return self.image
     }
 
-    private func imageFilePath() -> URL? {
-        guard let photoUUID = self.photoUUID,
-            let documentURL = FileManager.default.urls(for: .documentDirectory,
-                                                       in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
-        return documentURL.appendingPathComponent(photoUUID + ".png")
+    private func imageFilePath(imageUUID: String) -> URL? {
+        guard let documentURL = FileManager.default.urls(for: .documentDirectory,
+                                                         in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+        return documentURL.appendingPathComponent(imageUUID + ".png")
     }
 
 }

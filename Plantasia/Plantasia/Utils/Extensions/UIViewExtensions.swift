@@ -22,6 +22,16 @@ extension UIView {
         }
     }
 
+    func startWiggling() {
+        let transformAnim = CAKeyframeAnimation(keyPath: "transform")
+        transformAnim.values = [NSValue(caTransform3D: CATransform3DMakeRotation(0.04, 0.0, 0.0, 1.0)),
+                                NSValue(caTransform3D: CATransform3DMakeRotation(-0.04, 0, 0, 1))]
+        transformAnim.autoreverses = true
+        transformAnim.duration = 0.105
+        transformAnim.repeatCount = Float.infinity
+        layer.add(transformAnim, forKey: "transform")
+    }
+
     static var className: String {
         return String(describing: self)
     }

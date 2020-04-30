@@ -24,6 +24,11 @@
 		AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */; };
 		AB63DD32245463AB00EEAE2F /* AddPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD31245463AB00EEAE2F /* AddPlantViewModel.swift */; };
 		AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD33245467D500EEAE2F /* MediaPicker.swift */; };
+		AB6C2C5A245AA4460032233F /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C59245AA4460032233F /* PhotoGalleryViewController.swift */; };
+		AB6C2C5C245AA44F0032233F /* PhotoGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C5B245AA44F0032233F /* PhotoGalleryViewModel.swift */; };
+		AB6C2C5F245AA69B0032233F /* PlantPhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C5E245AA69B0032233F /* PlantPhotoGalleryCell.swift */; };
+		AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C60245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift */; };
+		AB6C2C63245AAB300032233F /* PlantPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C62245AAB300032233F /* PlantPhoto.swift */; };
 		AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0B2454B9B60049966B /* AlertPresenter.swift */; };
 		AB748C0E2454BA740049966B /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0D2454BA740049966B /* GeneralError.swift */; };
 		AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C112454C21E0049966B /* UIViewExtensions.swift */; };
@@ -65,6 +70,11 @@
 		AB63DD2E24545C7E00EEAE2F /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		AB63DD31245463AB00EEAE2F /* AddPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewModel.swift; sourceTree = "<group>"; };
 		AB63DD33245467D500EEAE2F /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
+		AB6C2C59245AA4460032233F /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewController.swift; sourceTree = "<group>"; };
+		AB6C2C5B245AA44F0032233F /* PhotoGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewModel.swift; sourceTree = "<group>"; };
+		AB6C2C5E245AA69B0032233F /* PlantPhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotoGalleryCell.swift; sourceTree = "<group>"; };
+		AB6C2C60245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotoGalleryCellViewModel.swift; sourceTree = "<group>"; };
+		AB6C2C62245AAB300032233F /* PlantPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhoto.swift; sourceTree = "<group>"; };
 		AB748C0B2454B9B60049966B /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		AB748C0D2454BA740049966B /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
 		AB748C112454C21E0049966B /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -176,6 +186,25 @@
 			path = AddPlant;
 			sourceTree = "<group>";
 		};
+		AB6C2C58245AA42D0032233F /* PhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C2C5D245AA6810032233F /* PlantPhotoGalleryCell */,
+				AB6C2C59245AA4460032233F /* PhotoGalleryViewController.swift */,
+				AB6C2C5B245AA44F0032233F /* PhotoGalleryViewModel.swift */,
+			);
+			path = PhotoGallery;
+			sourceTree = "<group>";
+		};
+		AB6C2C5D245AA6810032233F /* PlantPhotoGalleryCell */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C2C5E245AA69B0032233F /* PlantPhotoGalleryCell.swift */,
+				AB6C2C60245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift */,
+			);
+			path = PlantPhotoGalleryCell;
+			sourceTree = "<group>";
+		};
 		AB90177C245869DE0031369C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB8C94B2454AC1900A7DEBA /* Plant.swift */,
+				AB6C2C62245AAB300032233F /* PlantPhoto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -244,6 +274,7 @@
 				ABBF773F2455726E0075133D /* Garden */,
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
+				AB6C2C58245AA42D0032233F /* PhotoGallery */,
 				AB90177C245869DE0031369C /* Settings */,
 			);
 			path = Screens;
@@ -429,6 +460,7 @@
 				AB536ECB2455CF0A00B942B9 /* UIImageExtensions.swift in Sources */,
 				AB4B069F2455BBD20058174D /* AddPlantBarButtonItemView.swift in Sources */,
 				AB536ED02456C9EB00B942B9 /* PlantDetailsViewModel.swift in Sources */,
+				AB6C2C63245AAB300032233F /* PlantPhoto.swift in Sources */,
 				ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */,
 				ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */,
 				AB63DD2B24544DA500EEAE2F /* SegueHandler.swift in Sources */,
@@ -436,6 +468,7 @@
 				AB901786245872E90031369C /* DateExtensions.swift in Sources */,
 				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
 				AB4B06A62455BEF80058174D /* SortPlantsBarButtonItemView.swift in Sources */,
+				AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
 				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
 				AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */,
@@ -444,12 +477,15 @@
 				AB5DB8F72455B2DB00F751D4 /* PlantDetailsCollectionViewCellViewModel.swift in Sources */,
 				AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */,
 				AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */,
+				AB6C2C5A245AA4460032233F /* PhotoGalleryViewController.swift in Sources */,
 				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
 				AB5DB8F42455823600F751D4 /* PlantDetailsCollectionViewCell.swift in Sources */,
 				ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */,
 				ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */,
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
+				AB6C2C5C245AA44F0032233F /* PhotoGalleryViewModel.swift in Sources */,
 				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,
+				AB6C2C5F245AA69B0032233F /* PlantPhotoGalleryCell.swift in Sources */,
 				AB90177E245869F00031369C /* SettingsViewController.swift in Sources */,
 				AB901780245870100031369C /* SettingsViewModel.swift in Sources */,
 			);

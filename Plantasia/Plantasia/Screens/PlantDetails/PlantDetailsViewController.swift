@@ -35,7 +35,9 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.tintColor = .white
         setupPlantData()
+        setupNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {
@@ -52,7 +54,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     @IBAction func photoGalleryButtonPressed(_ sender: Any) {
-        //TODO: implement
+        performSegue(withIdentifier: .pushPhotoGallery)
     }
 
     private func setupBindings() {
@@ -116,7 +118,6 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupUI() {
-        setupNavigationBar()
         actionBarRoundedContainerView.layer.cornerRadius = 10
         actionBarRoundedContainerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         setupActionBarShadowContainerView()
@@ -200,6 +201,7 @@ extension PlantDetailsViewController: SegueHandler {
 
     enum SegueIdentifier: String {
         case pushEditPlant
+        case pushPhotoGallery
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -207,7 +209,21 @@ extension PlantDetailsViewController: SegueHandler {
         case .pushEditPlant:
             guard let nextVC = segue.destination as? AddPlantViewController else { return }
             nextVC.viewModel = AddPlantViewModel(plant: viewModel.plant.value)
+
+        case .pushPhotoGallery:
+            guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
+            nextVC.viewModel = PhotoGalleryViewModel(plantName: viewModel.plant.value.name, photos: Array(viewModel.plant.value.photos))
+            nextVC.delegate = self
         }
+    }
+
+}
+
+// MARK: - PhotoGalleryViewControllerDelegate
+extension PlantDetailsViewController: PhotoGalleryViewControllerDelegate {
+
+    func photoGalleryViewControllerDidSavePhotos(_ photos: [PlantPhoto]) {
+        viewModel.setPhotos(photos)
     }
 
 }

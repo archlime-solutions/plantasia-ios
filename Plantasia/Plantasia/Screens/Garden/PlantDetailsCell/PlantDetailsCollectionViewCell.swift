@@ -34,13 +34,12 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
         nameLabel.text = plant.name
         wateringLabel.text = "\(plant.getWateringPercentage())%"
         fertilizingLabel.text = "\(plant.getFertilizingPercentage())%"
-        plantImageView.image = plant.getThumbnailImage()
+        plantImageView.image = plant.getImage()
         setupShadowContainerView()
     }
 
     private func setupUI() {
         setupGradientView()
-
         roundedContainerView.layer.cornerRadius = 10
     }
 

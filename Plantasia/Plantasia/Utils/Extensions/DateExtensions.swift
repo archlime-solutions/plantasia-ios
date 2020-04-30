@@ -22,6 +22,12 @@ extension Date {
         return dateFormatter.date(from: dateString)
     }
 
+    func toShortMonthDateString() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM yyyy"
+        return dateFormatter.string(from: self)
+    }
+
     func toHoursMinutesString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"

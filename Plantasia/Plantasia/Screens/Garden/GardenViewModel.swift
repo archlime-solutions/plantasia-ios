@@ -41,10 +41,10 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         }
     }
 
+    //TODO: this is not async! remove events and call this in init()!
     func loadPlants() {
         if let realm = try? Realm() {
             plants = Array(realm.objects(Plant.self).sorted(by: { $0.index < $1.index }))
-            plants.forEach { $0.loadImage() }
             event.value = .didLoadPlants
         } else {
             error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
