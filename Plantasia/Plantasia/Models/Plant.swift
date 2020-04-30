@@ -159,12 +159,9 @@ class Plant: Object {
         if let realm = try? Realm() {
             if let retNext = realm.objects(Plant.self).sorted(byKeyPath: "id", ascending: false).first?.id {
                 return retNext + 1
-            } else {
-                return 1
             }
-        } else {
-            return -1
         }
+        return -1
     }
 
     private func loadImage() {

@@ -51,8 +51,7 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupShadowContainerView() {
-        if viewModel.plant.getWateringPercentage() <= 10
-            || viewModel.plant.getFertilizingPercentage() <= 10 {
+        if viewModel.plant.requiresAttention() {
             shadowContainerView.layer.shadowRadius = 15
             shadowContainerView.layer.shadowColor = UIColor.orangeFE865D.cgColor
             shadowContainerView.layer.shadowOpacity = 1
