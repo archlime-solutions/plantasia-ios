@@ -41,7 +41,6 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         setupBindings()
         setupDescriptionTextView()
 
-        //TODO: fix this navigation bar on Add Plant; add large title on gallery!
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.backgroundColor = .clear
@@ -336,7 +335,17 @@ extension AddPlantViewController: SegueHandler {
         case .pushPhotoGallery:
             guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
             nextVC.viewModel = PhotoGalleryViewModel(plantName: nil, photos: viewModel.photos)
+            nextVC.delegate = self
         }
+    }
+
+}
+
+// MARK: - PhotoGalleryViewControllerDelegate
+extension AddPlantViewController: PhotoGalleryViewControllerDelegate {
+
+    func photoGalleryViewControllerDidSavePhotos(_ photos: [PlantPhoto]) {
+        viewModel.setPhotos(photos)
     }
 
 }

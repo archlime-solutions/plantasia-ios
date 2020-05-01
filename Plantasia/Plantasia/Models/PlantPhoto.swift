@@ -12,6 +12,7 @@ class PlantPhoto: Object {
 
     @objc dynamic var creationDate: Date?
     @objc dynamic var photoUUID: String?
+    @objc dynamic var index: Int = 0
     private var image: UIImage?
 
     convenience init (
@@ -61,4 +62,14 @@ class PlantPhoto: Object {
         return documentURL.appendingPathComponent(imageUUID + ".png")
     }
 
+}
+
+extension PlantPhoto: NSItemProviderWriting {
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return []
+    }
+
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        return nil
+    }
 }

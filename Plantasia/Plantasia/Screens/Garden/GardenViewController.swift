@@ -215,7 +215,6 @@ extension GardenViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
 
         func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-            print("dragged at index \(indexPath)")
             let item = viewModel.plants[indexPath.row]
             let itemProvider = NSItemProvider(object: item)
             let dragItem = UIDragItem(itemProvider: itemProvider)

@@ -21,7 +21,6 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var plusButton: UIButton!
 
     var viewModel: PhotoGalleryViewModel!
-    //TODO: calld elegate when press back
     weak var delegate: PhotoGalleryViewControllerDelegate?
     private var mediaPicker = MediaPicker()
     private var isInEditingMode = false
@@ -56,7 +55,7 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
     @IBAction func plusButtonPressed(_ sender: Any) {
         mediaPicker.pickImage(self, { image in
-            self.viewModel.photos.append(PlantPhoto(image: image))
+            self.viewModel.addPhoto(image)
             self.setupContainerViewsVisibility()
         })
     }
@@ -120,52 +119,88 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension PhotoGalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate
+extension PhotoGalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,
+    UICollectionViewDragDelegate, UICollectionViewDropDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photos.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell =
-            collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else {
-                return UICollectionViewCell()
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return viewModel.photos.count
         }
-        cell.viewModel = PlantPhotoGalleryCellViewModel(plantPhoto: viewModel.photos[indexPath.row], index: indexPath.row, isInEditingMode: isInEditingMode)
-        cell.delegate = self
-        return cell
-    }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 156, height: 200)
-    }
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            guard let cell =
+                collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else {
+                    return UICollectionViewCell()
+            }
+            cell.viewModel = PlantPhotoGalleryCellViewModel(plantPhoto: viewModel.photos[indexPath.row], index: indexPath.row, isInEditingMode: isInEditingMode)
+            cell.delegate = self
+            return cell
+        }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
-    }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 156, height: 200)
+        }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
-    }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                            minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return 20
+        }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                            minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 20
+        }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell =
-            collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else { return }
-        let image = viewModel.photos[indexPath.row].getImage()
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        }
 
-        let viewController = DTPhotoViewerController(referencedView: cell.plantImageView, image: image)
-        present(viewController, animated: true, completion: nil)
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            guard let cell =
+                collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else { return }
+            let image = viewModel.photos[indexPath.row].getImage()
 
-    }
+            let viewController = DTPhotoViewerController(referencedView: cell.plantImageView, image: image)
+            present(viewController, animated: true, completion: nil)
+        }
 
-    //TODO: implement drag and drop? nu am index, vad eu cum fac
+        func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+            let item = viewModel.photos[indexPath.row]
+            let itemProvider = NSItemProvider(object: item)
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.localObject = item
+            return [dragItem]
+        }
+
+        func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+            guard let destinationIndexPath = coordinator.destinationIndexPath,
+                destinationIndexPath.row >= 0, coordinator.items.count == 1,
+                let item = coordinator.items.first,
+                let sourceIndexPath = item.sourceIndexPath,
+                let draggedPhoto = item.dragItem.localObject as? PlantPhoto
+                else { return }
+
+            collectionView.performBatchUpdates({
+                self.viewModel.movePhoto(draggedPhoto, fromPosition: sourceIndexPath.row, toPosition: destinationIndexPath.row)
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+            })
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        }
+
+        func collectionView(_ collectionView: UICollectionView,
+                            dropSessionDidUpdate session: UIDropSession,
+                            withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+            guard let destinationIndexPath = destinationIndexPath else {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+
+            if session.localDragSession != nil, destinationIndexPath.row >= 0 {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            } else {
+                return UICollectionViewDropProposal(operation: .forbidden)
+            }
+        }
 
 }
 

@@ -86,6 +86,10 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
         }
     }
 
+    func setPhotos(_ photos: [PlantPhoto]) {
+        self.photos = photos
+    }
+
     private func create(_ plant: Plant) {
         if let realm = try? Realm() {
             try? realm.write {

@@ -50,7 +50,6 @@ class SettingsViewController: BaseViewController {
     }
 
     @IBAction func shareAppButtonPressed(_ sender: Any) {
-        //TODO: change link
         if let myWebsite = URL(string: "http://itunes.apple.com/app/id\(appID)") {
             //TODO: change image from placeholder to logo
             let textToShare = "Check out Plantasia, a really cool app 😎. Download link 👉"

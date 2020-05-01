@@ -1285,25 +1285,12 @@ the + button below.</string>
                                                                                 <constraint firstItem="3J0-AA-gFT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DYw-Xo-Fak" secondAttribute="top" id="jpK-Sp-1KJ"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT0-QR-vCG">
-                                                                            <rect key="frame" x="116" y="15" width="25" height="25"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="25" id="UG8-fT-c1i"/>
-                                                                                <constraint firstAttribute="width" constant="25" id="ira-3G-cNV"/>
-                                                                            </constraints>
-                                                                            <state key="normal" image="delete"/>
-                                                                            <connections>
-                                                                                <action selector="deleteButtonPressed:" destination="kXl-IF-SbX" eventType="touchUpInside" id="7Vj-VA-Ppj"/>
-                                                                            </connections>
-                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="DYw-Xo-Fak" firstAttribute="leading" secondItem="C5H-PL-Zly" secondAttribute="leading" id="51L-hZ-UhW"/>
-                                                                        <constraint firstItem="lT0-QR-vCG" firstAttribute="top" secondItem="C5H-PL-Zly" secondAttribute="top" constant="15" id="5Jk-Gu-xVP"/>
                                                                         <constraint firstItem="DYw-Xo-Fak" firstAttribute="height" secondItem="C5H-PL-Zly" secondAttribute="height" multiplier="0.5" id="DPf-i0-jJ5"/>
                                                                         <constraint firstAttribute="bottom" secondItem="DYw-Xo-Fak" secondAttribute="bottom" id="Grd-BR-f6y"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="lT0-QR-vCG" secondAttribute="trailing" constant="15" id="Phm-OA-13O"/>
                                                                         <constraint firstAttribute="trailing" secondItem="mVb-CF-y0l" secondAttribute="trailing" id="Twz-6v-N9X"/>
                                                                         <constraint firstItem="mVb-CF-y0l" firstAttribute="leading" secondItem="C5H-PL-Zly" secondAttribute="leading" id="UHl-Oj-CV5"/>
                                                                         <constraint firstAttribute="bottom" secondItem="mVb-CF-y0l" secondAttribute="bottom" id="c30-EO-8XP"/>
@@ -1322,11 +1309,25 @@ the + button below.</string>
                                                                 <constraint firstAttribute="height" constant="200" id="gi0-GV-uwT"/>
                                                             </constraints>
                                                         </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT0-QR-vCG">
+                                                            <rect key="frame" x="131" y="-20" width="45" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="45" id="UG8-fT-c1i"/>
+                                                                <constraint firstAttribute="width" constant="45" id="ira-3G-cNV"/>
+                                                            </constraints>
+                                                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                            <state key="normal" image="delete"/>
+                                                            <connections>
+                                                                <action selector="deleteButtonPressed:" destination="kXl-IF-SbX" eventType="touchUpInside" id="7Vj-VA-Ppj"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="lT0-QR-vCG" secondAttribute="trailing" constant="-20" id="7bc-4s-zv2"/>
                                                         <constraint firstItem="3ab-zA-yAI" firstAttribute="leading" secondItem="85H-Hs-Cup" secondAttribute="leading" id="HG5-QW-VwR"/>
                                                         <constraint firstAttribute="bottom" secondItem="3ab-zA-yAI" secondAttribute="bottom" id="Liz-YC-GGY"/>
+                                                        <constraint firstItem="lT0-QR-vCG" firstAttribute="top" secondItem="85H-Hs-Cup" secondAttribute="top" constant="-20" id="Vsb-j2-jqO"/>
                                                         <constraint firstItem="3ab-zA-yAI" firstAttribute="top" secondItem="85H-Hs-Cup" secondAttribute="top" id="beL-P9-GYa"/>
                                                         <constraint firstAttribute="trailing" secondItem="3ab-zA-yAI" secondAttribute="trailing" id="rbQ-eQ-Pig"/>
                                                     </constraints>

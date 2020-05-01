@@ -44,11 +44,20 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
 
     func setPhotos(_ photos: [PlantPhoto]) {
         if let realm = try? Realm() {
-            for photo in photos {
+            let existingPhotosSet = Set(plant.value.photos)
+            let newPhotosSet = Set(photos)
+            let photosToDelete = existingPhotosSet.subtracting(newPhotosSet)
+            let photosToAdd = newPhotosSet.subtracting(existingPhotosSet)
+
+            photosToAdd.forEach { photo in
                 try? realm.write {
-                    if !plant.value.photos.contains(photo) {
-                        plant.value.photos.append(photo)
-                    }
+                    plant.value.photos.append(photo)
+                }
+            }
+
+            photosToDelete.forEach { photo in
+                try? realm.write {
+                    realm.delete(photo)
                 }
             }
         }
