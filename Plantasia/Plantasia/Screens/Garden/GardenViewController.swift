@@ -97,7 +97,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         let handler: () -> Void = {
             self.viewModel.fertilizeAllPlants()
         }
-        showAlert(title: "Are you sure you want to mark all plants as fertilized?",
+        showAlert(title: "Are you sure you want to mark all plants as fertilized? ",
                   message: nil,
                   buttonText: "Fertilize",
                   buttonHandler: handler,

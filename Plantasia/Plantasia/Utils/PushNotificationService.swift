@@ -32,9 +32,8 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
         if let realm = try? Realm(), !realm.objects(Plant.self).isEmpty {
             let content = UNMutableNotificationContent()
             let userActions = "Plantasia User Actions"
-            //TODO change texts
-            content.title = "Hey. Your plants require your attention. 🌿"
-            content.body = "Open the application to do it now."
+            content.title = "Hey 👋. Your plants would enjoy your attention."
+            content.body = "Open the app to see which ones. 🌿"
             content.sound = UNNotificationSound.default
             content.badge = NSNumber(value: 1)
             content.categoryIdentifier = userActions

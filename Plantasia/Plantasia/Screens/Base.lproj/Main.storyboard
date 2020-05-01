@@ -47,23 +47,6 @@
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="132.58928571428572"/>
         </scene>
-        <!--Tutorial View Controller-->
-        <scene sceneID="UpZ-gR-Iqd">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="zYu-Pm-fNu" customClass="TutorialViewController" customModule="Plantasia" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EiB-Uv-rn7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="Wu6-6f-w8g"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6Do-sj-ehe"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J7u-M2-uRy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2030" y="133"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="UGG-Tr-29T">
             <objects>
@@ -76,10 +59,10 @@
                                 <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ife-Z8-vKO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-fz-3Ef">
-                                                <rect key="frame" x="30" y="40" width="315" height="493"/>
+                                                <rect key="frame" x="30" y="40" width="315" height="403"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="f5Q-aC-SQc">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="75"/>
@@ -136,23 +119,8 @@
                                                             </stackView>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFn-SU-2wm">
-                                                        <rect key="frame" x="0.0" y="115" width="315" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="afb-EX-8Eu"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                        <color key="tintColor" name="green-90D599"/>
-                                                        <state key="normal" title="Replay tutorial">
-                                                            <color key="titleColor" name="green-90D599"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="photoGalleryButtonPressed:" destination="5xK-IQ-zlF" eventType="touchUpInside" id="j2H-Tz-fA7"/>
-                                                            <action selector="replayTutorialButtonPressed:" destination="k0n-Tz-gYX" eventType="touchUpInside" id="6xa-iF-Irm"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES3-KP-HV0">
-                                                        <rect key="frame" x="0.0" y="205" width="315" height="50"/>
+                                                        <rect key="frame" x="0.0" y="115" width="315" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="noS-7F-2HM"/>
                                                         </constraints>
@@ -167,7 +135,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09n-3y-w9c">
-                                                        <rect key="frame" x="0.0" y="295" width="315" height="50"/>
+                                                        <rect key="frame" x="0.0" y="205" width="315" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="xn5-yd-agC"/>
                                                         </constraints>
@@ -182,7 +150,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgY-o0-iN9">
-                                                        <rect key="frame" x="0.0" y="385" width="315" height="50"/>
+                                                        <rect key="frame" x="0.0" y="295" width="315" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="f7g-RK-64p"/>
                                                         </constraints>
@@ -197,7 +165,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtA-yQ-biu">
-                                                        <rect key="frame" x="0.0" y="475" width="315" height="18"/>
+                                                        <rect key="frame" x="0.0" y="385" width="315" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" name="grey-C4C4C4"/>
                                                         <nil key="highlightedColor"/>
@@ -236,7 +204,6 @@
                     <connections>
                         <outlet property="contactUsButton" destination="09n-3y-w9c" id="AVU-kV-OgE"/>
                         <outlet property="reminderTextField" destination="LVC-uo-Oc0" id="nPy-So-PvA"/>
-                        <outlet property="replayTutorialButton" destination="DFn-SU-2wm" id="zwk-1C-nAM"/>
                         <outlet property="scrollView" destination="Y9e-vY-JtT" id="qrx-vg-8EZ"/>
                         <outlet property="shareAppButton" destination="PgY-o0-iN9" id="YDc-PN-cVD"/>
                         <outlet property="versionLabel" destination="wtA-yQ-biu" id="AUN-Wa-YxB"/>
@@ -1107,10 +1074,10 @@ the + button below.</string>
             </objects>
             <point key="canvasLocation" x="4842" y="488"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Animated Tab Bar Controller-->
         <scene sceneID="Rqy-eT-1Hk">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="rCd-Br-DyZ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="rCd-Br-DyZ" customClass="RAMAnimatedTabBarController" customModule="RAMAnimatedTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Tb-XJ-soI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1147,7 +1114,11 @@ the + button below.</string>
         <scene sceneID="ccD-Uj-7Yv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I9I-gX-4Go" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="pencil.circle" catalog="system" id="BbD-lf-UXC"/>
+                    <tabBarItem key="tabBarItem" title="" image="plus" selectedImage="plus" id="BbD-lf-UXC" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="Uje-5g-fDY" id="l7P-k8-p0l"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="5Zz-D4-1tU">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -1160,6 +1131,13 @@ the + button below.</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yr-NN-spK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Uje-5g-fDY" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1321.7391304347827" y="884.59821428571422"/>
         </scene>
@@ -1167,7 +1145,11 @@ the + button below.</string>
         <scene sceneID="TYZ-Vx-S16">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ahd-7e-xA3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="pencil.circle.fill" catalog="system" id="7wD-tP-o8h"/>
+                    <tabBarItem key="tabBarItem" title="" image="plus" selectedImage="plus" id="7wD-tP-o8h" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="1Vi-za-2l7" id="gPO-Sk-EsA"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="c3h-ip-jYV">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -1179,6 +1161,7 @@ the + button below.</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-VY-dcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="1Vi-za-2l7" customClass="RAMRightRotationAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="1321.7391304347827" y="1530.8035714285713"/>
         </scene>

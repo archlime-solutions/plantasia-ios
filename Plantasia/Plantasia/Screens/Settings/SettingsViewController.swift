@@ -14,7 +14,6 @@ class SettingsViewController: BaseViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reminderTextField: UITextField!
-    @IBOutlet weak var replayTutorialButton: UIButton!
     @IBOutlet weak var writeAReviewButton: UIButton!
     @IBOutlet weak var contactUsButton: UIButton!
     @IBOutlet weak var shareAppButton: UIButton!
@@ -28,10 +27,6 @@ class SettingsViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupBindings()
-    }
-
-    @IBAction func replayTutorialButtonPressed(_ sender: Any) {
-        //TODO: implement
     }
 
     @IBAction func writeAReviewButtonPressed(_ sender: Any) {
@@ -77,7 +72,7 @@ class SettingsViewController: BaseViewController {
     }
 
     private func setupButtons() {
-        [replayTutorialButton, writeAReviewButton, contactUsButton, shareAppButton].forEach {
+        [writeAReviewButton, contactUsButton, shareAppButton].forEach {
             $0?.layer.cornerRadius = 10
             $0?.layer.borderWidth = 2
             $0?.layer.borderColor = UIColor.green90D599.cgColor
