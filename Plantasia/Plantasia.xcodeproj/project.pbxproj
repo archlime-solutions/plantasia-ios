@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */; };
+		AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */; };
 		AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D209A24557945001C5103 /* GardenViewModel.swift */; };
 		AB4B069F2455BBD20058174D /* AddPlantBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */; };
 		AB4B06A12455BBDF0058174D /* AddPlantBarButtonItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */; };
@@ -38,7 +39,6 @@
 		AB9017842458723E0031369C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9017832458723E0031369C /* UserDefaultsExtensions.swift */; };
 		AB901786245872E90031369C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901785245872E90031369C /* DateExtensions.swift */; };
 		AB901788245947BC0031369C /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
-		ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8118F24531D6B006369C1 /* TutorialViewController.swift */; };
 		ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8119124531D98006369C1 /* BaseViewController.swift */; };
 		ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C9492454A88000A7DEBA /* CustomTextField.swift */; };
 		ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C94B2454AC1900A7DEBA /* Plant.swift */; };
@@ -54,6 +54,7 @@
 /* Begin PBXFileReference section */
 		0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.release.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.release.xcconfig"; sourceTree = "<group>"; };
 		8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.debug.xcconfig"; sourceTree = "<group>"; };
+		AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		AB3D209A24557945001C5103 /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
 		AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantBarButtonItemView.swift; sourceTree = "<group>"; };
 		AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlantBarButtonItemView.xib; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		AB9017832458723E0031369C /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		AB901785245872E90031369C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		AB901787245947BC0031369C /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
-		ABA8118F24531D6B006369C1 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ABA8119124531D98006369C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		ABB8C9492454A88000A7DEBA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		ABB8C94B2454AC1900A7DEBA /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
@@ -269,13 +269,13 @@
 			children = (
 				ABE8CA1024531553001849FD /* LaunchScreen.storyboard */,
 				ABE8CA0B24531551001849FD /* Main.storyboard */,
-				ABA8118F24531D6B006369C1 /* TutorialViewController.swift */,
 				AB3D209C24557AA5001C5103 /* Loading */,
 				ABBF773F2455726E0075133D /* Garden */,
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
 				AB6C2C58245AA42D0032233F /* PhotoGallery */,
 				AB90177C245869DE0031369C /* Settings */,
+				AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -471,6 +471,7 @@
 				AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
 				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
+				AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */,
 				AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */,
 				AB63DD2D24544ECF00EEAE2F /* AddPlantViewController.swift in Sources */,
 				AB536ECE2456C9E100B942B9 /* PlantDetailsViewController.swift in Sources */,
@@ -481,7 +482,6 @@
 				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
 				AB5DB8F42455823600F751D4 /* PlantDetailsCollectionViewCell.swift in Sources */,
 				ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */,
-				ABA8119024531D6B006369C1 /* TutorialViewController.swift in Sources */,
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
 				AB6C2C5C245AA44F0032233F /* PhotoGalleryViewModel.swift in Sources */,
 				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,

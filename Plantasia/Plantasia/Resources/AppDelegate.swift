@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black232323]
+
         setupRealmConfiguration()
         UNUserNotificationCenter.current().delegate = PushNotificationService.shared
         UIApplication.shared.applicationIconBadgeNumber = 0

@@ -97,7 +97,7 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
 
         viewModel.plantImage.observeNext { [weak self] value in
             guard let self = self else { return }
-            self.imageView.image = value ?? #imageLiteral(resourceName: "placeholder")
+            self.imageView.image = value ?? #imageLiteral(resourceName: "camera")
         }.dispose(in: bag)
 
         viewModel.event.observeNext { [weak self] event in

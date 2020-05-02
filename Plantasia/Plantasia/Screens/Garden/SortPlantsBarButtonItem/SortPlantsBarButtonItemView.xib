@@ -21,8 +21,9 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3z8-pK-IJw">
                             <rect key="frame" x="0.0" y="0.0" width="142" height="25"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IWy-8b-FmR">
-                                    <rect key="frame" x="0.0" y="0.5" width="25" height="24"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort" translatesAutoresizingMaskIntoConstraints="NO" id="IWy-8b-FmR">
+                                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                    <color key="tintColor" name="black-232323"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="0a7-NS-eU6"/>
                                         <constraint firstAttribute="width" constant="25" id="Moe-6g-4cl"/>
@@ -59,7 +60,7 @@
         </view>
     </objects>
     <resources>
-        <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="sort" width="616" height="525"/>
         <namedColor name="black-232323">
             <color red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
