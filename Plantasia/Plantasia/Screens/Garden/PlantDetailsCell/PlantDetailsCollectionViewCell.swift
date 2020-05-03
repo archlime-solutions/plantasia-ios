@@ -33,7 +33,9 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
         let plant = viewModel.plant
         nameLabel.text = plant.name
         wateringLabel.text = "\(plant.getWateringPercentage())%"
+        wateringLabel.textColor = plant.requiresWatering() ? UIColor.orangeFE865D : UIColor.white
         fertilizingLabel.text = "\(plant.getFertilizingPercentage())%"
+        fertilizingLabel.textColor = plant.requiresFertilizing() ? UIColor.orangeFE865D : UIColor.white
         plantImageView.image = plant.getImage()
         setupShadowContainerView()
     }

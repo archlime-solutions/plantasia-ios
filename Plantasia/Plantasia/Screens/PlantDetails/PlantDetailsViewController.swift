@@ -11,6 +11,8 @@ import DTPhotoViewerController
 
 class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
+    @IBOutlet weak var actionBarBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var actionBarTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var actionBarShadowContainerView: UIView!
     @IBOutlet weak var actionBarRoundedContainerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -24,6 +26,8 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var wateringPercentageLabel: UILabel!
     @IBOutlet weak var fertilizingPercentageLabel: UILabel!
     @IBOutlet weak var photoGalleryButton: UIButton!
+    @IBOutlet weak var wateringPercentageStackView: UIStackView!
+    @IBOutlet weak var fertilizingPercentageStackView: UIStackView!
 
     var viewModel: PlantDetailsViewModel!
     private var gradientLayer: CAGradientLayer?
@@ -39,6 +43,13 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         navigationController?.navigationBar.tintColor = .white
         setupPlantData()
         setupNavigationBar()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.showActionBarView()
+        })
     }
 
     override func viewDidLayoutSubviews() {
@@ -70,11 +81,11 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
             case .didFertilizePlant:
                 self.setupPlantData()
                 self.fertilizingLabel.animateScale()
-                self.fertilizingPercentageLabel.animateScale()
+                self.fertilizingPercentageStackView.animateScale()
             case .didWaterPlant:
                 self.setupPlantData()
                 self.wateringLabel.animateScale()
-                self.wateringPercentageLabel.animateScale()
+                self.wateringPercentageStackView.animateScale()
             }
         }.dispose(in: bag)
 
@@ -127,6 +138,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         setupImageShadowContainerView()
         setupPhotoGalleryButton()
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewPressed)))
+        hideActionBarView()
     }
 
     private func setupPhotoGalleryButton() {
@@ -189,6 +201,18 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     private func imageViewPressed(_ sender: UITapGestureRecognizer) {
         let viewController = DTPhotoViewerController(referencedView: imageView, image: imageView.image)
         present(viewController, animated: true, completion: nil)
+    }
+
+    private func hideActionBarView() {
+        actionBarBottomConstraint.constant = -104
+        actionBarTopConstraint.constant = 104
+        view.layoutIfNeeded()
+    }
+
+    private func showActionBarView() {
+        actionBarBottomConstraint.constant = 0
+        actionBarTopConstraint.constant = 0
+        view.layoutIfNeeded()
     }
 
 }

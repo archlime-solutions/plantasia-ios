@@ -33,7 +33,7 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
             let content = UNMutableNotificationContent()
             let userActions = "Plantasia User Actions"
             content.title = "Hey 👋. Your plants would enjoy your attention."
-            content.body = "Open the app to see which ones. 🌿"
+            content.body = "Open the app to see which ones need watering or fertilizing. 🌿"
             content.sound = UNNotificationSound.default
             content.badge = NSNumber(value: 1)
             content.categoryIdentifier = userActions
@@ -44,8 +44,8 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             notificationCenter.add(request) { _ in }
 
-            let snooze1HourAction = UNNotificationAction(identifier: NotificationAction.snooze1Hour.rawValue, title: "Snooze 1 hour", options: [])
-            let markAsCompleteAction = UNNotificationAction(identifier: NotificationAction.markAsComplete.rawValue, title: "Mark as complete", options: [])
+            let snooze1HourAction = UNNotificationAction(identifier: NotificationAction.snooze1Hour.rawValue, title: "Snooze 1 Hour", options: [])
+            let markAsCompleteAction = UNNotificationAction(identifier: NotificationAction.markAsComplete.rawValue, title: "Mark as Complete", options: [])
             let skipAction = UNNotificationAction(identifier: NotificationAction.skip.rawValue, title: "Skip", options: [.destructive])
             let category = UNNotificationCategory(identifier: userActions,
                                                   actions: [snooze1HourAction, markAsCompleteAction, skipAction],

@@ -46,9 +46,8 @@ class SettingsViewController: BaseViewController {
 
     @IBAction func shareAppButtonPressed(_ sender: Any) {
         if let myWebsite = URL(string: "http://itunes.apple.com/app/id\(appID)") {
-            //TODO: change image from placeholder to logo
-            let textToShare = "Check out Plantasia, a really cool app 😎. Download link 👉"
-            let objectsToShare = [textToShare, myWebsite, #imageLiteral(resourceName: "placeholder")] as [Any]
+            let textToShare = "Check out Plantasia, your mobile garden companion 🌿. Download link 👉"
+            let objectsToShare = [textToShare, myWebsite, #imageLiteral(resourceName: "logo")] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.popoverPresentationController?.sourceView = view
             present(activityVC, animated: true, completion: nil)

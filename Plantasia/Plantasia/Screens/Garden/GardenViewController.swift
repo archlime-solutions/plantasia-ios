@@ -79,7 +79,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         }
         showAlert(title: "Are you sure you want mark all plants as watered?",
                   message: nil,
-                  buttonText: "Water",
+                  buttonText: "Yes",
                   buttonHandler: handler,
                   showCancelButton: true)
     }
@@ -99,7 +99,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         }
         showAlert(title: "Are you sure you want to mark all plants as fertilized? ",
                   message: nil,
-                  buttonText: "Fertilize",
+                  buttonText: "Yes",
                   buttonHandler: handler,
                   showCancelButton: true)
     }
