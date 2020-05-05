@@ -152,6 +152,7 @@ class Plant: Object {
             photoUUID = uuid
             try? jpegRepresentation.write(to: filePath,
                                           options: .atomic)
+            loadImage()
         }
     }
 

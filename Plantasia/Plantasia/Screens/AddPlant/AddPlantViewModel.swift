@@ -112,7 +112,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     }
 
     private func isInputDataComplete() -> Bool {
-        return name.value != nil && plantImage.value != nil
+        return !(name.value ?? "").isEmpty && plantImage.value != nil
     }
 
 }

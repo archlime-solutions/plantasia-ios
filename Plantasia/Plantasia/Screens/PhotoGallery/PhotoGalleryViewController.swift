@@ -215,7 +215,7 @@ extension PhotoGalleryViewController: PlantPhotoGalleryCellDelegate {
             self.collectionView.reloadSections(indexSet)
         }
         showAlert(title: "Are you sure you want to remove this photo?",
-                  message: "This will permanently remove this photo from the gallery.",
+                  message: "This will permanently remove this photo from the album.",
                   buttonText: "Remove",
                   buttonHandler: handler,
                   buttonStyle: .destructive,

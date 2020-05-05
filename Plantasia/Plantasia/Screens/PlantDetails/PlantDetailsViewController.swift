@@ -19,6 +19,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var imageTopGradientView: UIView!
     @IBOutlet weak var imageShadowContainerView: UIView!
     @IBOutlet weak var imageRoundedCornersContainerView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionStackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var wateringLabel: UILabel!
@@ -97,7 +98,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     private func setupPlantData() {
         let plant = viewModel.plant.value
-        title = plant.name
+        nameLabel.text = plant.name
         descriptionLabel.text = plant.descr
         descriptionStackView.isHidden = (plant.descr ?? "").isEmpty
         setupWateringLabel()
@@ -152,9 +153,6 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: UIColor.white,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: .bold)]
         setupEditButton()
     }
 

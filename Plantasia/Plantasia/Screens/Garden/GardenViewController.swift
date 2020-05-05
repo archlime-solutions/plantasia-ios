@@ -134,6 +134,8 @@ class GardenViewController: BaseViewController, AlertPresenter {
             emptyGardenContainerView.isHidden = false
             quickActionsContainerView.isHidden = true
             plusButton.layer.cornerRadius = plusButton.bounds.height / 2
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
         } else {
             filledGardenContainerView.isHidden = false
             emptyGardenContainerView.isHidden = true
