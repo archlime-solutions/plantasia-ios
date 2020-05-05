@@ -67,6 +67,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.water() }
+                event.value = .didWaterAllPlants
             }
         }
     }
@@ -75,7 +76,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.fertilize() }
-                event.value = .didWaterAllPlants
+                event.value = .didFertilizeAllPlants
             }
         }
     }
