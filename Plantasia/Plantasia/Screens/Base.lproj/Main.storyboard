@@ -77,7 +77,7 @@
                                     <constraint firstAttribute="height" constant="30" id="s2b-Aa-CAV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="white-FFFFFF"/>
+                                <color key="textColor" name="grey-C4C4C4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9e-vY-JtT">

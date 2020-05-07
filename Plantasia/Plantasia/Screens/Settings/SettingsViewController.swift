@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import MessageUI
 
-class SettingsViewController: BaseViewController {
+class SettingsViewController: BaseViewController, AlertPresenter {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reminderTextField: UITextField!
@@ -36,11 +36,28 @@ class SettingsViewController: BaseViewController {
     }
 
     @IBAction func contactButtonPressed(_ sender: Any) {
+        let address = "contact@archlime.com"
+        let subject = "Plantasia - User Feedback"
+
         if MFMailComposeViewController.canSendMail() {
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
-            mailComposerVC.setToRecipients(["contact@archlime.com"])
+            mailComposerVC.setToRecipients([address])
+            mailComposerVC.setSubject(subject)
             present(mailComposerVC, animated: true, completion: nil)
+        } else {
+            let googleUrlString =
+                """
+                googlegmail:///co?to=\(address.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ??
+                "")&subject=\(subject.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? "")
+                """
+            if let googleUrl = URL(string: googleUrlString) {
+                UIApplication.shared.open(googleUrl, options: [:]) { success in
+                    if !success {
+                        self.showAlert(title: "You need to have either Mail or Gmail installed in order to send emails.")
+                    }
+                }
+            }
         }
     }
 
@@ -62,9 +79,8 @@ class SettingsViewController: BaseViewController {
     }
 
     private func setupVersionLabel() {
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"],
-            let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] {
-            versionLabel.text = "Version \(version) (\(buildNumber))"
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] {
+            versionLabel.text = "Version \(version)"
         } else {
             versionLabel.isHidden = true
         }

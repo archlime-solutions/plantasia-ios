@@ -25,8 +25,8 @@ protocol AlertPresenter where Self: UIViewController {
 extension AlertPresenter {
 
     func showAlert(title: String?,
-                   message: String?,
-                   buttonText: String?,
+                   message: String? = nil,
+                   buttonText: String? = "OK",
                    buttonHandler: (() -> Void)? = nil,
                    buttonStyle: UIAlertAction.Style = .default,
                    showCancelButton: Bool = false) {

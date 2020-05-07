@@ -8,6 +8,7 @@
 
 import UIKit
 import DTPhotoViewerController
+import StoreKit
 
 class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
@@ -60,6 +61,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     @IBAction func waterButtonPressed(_ sender: Any) {
         viewModel.waterPlant()
+        SKStoreReviewController.requestReview()
     }
 
     @IBAction func fertilizeButtonPressed(_ sender: Any) {
