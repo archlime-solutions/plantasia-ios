@@ -305,3 +305,14 @@ extension GardenViewController: AddPlantViewControllerDelegate {
     }
 
 }
+
+// MARK: - UIScrollViewDelegate
+extension GardenViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < -20 {
+            scrollView.contentOffset.y = -20
+        }
+    }
+
+}

@@ -244,69 +244,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msa-Ig-gyO">
-                                <rect key="frame" x="0.0" y="140" width="375" height="589"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdT-fA-m6X">
-                                        <rect key="frame" x="147.66666666666666" y="454" width="80" height="80"/>
-                                        <color key="backgroundColor" name="green-90D599"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="LOP-qd-qM1"/>
-                                            <constraint firstAttribute="height" constant="80" id="ckT-Fp-ggQ"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="plus"/>
-                                        <state key="highlighted" image="plus"/>
-                                        <connections>
-                                            <action selector="plusButtonPressed:" destination="krG-4H-3wn" eventType="touchUpInside" id="kJE-bm-jxb"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-OA-eLT">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="8tm-gg-9JN">
-                                                <rect key="frame" x="20" y="169.66666666666669" width="335" height="114.66666666666669"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your garden is empty" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2k-cr-sVD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40.666666666666664"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                                        <color key="textColor" name="black-232323"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtC-P6-nie">
-                                                        <rect key="frame" x="0.0" y="66.666666666666629" width="335" height="48"/>
-                                                        <string key="text">Add some plants by pressing 
-the + button below.</string>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                        <color key="textColor" name="grey-C4C4C4"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstItem="8tm-gg-9JN" firstAttribute="leading" secondItem="YNQ-OA-eLT" secondAttribute="leading" constant="20" id="AdG-DV-TAT"/>
-                                            <constraint firstItem="8tm-gg-9JN" firstAttribute="centerY" secondItem="YNQ-OA-eLT" secondAttribute="centerY" id="fsR-XG-ti0"/>
-                                            <constraint firstAttribute="trailing" secondItem="8tm-gg-9JN" secondAttribute="trailing" constant="20" id="hfe-UT-B6U"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="YNQ-OA-eLT" secondAttribute="trailing" id="0Ke-H3-imt"/>
-                                    <constraint firstItem="YNQ-OA-eLT" firstAttribute="leading" secondItem="msa-Ig-gyO" secondAttribute="leading" id="6eV-bC-h1t"/>
-                                    <constraint firstItem="YNQ-OA-eLT" firstAttribute="top" secondItem="msa-Ig-gyO" secondAttribute="top" id="FEo-X8-mnl"/>
-                                    <constraint firstItem="XdT-fA-m6X" firstAttribute="top" secondItem="YNQ-OA-eLT" secondAttribute="bottom" id="VQv-nW-lfu"/>
-                                    <constraint firstItem="XdT-fA-m6X" firstAttribute="centerX" secondItem="msa-Ig-gyO" secondAttribute="centerX" id="u90-d3-Gjb"/>
-                                    <constraint firstAttribute="bottom" secondItem="XdT-fA-m6X" secondAttribute="bottom" constant="55" id="wxJ-Nt-Ukb"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P01-5n-gyX">
-                                <rect key="frame" x="0.0" y="140" width="375" height="589"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4aC-i4-zow">
-                                        <rect key="frame" x="0.0" y="90" width="375" height="499"/>
+                                        <rect key="frame" x="0.0" y="90" width="375" height="551"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XxW-EO-t88">
                                             <size key="itemSize" width="128" height="128"/>
@@ -533,6 +475,64 @@ the + button below.</string>
                                     <constraint firstItem="4aC-i4-zow" firstAttribute="leading" secondItem="P01-5n-gyX" secondAttribute="leading" id="zZg-Qn-MSf"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msa-Ig-gyO">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdT-fA-m6X">
+                                        <rect key="frame" x="147.66666666666666" y="506" width="80" height="80"/>
+                                        <color key="backgroundColor" name="green-90D599"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="LOP-qd-qM1"/>
+                                            <constraint firstAttribute="height" constant="80" id="ckT-Fp-ggQ"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="plus"/>
+                                        <state key="highlighted" image="plus"/>
+                                        <connections>
+                                            <action selector="plusButtonPressed:" destination="krG-4H-3wn" eventType="touchUpInside" id="kJE-bm-jxb"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-OA-eLT">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="8tm-gg-9JN">
+                                                <rect key="frame" x="20" y="195.66666666666669" width="335" height="114.66666666666669"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your garden is empty" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2k-cr-sVD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40.666666666666664"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                        <color key="textColor" name="black-232323"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtC-P6-nie">
+                                                        <rect key="frame" x="0.0" y="66.666666666666629" width="335" height="48"/>
+                                                        <string key="text">Add some plants by pressing 
+the + button below.</string>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <color key="textColor" name="grey-C4C4C4"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="8tm-gg-9JN" firstAttribute="leading" secondItem="YNQ-OA-eLT" secondAttribute="leading" constant="20" id="AdG-DV-TAT"/>
+                                            <constraint firstItem="8tm-gg-9JN" firstAttribute="centerY" secondItem="YNQ-OA-eLT" secondAttribute="centerY" id="fsR-XG-ti0"/>
+                                            <constraint firstAttribute="trailing" secondItem="8tm-gg-9JN" secondAttribute="trailing" constant="20" id="hfe-UT-B6U"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YNQ-OA-eLT" secondAttribute="trailing" id="0Ke-H3-imt"/>
+                                    <constraint firstItem="YNQ-OA-eLT" firstAttribute="leading" secondItem="msa-Ig-gyO" secondAttribute="leading" id="6eV-bC-h1t"/>
+                                    <constraint firstItem="YNQ-OA-eLT" firstAttribute="top" secondItem="msa-Ig-gyO" secondAttribute="top" id="FEo-X8-mnl"/>
+                                    <constraint firstItem="XdT-fA-m6X" firstAttribute="top" secondItem="YNQ-OA-eLT" secondAttribute="bottom" id="VQv-nW-lfu"/>
+                                    <constraint firstItem="XdT-fA-m6X" firstAttribute="centerX" secondItem="msa-Ig-gyO" secondAttribute="centerX" id="u90-d3-Gjb"/>
+                                    <constraint firstAttribute="bottom" secondItem="XdT-fA-m6X" secondAttribute="bottom" constant="55" id="wxJ-Nt-Ukb"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -547,7 +547,7 @@ the + button below.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kUM-Ce-545"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Garden" largeTitleDisplayMode="always" id="iCy-Rg-06t">
+                    <navigationItem key="navigationItem" title="Garden" id="iCy-Rg-06t">
                         <barButtonItem key="backBarButtonItem" title=" " id="i4q-Pr-BvG"/>
                     </navigationItem>
                     <connections>
