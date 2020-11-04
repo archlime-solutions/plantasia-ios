@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DTPhotoViewerController
 
 protocol PhotoGalleryViewControllerDelegate: class {
     func photoGalleryViewControllerDidSavePhotos(_: [PlantPhoto])
@@ -22,11 +21,12 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
     var viewModel: PhotoGalleryViewModel!
     weak var delegate: PhotoGalleryViewControllerDelegate?
-    private var mediaPicker = MediaPicker()
     private var isInEditingMode = false
+    private var mediaPicker = MediaPicker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBindings()
         setupContainerViewsVisibility()
         plusButton.layer.cornerRadius = plusButton.bounds.height / 2
     }
@@ -34,6 +34,8 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        viewModel.selectedPlantPhoto = nil
+        viewModel.selectedImage = nil
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -55,8 +57,8 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
     @IBAction func plusButtonPressed(_ sender: Any) {
         mediaPicker.pickImage(self, { image in
-            self.viewModel.addPhoto(image)
-            self.setupContainerViewsVisibility()
+            self.viewModel.selectedImage = image
+            self.performSegue(withIdentifier: .pushPhotoDetails)
         })
     }
 
@@ -64,6 +66,16 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
         title = viewModel.plantName
         navigationController?.navigationBar.tintColor = .black232323
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black232323]
+    }
+
+    private func setupBindings() {
+        viewModel.event.observeNext { [weak self] event in
+            guard let self = self, let event = event else { return }
+            switch event {
+            case .didLoadPlantPhotos:
+                self.collectionView.reloadData()
+            }
+        }.dispose(in: bag)
     }
 
     private func setupContainerViewsVisibility() {
@@ -156,12 +168,9 @@ extension PhotoGalleryViewController: UICollectionViewDelegate, UICollectionView
         }
 
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            guard let cell =
-                collectionView.dequeueReusableCell(withReuseIdentifier: "PlantPhotoGalleryCell", for: indexPath) as? PlantPhotoGalleryCell else { return }
-            let image = viewModel.photos[indexPath.row].getImage()
-
-            let viewController = DTPhotoViewerController(referencedView: cell.plantImageView, image: image)
-            present(viewController, animated: true, completion: nil)
+            guard !isInEditingMode else { return }
+            viewModel.selectedPlantPhoto = viewModel.photos[indexPath.row]
+            performSegue(withIdentifier: .pushPhotoDetails)
         }
 
         func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
@@ -220,6 +229,36 @@ extension PhotoGalleryViewController: PlantPhotoGalleryCellDelegate {
                   buttonHandler: handler,
                   buttonStyle: .destructive,
                   showCancelButton: true)
+    }
+
+}
+
+// MARK: - SegueHandler
+extension PhotoGalleryViewController: SegueHandler {
+
+    enum SegueIdentifier: String {
+        case pushPhotoDetails
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .pushPhotoDetails:
+            guard let nextVC = segue.destination as? PhotoDetailsViewController else { return }
+            nextVC.viewModel = PhotoDetailsViewModel(plant: viewModel.plant,
+                                                     editedPlantPhoto: viewModel.selectedPlantPhoto,
+                                                     image: viewModel.selectedImage, index: viewModel.photos.count)
+            nextVC.delegate = self
+        }
+    }
+
+}
+
+// MARK: - PhotoDetailsViewControllerDelegate
+extension PhotoGalleryViewController: PhotoDetailsViewControllerDelegate {
+
+    func photoDetailsViewControllerDidAddPhoto() {
+        viewModel.getPlantPhotos()
+        setupContainerViewsVisibility()
     }
 
 }

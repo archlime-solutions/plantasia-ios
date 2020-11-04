@@ -244,7 +244,7 @@ extension PlantDetailsViewController: SegueHandler {
 
         case .pushPhotoGallery:
             guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
-            nextVC.viewModel = PhotoGalleryViewModel(plantName: viewModel.plant.value.name, photos: Array(viewModel.plant.value.photos))
+            nextVC.viewModel = PhotoGalleryViewModel(plant: viewModel.plant.value, photos: Array(viewModel.plant.value.photos))
             nextVC.delegate = self
         }
     }

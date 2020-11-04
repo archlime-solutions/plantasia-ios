@@ -13,6 +13,7 @@ class PlantPhoto: Object {
     @objc dynamic var creationDate: Date?
     @objc dynamic var photoUUID: String?
     @objc dynamic var index: Int = 0
+    @objc dynamic var descr: String?
     private var image: UIImage?
 
     convenience init (

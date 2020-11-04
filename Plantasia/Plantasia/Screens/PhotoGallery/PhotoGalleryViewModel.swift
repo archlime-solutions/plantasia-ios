@@ -11,13 +11,27 @@ import RealmSwift
 
 class PhotoGalleryViewModel: BaseViewModel {
 
-    var error = Observable<GeneralError?>(nil)
+    enum Event {
+        case didLoadPlantPhotos
+    }
+
+    let error = Observable<GeneralError?>(nil)
+    let event = Observable<Event?>(nil)
     var plantName: String?
     var photos: [PlantPhoto]
+    var selectedPlantPhoto: PlantPhoto?
+    var selectedImage: UIImage?
+    var plant: Plant?
+    private var plantId: Int?
 
-    init(plantName: String?, photos: [PlantPhoto]) {
-        self.plantName = plantName
-        self.photos = Array(photos.sorted(by: { $0.index < $1.index }))
+    init(plant: Plant?, photos: [PlantPhoto]) {
+        self.plant = plant
+        self.plantName = plant?.name
+        self.plantId = plant?.id
+        self.photos = photos
+        if plantId != nil {
+            getPlantPhotos()
+        }
     }
 
     func movePhoto(_ photo: PlantPhoto, fromPosition: Int, toPosition: Int) {
@@ -33,14 +47,13 @@ class PhotoGalleryViewModel: BaseViewModel {
         }
     }
 
-    func addPhoto(_ image: UIImage) {
-        if let realm = try? Realm() {
-            try? realm.write {
-                let plantPhoto = PlantPhoto(image: image)
-                plantPhoto.index = photos.count
-                realm.add(plantPhoto)
-                photos.append(plantPhoto)
-            }
+    func getPlantPhotos() {
+        if let realm = try? Realm(),
+            let photos = realm.object(ofType: Plant.self, forPrimaryKey: plantId)?.photos.sorted(by: { $0.index < $1.index }) {
+            self.photos = photos
+            event.value = .didLoadPlantPhotos
+        } else {
+            error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
         }
     }
 

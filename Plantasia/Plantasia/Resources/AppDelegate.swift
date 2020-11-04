@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Set the new schema version. This must be greater than the previously used version.
     private func setupRealmConfiguration() {
         let config = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 2,
             migrationBlock: nil)
 
         Realm.Configuration.defaultConfiguration = config

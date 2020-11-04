@@ -40,6 +40,22 @@ extension AlertPresenter {
         present(alert, animated: true, completion: nil)
     }
 
+    func showTwoActionsAlert(title: String?,
+                             message: String? = nil,
+                             firstButtonText: String?,
+                             firstButtonHandler: (() -> Void)?,
+                             secondButtonText: String?,
+                             secondButtonHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: firstButtonText, style: .default, handler: { _ in firstButtonHandler?() })
+        let secondAction = UIAlertAction(title: secondButtonText, style: .default, handler: { _ in secondButtonHandler?() })
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        alert.preferredAction = firstAction
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
     func showAlert(error: GeneralError) {
         let alert = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))

@@ -13,8 +13,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
 
     enum Event {
         case didLoadPlants
-        case didWaterAllPlants
-        case didFertilizeAllPlants
+        case didWaterPlants
+        case didFertilizePlants
     }
 
     enum SortingCriteria {
@@ -67,7 +67,16 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.water() }
-                event.value = .didWaterAllPlants
+                event.value = .didWaterPlants
+            }
+        }
+    }
+
+    func waterDehydratedPlants() {
+        if let realm = try? Realm() {
+            try? realm.write {
+                plants.filter { $0.requiresWatering() }.forEach { $0.water() }
+                event.value = .didWaterPlants
             }
         }
     }
@@ -76,7 +85,16 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.fertilize() }
-                event.value = .didFertilizeAllPlants
+                event.value = .didFertilizePlants
+            }
+        }
+    }
+
+    func fertilizeUnfertilizedPlants() {
+        if let realm = try? Realm() {
+            try? realm.write {
+                plants.filter { $0.requiresFertilizing() }.forEach { $0.fertilize() }
+                event.value = .didFertilizePlants
             }
         }
     }
@@ -87,7 +105,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
             for (index, plant) in plants.enumerated() {
                 try? realm.write {
                     plant.index = index
-                    event.value = .didFertilizeAllPlants
+                    event.value = .didFertilizePlants
                 }
             }
         }

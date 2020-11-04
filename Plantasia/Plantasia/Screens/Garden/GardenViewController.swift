@@ -57,7 +57,11 @@ class GardenViewController: BaseViewController, AlertPresenter {
                 switch event {
                 case .didLoadPlants:
                     self.setupContainerViewsVisibility()
-                case .didWaterAllPlants, .didFertilizeAllPlants:
+                case .didWaterPlants:
+                    self.showAlert(title: "Your plants have been watered!")
+                    self.collectionView.reloadData()
+                case .didFertilizePlants:
+                    self.showAlert(title: "Your plants have been fertilized!")
                     self.collectionView.reloadData()
                 }
             }
@@ -74,14 +78,18 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @objc
     private func waterAllViewPressed() {
         waterAllView.flash()
-        let handler: () -> Void = {
+        let waterDehydratedHandler: () -> Void = {
+            self.viewModel.waterDehydratedPlants()
+        }
+        let waterAllHandler: () -> Void = {
             self.viewModel.waterAllPlants()
         }
-        showAlert(title: "Are you sure you want mark all plants as watered?",
-                  message: nil,
-                  buttonText: "Yes",
-                  buttonHandler: handler,
-                  showCancelButton: true)
+
+        showTwoActionsAlert(title: "Water Plants",
+                            firstButtonText: "Water dehydrated",
+                            firstButtonHandler: waterDehydratedHandler,
+                            secondButtonText: "Water all",
+                            secondButtonHandler: waterAllHandler)
     }
 
     private func setupFertilizeAllView() {
@@ -94,14 +102,18 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @objc
     private func fertilizeAllViewPressed() {
         fertilizeAllView.flash()
-        let handler: () -> Void = {
+        let fertilizeUnfertilizedHandler: () -> Void = {
+            self.viewModel.fertilizeUnfertilizedPlants()
+        }
+        let fertilizeAllHandler: () -> Void = {
             self.viewModel.fertilizeAllPlants()
         }
-        showAlert(title: "Are you sure you want to mark all plants as fertilized? ",
-                  message: nil,
-                  buttonText: "Yes",
-                  buttonHandler: handler,
-                  showCancelButton: true)
+
+        showTwoActionsAlert(title: "Fertilize Plants",
+                            firstButtonText: "Fertilize unfertilized",
+                            firstButtonHandler: fertilizeUnfertilizedHandler,
+                            secondButtonText: "Fertilize all",
+                            secondButtonHandler: fertilizeAllHandler)
     }
 
     private func setupPlusButtonAnimation() {

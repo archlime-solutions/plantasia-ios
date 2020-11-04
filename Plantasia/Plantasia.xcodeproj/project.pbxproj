@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */; };
 		AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */; };
+		AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */; };
+		AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */; };
 		AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D209A24557945001C5103 /* GardenViewModel.swift */; };
 		AB4B069F2455BBD20058174D /* AddPlantBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */; };
 		AB4B06A12455BBDF0058174D /* AddPlantBarButtonItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */; };
@@ -55,6 +57,8 @@
 		0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.release.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.release.xcconfig"; sourceTree = "<group>"; };
 		8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.debug.xcconfig"; sourceTree = "<group>"; };
 		AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
 		AB3D209A24557945001C5103 /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
 		AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantBarButtonItemView.swift; sourceTree = "<group>"; };
 		AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlantBarButtonItemView.xib; sourceTree = "<group>"; };
@@ -119,6 +123,15 @@
 				0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AB2E6BAF2552F0F400D2A0EF /* PhotoDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */,
+				AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */,
+			);
+			path = PhotoDetails;
 			sourceTree = "<group>";
 		};
 		AB3D209C24557AA5001C5103 /* Loading */ = {
@@ -274,6 +287,7 @@
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
 				AB6C2C58245AA42D0032233F /* PhotoGallery */,
+				AB2E6BAF2552F0F400D2A0EF /* PhotoDetails */,
 				AB90177C245869DE0031369C /* Settings */,
 				AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */,
 			);
@@ -469,6 +483,7 @@
 				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
 				AB4B06A62455BEF80058174D /* SortPlantsBarButtonItemView.swift in Sources */,
 				AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */,
+				AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
 				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
 				AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */,
@@ -485,6 +500,7 @@
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
 				AB6C2C5C245AA44F0032233F /* PhotoGalleryViewModel.swift in Sources */,
 				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,
+				AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */,
 				AB6C2C5F245AA69B0032233F /* PlantPhotoGalleryCell.swift in Sources */,
 				AB90177E245869F00031369C /* SettingsViewController.swift in Sources */,
 				AB901780245870100031369C /* SettingsViewModel.swift in Sources */,
@@ -632,6 +648,7 @@
 			baseConfigurationReference = 8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B6W985PHBM;
@@ -643,6 +660,7 @@
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -653,6 +671,7 @@
 			baseConfigurationReference = 0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B6W985PHBM;
@@ -664,6 +683,7 @@
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -40,11 +40,6 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         setupUI()
         setupBindings()
         setupDescriptionTextView()
-
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.navigationBar.isTranslucent = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -138,6 +133,14 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         setupDeletePlantButton()
         setupDaysPicker()
         setupCancelBarButtonItem()
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.isTranslucent = true
     }
 
     private func setupCancelBarButtonItem() {
@@ -282,15 +285,6 @@ extension AddPlantViewController: UITextViewDelegate {
         }
     }
 
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
@@ -346,7 +340,7 @@ extension AddPlantViewController: SegueHandler {
         switch segueIdentifier(for: segue) {
         case .pushPhotoGallery:
             guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
-            nextVC.viewModel = PhotoGalleryViewModel(plantName: nil, photos: viewModel.photos)
+            nextVC.viewModel = PhotoGalleryViewModel(plant: nil, photos: viewModel.photos)
             nextVC.delegate = self
         }
     }
