@@ -15,6 +15,7 @@ class PhotoDetailsViewModel: BaseViewModel {
         case didAddPhoto
     }
 
+    // MARK: - Properties
     let error = Observable<GeneralError?>(nil)
     let description = Observable<String?>(nil)
     let plantImage = Observable<UIImage?>(nil)
@@ -26,6 +27,7 @@ class PhotoDetailsViewModel: BaseViewModel {
     private let index: Int
     private let editedPlantPhoto: PlantPhoto?
 
+    // MARK: - Lifecycle
     init(plant: Plant?, editedPlantPhoto: PlantPhoto?, image: UIImage?, index: Int) {
         self.plant = plant
         self.editedPlantPhoto = editedPlantPhoto
@@ -38,6 +40,7 @@ class PhotoDetailsViewModel: BaseViewModel {
         self.index = index
     }
 
+    // MARK: - Internal
     func saveValidatedPlantPhoto() {
         if isInputDataComplete() {
             editedPlantPhoto != nil ? updatePlantPhoto() : createPlantPhoto()
@@ -47,6 +50,7 @@ class PhotoDetailsViewModel: BaseViewModel {
         }
     }
 
+    // MARK: - Private
     private func createPlantPhoto() {
         if let realm = try? Realm(), let plant = plant, let image = plantImage.value {
             try? realm.write {

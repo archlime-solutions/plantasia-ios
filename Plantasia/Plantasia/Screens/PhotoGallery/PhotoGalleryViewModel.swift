@@ -15,6 +15,7 @@ class PhotoGalleryViewModel: BaseViewModel {
         case didLoadPlantPhotos
     }
 
+    // MARK: - Properties
     let error = Observable<GeneralError?>(nil)
     let event = Observable<Event?>(nil)
     var plantName: String?
@@ -24,6 +25,7 @@ class PhotoGalleryViewModel: BaseViewModel {
     var plant: Plant?
     private var plantId: Int?
 
+    // MARK: - Lifecycle
     init(plant: Plant?, photos: [PlantPhoto]) {
         self.plant = plant
         self.plantName = plant?.name
@@ -34,6 +36,7 @@ class PhotoGalleryViewModel: BaseViewModel {
         }
     }
 
+    // MARK: - Internal
     func movePhoto(_ photo: PlantPhoto, fromPosition: Int, toPosition: Int) {
         photos.remove(at: fromPosition)
         photos.insert(photo, at: toPosition)

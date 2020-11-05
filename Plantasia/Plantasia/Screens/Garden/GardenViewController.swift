@@ -11,6 +11,7 @@ import RealmSwift
 
 class GardenViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var emptyGardenContainerView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var filledGardenContainerView: UIView!
@@ -19,8 +20,10 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var fertilizeAllView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    // MARK: - Properties
     private let viewModel = GardenViewModel()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
@@ -42,14 +45,17 @@ class GardenViewController: BaseViewController, AlertPresenter {
         plusButton.layer.removeAllAnimations()
     }
 
+    // MARK: - IBActions
     @IBAction func plusButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: .presentAddPlant)
     }
 
+    // MARK: - Internal
     func loadPlants() {
         viewModel.loadPlants()
     }
 
+    // MARK: - Private
     private func setupBindings() {
         viewModel.event.observeNext { [weak self] event in
             guard let self = self else { return }
@@ -86,7 +92,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         }
 
         showTwoActionsAlert(title: "Water Plants",
-                            firstButtonText: "Water dehydrated",
+                            firstButtonText: "Water dehydrated only",
                             firstButtonHandler: waterDehydratedHandler,
                             secondButtonText: "Water all",
                             secondButtonHandler: waterAllHandler)
@@ -110,7 +116,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
         }
 
         showTwoActionsAlert(title: "Fertilize Plants",
-                            firstButtonText: "Fertilize unfertilized",
+                            firstButtonText: "Fertilize unfertilized only",
                             firstButtonHandler: fertilizeUnfertilizedHandler,
                             secondButtonText: "Fertilize all",
                             secondButtonHandler: fertilizeAllHandler)

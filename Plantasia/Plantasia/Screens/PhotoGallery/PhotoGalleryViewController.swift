@@ -14,16 +14,19 @@ protocol PhotoGalleryViewControllerDelegate: class {
 
 class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var emptyGalleryContainerView: UIView!
     @IBOutlet weak var filledGalleryContainerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
 
+    // MARK: - Properties
     var viewModel: PhotoGalleryViewModel!
     weak var delegate: PhotoGalleryViewControllerDelegate?
     private var isInEditingMode = false
     private var mediaPicker = MediaPicker()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
@@ -55,6 +58,7 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
         plusButton.layer.removeAllAnimations()
     }
 
+    // MARK: - IBActions
     @IBAction func plusButtonPressed(_ sender: Any) {
         mediaPicker.pickImage(self, { image in
             self.viewModel.selectedImage = image
@@ -62,6 +66,7 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
         })
     }
 
+    // MARK: - Private
     private func setupNavigationBar() {
         title = viewModel.plantName
         navigationController?.navigationBar.tintColor = .black232323

@@ -11,6 +11,7 @@ import RealmSwift
 
 class Plant: Object {
 
+    // MARK: - Properties
     private static let criticalPercentageThreshold = 10
 
     @objc dynamic var id: Int = -1
@@ -22,9 +23,11 @@ class Plant: Object {
     @objc dynamic var lastWateringDate: Date?
     @objc dynamic var lastFertilizingDate: Date?
     @objc dynamic var index: Int = 0
+    @objc dynamic var ownedSinceDate: Date?
     var photos = List<PlantPhoto>()
     private var image: UIImage?
 
+    // MARK: - Lifecycle
     convenience init (
         name: String?,
         descr: String?,
@@ -33,7 +36,8 @@ class Plant: Object {
         image: UIImage?,
         lastWateringDate: Date?,
         lastFertilizingDate: Date?,
-        photos: [PlantPhoto]
+        photos: [PlantPhoto],
+        ownedSinceDate: Date
     ) {
         self.init()
         self.id = nextId()
@@ -45,12 +49,15 @@ class Plant: Object {
         self.lastWateringDate = lastWateringDate
         self.lastFertilizingDate = lastFertilizingDate
         self.photos.append(objectsIn: photos)
+        self.ownedSinceDate = ownedSinceDate
     }
 
+    // MARK: - Overrides
     override static func primaryKey() -> String? {
         return "id"
     }
 
+    // MARK: - Internal
     func requiresAttention() -> Bool {
         return requiresWatering() || requiresFertilizing()
     }
@@ -156,6 +163,7 @@ class Plant: Object {
         }
     }
 
+    // MARK: - Private
     private func nextId() -> Int {
         if let realm = try? Realm() {
             if let retNext = realm.objects(Plant.self).sorted(byKeyPath: "id", ascending: false).first?.id {
@@ -182,6 +190,7 @@ class Plant: Object {
 
 }
 
+// MARK: - NSItemProviderWriting
 extension Plant: NSItemProviderWriting {
     static var writableTypeIdentifiersForItemProvider: [String] {
         return []

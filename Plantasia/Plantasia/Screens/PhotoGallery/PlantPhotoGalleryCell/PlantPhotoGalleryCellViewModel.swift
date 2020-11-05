@@ -10,10 +10,12 @@ import UIKit
 
 class PlantPhotoGalleryCellViewModel {
 
+    // MARK: - Properties
     var plantPhoto: PlantPhoto
     var index: Int
     var isInEditingMode: Bool
 
+    // MARK: - Lifecycle
     init(plantPhoto: PlantPhoto, index: Int, isInEditingMode: Bool) {
         self.plantPhoto = plantPhoto
         self.index = index

@@ -23,8 +23,9 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         case dateAdded
     }
 
-    var error = Observable<GeneralError?>(nil)
-    var event = Observable<Event?>(nil)
+    // MARK: - Properties
+    let error = Observable<GeneralError?>(nil)
+    let event = Observable<Event?>(nil)
     var plants = [Plant]()
     var selectedPlant: Plant?
 
@@ -41,6 +42,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         }
     }
 
+    // MARK: - Internal
     func loadPlants() {
         if let realm = try? Realm() {
             plants = Array(realm.objects(Plant.self).sorted(by: { $0.index < $1.index }))
@@ -112,6 +114,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         event.value = .didLoadPlants
     }
 
+    // MARK: - Private
     private func sortByFertilization() {
         plants = plants.sorted(by: { $0.getFertilizingPercentage() < $1.getFertilizingPercentage() })
         if let realm = try? Realm() {

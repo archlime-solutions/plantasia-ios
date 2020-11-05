@@ -16,25 +16,32 @@ protocol AddPlantViewControllerDelegate: class {
 
 class AddPlantViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageTopGradientView: UIView!
     @IBOutlet weak var imageShadowContainerView: UIView!
     @IBOutlet weak var imageRoundedCornersContainerView: UIView!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var photoGalleryButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var wateringTextField: UITextField!
     @IBOutlet weak var fertilizingTextField: UITextField!
     @IBOutlet weak var deletePlantButton: UIButton!
+    @IBOutlet weak var ownedSinceStackView: UIStackView!
+    @IBOutlet weak var ownedSinceTextField: CustomTextField!
+    @IBOutlet weak var doneButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var doneButtonTopConstraint: NSLayoutConstraint!
 
+    // MARK: - Properties
     var viewModel: AddPlantViewModel!
     weak var delegate: AddPlantViewControllerDelegate?
     private var gradientLayer: CAGradientLayer?
     private var mediaPicker = MediaPicker()
     private var daysPicker = UIPickerView()
+    private var ownedSincePicker = UIDatePicker()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -52,16 +59,21 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         registerKeyboardHeightChangeObservers()
     }
 
-    override func keyboardChanged(height: CGFloat) {
-        scrollView.contentInset.bottom = height
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.showDoneButton()
+        })
     }
 
+    // MARK: - Overrides
+    override func keyboardChanged(height: CGFloat) {
+        scrollView.contentInset.bottom = height == 0 ? 104 : height
+    }
+
+    // MARK: - IBActions
     @IBAction func doneButtonPressed(_ sender: Any) {
         viewModel.saveValidatedPlant()
-    }
-
-    @IBAction func photoGalleryButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: .pushPhotoGallery)
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
@@ -76,20 +88,40 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
                   showCancelButton: true)
     }
 
+    // MARK: - Private
     private func setupBindings() {
         viewModel.name.bidirectionalBind(to: nameTextField.reactive.text).dispose(in: bag)
         viewModel.description.bidirectionalBind(to: descriptionTextView.reactive.text).dispose(in: bag)
+        bindWatering()
+        bindFertilizing()
+        bindOwnedSince()
+        bindPlantImage()
+        bindEvent()
+        bindError()
+    }
 
+    private func bindWatering() {
         viewModel.watering.observeNext { [weak self] value in
             guard let self = self else { return }
             self.wateringTextField.text = "Watering every \(value) \(value > 1 ? "days" : "day")"
         }.dispose(in: bag)
+    }
 
+    private func bindFertilizing() {
         viewModel.fertilizing.observeNext { [weak self] value in
             guard let self = self else { return }
             self.fertilizingTextField.text = "Fertilizing every \(value) \(value > 1 ? "days" : "day")"
         }.dispose(in: bag)
+    }
 
+    private func bindOwnedSince() {
+        viewModel.ownedSince.observeNext { [weak self] value in
+            guard let self = self, let ownedSinceValue = value?.toShortMonthYearString() else { return }
+            self.ownedSinceTextField.text = "Owned since \(ownedSinceValue)"
+        }.dispose(in: bag)
+    }
+
+    private func bindPlantImage() {
         viewModel.plantImage.observeNext { [weak self] value in
             guard let self = self else { return }
             if let value = value {
@@ -100,7 +132,9 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
                 self.imageView.contentMode = .center
             }
         }.dispose(in: bag)
+    }
 
+    private func bindEvent() {
         viewModel.event.observeNext { [weak self] event in
             guard let self = self, let event = event else { return }
             switch event {
@@ -116,7 +150,9 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }.dispose(in: bag)
+    }
 
+    private func bindError() {
         viewModel.error.observeNext { [weak self] value in
             guard let self = self, let value = value else { return }
             self.showAlert(error: value)
@@ -124,16 +160,18 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupUI() {
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 104, right: 0)
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewPressed)))
         setupImageTopGradientView()
         setupImageRounderCornersContainerView()
         setupImageShadowContainerView()
         setupDoneButton()
-        setupPhotoGalleryButton()
         setupDeletePlantButton()
         setupDaysPicker()
+        setupOwnedSincePicker()
         setupCancelBarButtonItem()
         setupNavigationBar()
+        hideDoneButton()
     }
 
     private func setupNavigationBar() {
@@ -157,12 +195,7 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         dismiss(animated: true, completion: nil)
     }
 
-    private func setupDaysPicker() {
-        daysPicker.delegate = self
-        daysPicker.backgroundColor = .whiteFFFFFF
-        wateringTextField.inputView = daysPicker
-        fertilizingTextField.inputView = daysPicker
-
+    private func pickerToolbar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -170,12 +203,39 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         toolBar.barTintColor = .whiteFFFFFF
         toolBar.sizeToFit()
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.pickerDoneButtonTapped))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pickerDoneButtonTapped))
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
 
-        wateringTextField.inputAccessoryView = toolBar
-        fertilizingTextField.inputAccessoryView = toolBar
+        return toolBar
+    }
+
+    private func setupDaysPicker() {
+        daysPicker.delegate = self
+        daysPicker.backgroundColor = .whiteFFFFFF
+        wateringTextField.inputView = daysPicker
+        fertilizingTextField.inputView = daysPicker
+        wateringTextField.inputAccessoryView = pickerToolbar()
+        fertilizingTextField.inputAccessoryView = pickerToolbar()
+    }
+
+    private func setupOwnedSincePicker() {
+        if viewModel.isEditingExistingPlant {
+            ownedSinceStackView.isHidden = false
+            ownedSincePicker.datePickerMode = .date
+            ownedSincePicker.maximumDate = Date()
+            ownedSincePicker.backgroundColor = .whiteFFFFFF
+            ownedSinceTextField.inputView = ownedSincePicker
+            ownedSinceTextField.inputAccessoryView = pickerToolbar()
+            ownedSincePicker.addTarget(self, action: #selector(ownedSincePickerValueChanged), for: .valueChanged)
+        } else {
+            ownedSinceStackView.isHidden = true
+        }
+    }
+
+    @objc
+    private func ownedSincePickerValueChanged(_ datePicker: UIDatePicker) {
+        viewModel.ownedSince.value = datePicker.date
     }
 
     @objc
@@ -215,16 +275,6 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         doneButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
 
-    private func setupPhotoGalleryButton() {
-        if viewModel.isEditingExistingPlant {
-            photoGalleryButton.isHidden = true
-        } else {
-            photoGalleryButton.layer.cornerRadius = 10
-            photoGalleryButton.layer.borderWidth = 2
-            photoGalleryButton.layer.borderColor = UIColor.green90D599.cgColor
-        }
-    }
-
     private func setupDescriptionTextView() {
         descriptionTextView.textColor = (viewModel.description.value ?? "").isEmpty ? viewModel.placeholderTextColor : viewModel.inputTextColor
         descriptionTextView.text = (viewModel.description.value ?? "").isEmpty ? viewModel.descriptionPlaceholder : viewModel.description.value
@@ -238,6 +288,18 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
         } else {
             deletePlantButton.isHidden = true
         }
+    }
+
+    private func hideDoneButton() {
+        doneButtonBottomConstraint.constant = -104
+        doneButtonTopConstraint.constant = 0
+        view.layoutIfNeeded()
+    }
+
+    private func showDoneButton() {
+        doneButtonBottomConstraint.constant = 0
+        doneButtonTopConstraint.constant = 104
+        view.layoutIfNeeded()
     }
 
 }
@@ -295,17 +357,17 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.pickerOptions.count
+        return viewModel.daysPickerOptions.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let option = viewModel.pickerOptions[row]
+        let option = viewModel.daysPickerOptions[row]
         return "\(option) \(option > 1 ? "days" : "day")"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let currentPickerSelection = viewModel.currentPickerSelection else { return }
-        let numberOfDays = viewModel.pickerOptions[row]
+        let numberOfDays = viewModel.daysPickerOptions[row]
         switch currentPickerSelection {
         case .watering:
             viewModel.watering.value = numberOfDays
@@ -325,33 +387,6 @@ extension AddPlantViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y < 0 {
             scrollView.contentOffset.y = 0
         }
-    }
-
-}
-
-// MARK: - SegueHandler
-extension AddPlantViewController: SegueHandler {
-
-    enum SegueIdentifier: String {
-        case pushPhotoGallery
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(for: segue) {
-        case .pushPhotoGallery:
-            guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
-            nextVC.viewModel = PhotoGalleryViewModel(plant: nil, photos: viewModel.photos)
-            nextVC.delegate = self
-        }
-    }
-
-}
-
-// MARK: - PhotoGalleryViewControllerDelegate
-extension AddPlantViewController: PhotoGalleryViewControllerDelegate {
-
-    func photoGalleryViewControllerDidSavePhotos(_ photos: [PlantPhoto]) {
-        viewModel.setPhotos(photos)
     }
 
 }

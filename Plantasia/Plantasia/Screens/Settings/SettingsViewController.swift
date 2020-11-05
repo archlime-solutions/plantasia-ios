@@ -12,6 +12,7 @@ import MessageUI
 
 class SettingsViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reminderTextField: UITextField!
     @IBOutlet weak var writeAReviewButton: UIButton!
@@ -19,16 +20,19 @@ class SettingsViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var shareAppButton: UIButton!
     @IBOutlet weak var versionLabel: UILabel!
 
+    // MARK: - Properties
     private var timePicker = UIDatePicker()
     private var viewModel = SettingsViewModel()
     private var appID = "1510768461"
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
     }
 
+    // MARK: - IBActions
     @IBAction func writeAReviewButtonPressed(_ sender: Any) {
         let urlStr = "https://itunes.apple.com/app/id\(appID)?action=write-review"
         guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
@@ -71,6 +75,7 @@ class SettingsViewController: BaseViewController, AlertPresenter {
         }
     }
 
+    // MARK: - Private
     private func setupUI() {
         setReminderTextFieldText()
         setupTimePicker()

@@ -10,8 +10,10 @@ import Foundation
 
 class PlantDetailsCollectionViewCellViewModel {
 
+    // MARK: - Properties
     var plant: Plant
 
+    // MARK: - Lifecycle
     init(plant: Plant) {
         self.plant = plant
     }

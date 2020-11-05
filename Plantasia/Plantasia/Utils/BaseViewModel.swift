@@ -10,6 +10,7 @@ import Bond
 
 protocol BaseViewModel {
 
+    // MARK: - Properties
     var error: Observable<GeneralError?> { get }
 
 }

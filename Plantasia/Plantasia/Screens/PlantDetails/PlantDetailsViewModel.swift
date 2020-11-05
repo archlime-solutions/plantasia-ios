@@ -16,14 +16,17 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
         case didFertilizePlant
     }
 
+    // MARK: - Properties
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
     var plant: Observable<Plant>
 
+    // MARK: - Lifecycle
     init(plant: Plant) {
         self.plant = Observable<Plant>(plant)
     }
 
+    // MARK: - Internal
     func waterPlant() {
         if let realm = try? Realm() {
             try? realm.write {
