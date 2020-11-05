@@ -65,10 +65,10 @@ class GardenViewController: BaseViewController, AlertPresenter {
                     self.setupContainerViewsVisibility()
                 case .didWaterPlants:
                     self.showAlert(title: "Your plants have been watered!")
-                    self.collectionView.reloadData()
+                    self.reloadCollectionViewAnimated()
                 case .didFertilizePlants:
                     self.showAlert(title: "Your plants have been fertilized!")
-                    self.collectionView.reloadData()
+                    self.reloadCollectionViewAnimated()
                 }
             }
         }.dispose(in: bag)
@@ -164,7 +164,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
             setupAddPlantBarButtonItem()
             setupSortPlantsBarButtonItem()
             collectionView.dragInteractionEnabled = true
-            collectionView.reloadData()
+            reloadCollectionViewAnimated()
         }
     }
 
@@ -173,6 +173,12 @@ class GardenViewController: BaseViewController, AlertPresenter {
         quickActionsContainerView.layer.shadowColor = UIColor.black.cgColor
         quickActionsContainerView.layer.shadowOpacity = 0.1
         quickActionsContainerView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+    }
+
+    private func reloadCollectionViewAnimated() {
+        UIView.transition(with: collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.collectionView.reloadData()
+        }, completion: nil)
     }
 
 }
@@ -306,10 +312,11 @@ extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
             self.viewModel.sortingCriteria = .dateAdded
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            print("User click Dismiss button")
-        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
 
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.permittedArrowDirections = .up
+        alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
         present(alert, animated: true, completion: nil)
     }
 

@@ -245,7 +245,7 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
 
     @objc
     private func imageViewPressed(_ sender: UITapGestureRecognizer) {
-        mediaPicker.pickImage(self, { image in
+        mediaPicker.pickImage(self, view: imageView, { image in
             self.viewModel.plantImage.value = image
         })
     }

@@ -99,6 +99,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                 plant.index = realm.objects(Plant.self).count
                 realm.add(plant)
             }
+            PushNotificationService.shared.scheduleNotifications()
         }
     }
 
@@ -112,6 +113,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                 plant?.setImage(plantImage.value)
                 plant?.ownedSinceDate = ownedSince.value
             }
+            PushNotificationService.shared.scheduleNotifications()
         }
     }
 

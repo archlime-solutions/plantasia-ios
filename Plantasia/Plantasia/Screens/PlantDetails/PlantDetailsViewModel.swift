@@ -31,6 +31,7 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plant.value.water()
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didWaterPlant
             }
         }
@@ -40,6 +41,7 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plant.value.fertilize()
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didFertilizePlant
             }
         }

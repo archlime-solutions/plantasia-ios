@@ -69,6 +69,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.water() }
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didWaterPlants
             }
         }
@@ -78,6 +79,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.filter { $0.requiresWatering() }.forEach { $0.water() }
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didWaterPlants
             }
         }
@@ -87,6 +89,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.forEach { $0.fertilize() }
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didFertilizePlants
             }
         }
@@ -96,6 +99,7 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         if let realm = try? Realm() {
             try? realm.write {
                 plants.filter { $0.requiresFertilizing() }.forEach { $0.fertilize() }
+                PushNotificationService.shared.scheduleNotifications()
                 event.value = .didFertilizePlants
             }
         }
@@ -107,7 +111,6 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
             for (index, plant) in plants.enumerated() {
                 try? realm.write {
                     plant.index = index
-                    event.value = .didFertilizePlants
                 }
             }
         }

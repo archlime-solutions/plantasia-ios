@@ -60,7 +60,7 @@ class PhotoGalleryViewController: BaseViewController, AlertPresenter {
 
     // MARK: - IBActions
     @IBAction func plusButtonPressed(_ sender: Any) {
-        mediaPicker.pickImage(self, { image in
+        mediaPicker.pickImage(self, view: plusButton, { image in
             self.viewModel.selectedImage = image
             self.performSegue(withIdentifier: .pushPhotoDetails)
         })

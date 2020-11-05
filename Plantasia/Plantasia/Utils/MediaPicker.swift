@@ -17,7 +17,7 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     var pickImageCallback: ((UIImage) -> Void)?
 
     // MARK: - Media picking
-    func pickImage(_ viewController: UIViewController,
+    func pickImage(_ viewController: UIViewController, view: UIView,
                    _ callback: @escaping ((UIImage) -> Void)) {
         pickImageCallback = callback
         self.viewController = viewController
@@ -41,7 +41,10 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
-        alert.popoverPresentationController?.sourceView = self.viewController?.view
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.permittedArrowDirections = .any
+        alert.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+
         viewController.present(alert, animated: true, completion: nil)
         self.alert = alert
     }

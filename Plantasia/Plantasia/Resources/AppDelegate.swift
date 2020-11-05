@@ -24,15 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        PushNotificationService.shared.scheduleNotifications()
-    }
-
-    //TODO razvan: pune inapoi pe 2
     /// Set the new schema version. This must be greater than the previously used version.
     private func setupRealmConfiguration() {
         let config = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 2,
             migrationBlock: nil)
 
         Realm.Configuration.defaultConfiguration = config

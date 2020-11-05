@@ -17,11 +17,14 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
         case skip
     }
 
+    // MARK: - Properties
     static let shared = PushNotificationService()
     private let notificationCenter = UNUserNotificationCenter.current()
 
+    // MARK: - Lifecycle
     override private init() { }
 
+    // MARK: - Internal
     func requestPushNotificationAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
     }
@@ -38,20 +41,33 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
             content.badge = NSNumber(value: 1)
             content.categoryIdentifier = userActions
 
-            let date = UserDefaults.standard.getRemindersTime()
-            let triggerDate = Calendar.current.dateComponents([.hour, .minute], from: date)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            notificationCenter.add(request) { _ in }
+            //ora si minutele din settings
+            let remindersDateComponents = Calendar.current.dateComponents([.hour, .minute], from: UserDefaults.standard.getRemindersTime())
 
-            let snooze1HourAction = UNNotificationAction(identifier: NotificationAction.snooze1Hour.rawValue, title: "Snooze 1 Hour", options: [])
-            let markAsCompleteAction = UNNotificationAction(identifier: NotificationAction.markAsComplete.rawValue, title: "Mark as Complete", options: [])
-            let skipAction = UNNotificationAction(identifier: NotificationAction.skip.rawValue, title: "Skip", options: [.destructive])
-            let category = UNNotificationCategory(identifier: userActions,
-                                                  actions: [snooze1HourAction, markAsCompleteAction, skipAction],
-                                                  intentIdentifiers: [],
-                                                  options: [])
-            notificationCenter.setNotificationCategories([category])
+            //data curenta
+            var triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+            //seteaza ora si minute din settings pe data curenta
+            triggerDateComponents.hour = remindersDateComponents.hour
+            triggerDateComponents.minute = remindersDateComponents.minute
+
+            //adauga zilele de attention pe data curenta
+            if let date = triggerDateComponents.date,
+                let triggerDate = Calendar.current.date(byAdding: .day, value: getPlantsAttentionRemainingDays(), to: date) {
+                let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                                                                          from: triggerDate),
+                                                            repeats: true)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                notificationCenter.add(request) { _ in }
+
+                let snooze1HourAction = UNNotificationAction(identifier: NotificationAction.snooze1Hour.rawValue, title: "Snooze 1 Hour", options: [])
+                let markAsCompleteAction = UNNotificationAction(identifier: NotificationAction.markAsComplete.rawValue, title: "Mark as Complete", options: [])
+                let skipAction = UNNotificationAction(identifier: NotificationAction.skip.rawValue, title: "Skip", options: [.destructive])
+                let category = UNNotificationCategory(identifier: userActions,
+                                                      actions: [snooze1HourAction, markAsCompleteAction, skipAction],
+                                                      intentIdentifiers: [],
+                                                      options: [])
+                notificationCenter.setNotificationCategories([category])
+            }
         }
     }
 
@@ -77,16 +93,43 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
                 plants.forEach {
                     if $0.requiresWatering() {
                         $0.water()
+
                     }
                     if $0.requiresFertilizing() {
                         $0.fertilize()
                     }
                 }
+                scheduleNotifications()
             }
         default:
             break
         }
         completionHandler()
+    }
+
+    // MARK: - Private
+
+    ///
+    /// - Returns: Returns the number of days until any of the stored plants requires attention (watering or fertilizing)
+    private func getPlantsAttentionRemainingDays() -> Int {
+        if let realm = try? Realm() {
+            let plants = Array(realm.objects(Plant.self))
+            if !plants.isEmpty {
+                var minNumberOfDays = Int.max
+                for plant in plants {
+                    let wateringRemainingDays = plant.getWateringRemainingDays()
+                    let fertilizingRemainingDays = plant.getFertilizingRemainingDays()
+                    if wateringRemainingDays < minNumberOfDays {
+                        minNumberOfDays = wateringRemainingDays
+                    }
+                    if fertilizingRemainingDays < minNumberOfDays {
+                        minNumberOfDays = fertilizingRemainingDays
+                    }
+                }
+                return minNumberOfDays
+            }
+        }
+        return 0
     }
 
 }
