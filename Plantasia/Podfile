@@ -13,3 +13,12 @@ target 'Plantasia' do
   pod 'RAMAnimatedTabBarController', '~> 5.1.0'
 
 end
+
+target 'Plantasia iMessageExtension' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Plantasia
+  pod 'RealmSwift', '~> 4.4.1'
+  pod 'Bond', '~> 7.6.6'
+end

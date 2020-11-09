@@ -161,23 +161,23 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Bond/Bond.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Bond-iOS11.0/Bond.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTPhotoViewerController/DTPhotoViewerController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Differ/Differ.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Differ-iOS11.0/Differ.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ReactiveKit-iOS11.0/ReactiveKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Realm-iOS11.0/Realm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift-iOS11.0/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Bond/Bond.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Bond-iOS11.0/Bond.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTPhotoViewerController/DTPhotoViewerController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Differ/Differ.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Differ-iOS11.0/Differ.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ReactiveKit-iOS11.0/ReactiveKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Realm-iOS11.0/Realm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift-iOS11.0/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -10,12 +10,14 @@ import Foundation
 
 extension UserDefaults {
 
-    enum Keys {
-        static let RemindersTime = "RemindersTimeKey"
+    private enum Keys {
+        static let remindersTime = "RemindersTimeKey"
+        static let didMigratePlantImagesToAppGroup = "DidMigratePlantImagesToAppGroupKey"
+        static let didMigrateRealmConfigToAppGroup = "DidMigrateRealmConfigToAppGroupKey"
     }
 
     func getRemindersTime() -> Date {
-        guard let dateString = string(forKey: Keys.RemindersTime), let date = Date.fromString(dateString) else {
+        guard let dateString = string(forKey: Keys.remindersTime), let date = Date.fromString(dateString) else {
             return Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
         }
         return date
@@ -23,8 +25,23 @@ extension UserDefaults {
 
     func set(remindersTime: Date) {
         guard let dateString = remindersTime.toString() else { return }
-        set(dateString, forKey: Keys.RemindersTime)
-        PushNotificationService.shared.scheduleNotifications()
+        set(dateString, forKey: Keys.remindersTime)
+    }
+
+    func didMigratePlantImagesToAppGroup() -> Bool {
+        return bool(forKey: Keys.didMigratePlantImagesToAppGroup)
+    }
+
+    func setDidMigratePlantImagesToAppGroup() {
+        set(true, forKey: Keys.didMigratePlantImagesToAppGroup)
+    }
+
+    func didMigrateRealmConfigToAppGroup() -> Bool {
+        return bool(forKey: Keys.didMigrateRealmConfigToAppGroup)
+    }
+
+    func setDidMigrateRealmConfigToAppGroup() {
+        set(true, forKey: Keys.didMigrateRealmConfigToAppGroup)
     }
 
 }

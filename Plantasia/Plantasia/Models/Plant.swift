@@ -183,8 +183,7 @@ class Plant: Object {
     }
 
     private func imageFilePath(imageUUID: String) -> URL? {
-        guard let documentURL = FileManager.default.urls(for: .documentDirectory,
-                                                         in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+        guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.applicationGroup) else { return nil }
         return documentURL.appendingPathComponent(imageUUID + ".png")
     }
 

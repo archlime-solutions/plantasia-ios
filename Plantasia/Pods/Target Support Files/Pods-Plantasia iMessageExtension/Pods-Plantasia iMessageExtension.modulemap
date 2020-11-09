@@ -1,0 +1,6 @@
+framework module Pods_Plantasia_iMessageExtension {
+  umbrella header "Pods-Plantasia iMessageExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}

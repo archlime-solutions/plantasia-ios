@@ -21,6 +21,7 @@ class SettingsViewModel: BaseViewModel, EventTransmitter {
     // MARK: - Internal
     func setReminderTime(_ date: Date) {
         UserDefaults.standard.set(remindersTime: date)
+        PushNotificationService.shared.scheduleNotifications()
         event.value = .didSetReminderTime
     }
 
