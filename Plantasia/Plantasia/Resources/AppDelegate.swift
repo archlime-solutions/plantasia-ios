@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black232323]
-        setupRealmConfiguration()
+
         migrateRealmConfigToAppGroup()
+        setupRealmConfiguration()
         migratePlantImagesToAppGroup()
 
         UNUserNotificationCenter.current().delegate = PushNotificationService.shared
@@ -60,12 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
                 UserDefaults.standard.setDidMigratePlantImagesToAppGroup()
-            } catch {
+            } catch let error {
+                print(error.localizedDescription)
                 //TODO: log error
             }
         }
     }
 
+    /// Migrates the realm configuration from local DB to application group so it is available in the iMessage extension.
     private func migrateRealmConfigToAppGroup() {
         if !UserDefaults.standard.didMigrateRealmConfigToAppGroup() {
             let fileManager = FileManager.default
@@ -74,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.applicationGroup)?.appendingPathComponent(Constants.sharedRealmUrl) {
                 do {
                     try _ = fileManager.replaceItemAt(appGroupURL, withItemAt: originalPath)
-                    UserDefaults.standard.setDidMigratePlantImagesToAppGroup()
+                    UserDefaults.standard.setDidMigrateRealmConfigToAppGroup()
                 } catch let error {
                     print(error.localizedDescription)
                     //TODO: log error

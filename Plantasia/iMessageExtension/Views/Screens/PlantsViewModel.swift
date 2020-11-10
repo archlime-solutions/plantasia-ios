@@ -6,7 +6,6 @@
 //  Copyright © 2020 archlime solutions. All rights reserved.
 //
 
-import Foundation
 import Bond
 import RealmSwift
 
@@ -19,6 +18,7 @@ class PlantsViewModel {
     // MARK: - Properties
     let event = Observable<Event?>(nil)
     var plants: [Plant] = []
+    private let plantsService = PlantsService()
 
     init() {
         setupDBConnection()
@@ -27,15 +27,15 @@ class PlantsViewModel {
     // MARK: - Internal
     func loadPlants() {
         do {
-            let realm = try Realm()
-            plants = Array(realm.objects(Plant.self).sorted(by: { $0.index < $1.index })).filter { $0.getImage() != nil }
+            plants = try plantsService.getSortedPlants().filter { $0.getImage() != nil }
             event.value = .didLoadPlants(success: true)
         } catch {
+            //TODO: log event
             event.value = .didLoadPlants(success: false)
         }
     }
 
-// MARK: - Private
+    // MARK: - Private
     private func setupDBConnection() {
         var config = Realm.Configuration(
             schemaVersion: Constants.realmDBVersion,

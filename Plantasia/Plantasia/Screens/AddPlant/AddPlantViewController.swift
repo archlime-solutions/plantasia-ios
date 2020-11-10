@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import RealmSwift
 
 protocol AddPlantViewControllerDelegate: class {
     func addPlantViewControllerDidCreatePlant()

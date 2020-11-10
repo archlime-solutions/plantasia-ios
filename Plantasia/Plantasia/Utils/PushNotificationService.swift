@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate {
 
@@ -20,6 +19,7 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
     // MARK: - Properties
     static let shared = PushNotificationService()
     private let notificationCenter = UNUserNotificationCenter.current()
+    private let plantsService = PlantsService()
 
     // MARK: - Lifecycle
     override private init() { }
@@ -32,7 +32,7 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
     func scheduleNotifications() {
         notificationCenter.removeAllPendingNotificationRequests()
 
-        if let realm = try? Realm(), !realm.objects(Plant.self).isEmpty {
+        if plantsService.plantsExist() {
             let content = UNMutableNotificationContent()
             let userActions = "Plantasia User Actions"
             content.title = "Hey 👋. Your plants would enjoy your attention."
@@ -41,18 +41,14 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
             content.badge = NSNumber(value: 1)
             content.categoryIdentifier = userActions
 
-            //ora si minutele din settings
             let remindersDateComponents = Calendar.current.dateComponents([.hour, .minute], from: UserDefaults.standard.getRemindersTime())
 
-            //data curenta
             var triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-            //seteaza ora si minute din settings pe data curenta
             triggerDateComponents.hour = remindersDateComponents.hour
             triggerDateComponents.minute = remindersDateComponents.minute
 
-            //adauga zilele de attention pe data curenta
             if let date = triggerDateComponents.date,
-                let triggerDate = Calendar.current.date(byAdding: .day, value: getPlantsAttentionRemainingDays(), to: date) {
+                let triggerDate = Calendar.current.date(byAdding: .day, value: plantsService.getPlantsAttentionRemainingDays(), to: date) {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
                                                                                                           from: triggerDate),
                                                             repeats: true)
@@ -88,48 +84,14 @@ final class PushNotificationService: NSObject, UNUserNotificationCenterDelegate 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: response.notification.request.content, trigger: trigger)
             notificationCenter.add(request) { _ in }
         case NotificationAction.markAsComplete.rawValue:
-            if let realm = try? Realm() {
-                let plants = Array(realm.objects(Plant.self).filter({ $0.requiresAttention() }))
-                plants.forEach {
-                    if $0.requiresWatering() {
-                        $0.water()
-
-                    }
-                    if $0.requiresFertilizing() {
-                        $0.fertilize()
-                    }
-                }
+            let success = plantsService.waterAndFertilizeRequiringPlants()
+            if success {
                 scheduleNotifications()
             }
         default:
             break
         }
         completionHandler()
-    }
-
-    // MARK: - Private
-
-    ///
-    /// - Returns: Returns the number of days until any of the stored plants requires attention (watering or fertilizing)
-    private func getPlantsAttentionRemainingDays() -> Int {
-        if let realm = try? Realm() {
-            let plants = Array(realm.objects(Plant.self))
-            if !plants.isEmpty {
-                var minNumberOfDays = Int.max
-                for plant in plants {
-                    let wateringRemainingDays = plant.getWateringRemainingDays()
-                    let fertilizingRemainingDays = plant.getFertilizingRemainingDays()
-                    if wateringRemainingDays < minNumberOfDays {
-                        minNumberOfDays = wateringRemainingDays
-                    }
-                    if fertilizingRemainingDays < minNumberOfDays {
-                        minNumberOfDays = fertilizingRemainingDays
-                    }
-                }
-                return minNumberOfDays
-            }
-        }
-        return 0
     }
 
 }

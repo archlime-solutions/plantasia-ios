@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class GardenViewController: BaseViewController, AlertPresenter {
 
@@ -308,8 +307,8 @@ extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
             self.viewModel.sortingCriteria = .fertilization
         }))
 
-        alert.addAction(UIAlertAction(title: "Date Added", style: .default, handler: { _ in
-            self.viewModel.sortingCriteria = .dateAdded
+        alert.addAction(UIAlertAction(title: "Owned Since", style: .default, handler: { _ in
+            self.viewModel.sortingCriteria = .ownedSince
         }))
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))

@@ -12,6 +12,8 @@
 		AB12B0C22555AFC500103E77 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB12B0C12555AFC500103E77 /* Constants.swift */; };
 		AB12B0C52555B08600103E77 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB12B0C12555AFC500103E77 /* Constants.swift */; };
 		AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */; };
+		AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFD1332559A4DC00A71929 /* PlantsService.swift */; };
+		AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
 		AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */; };
 		AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */; };
 		AB335FC8255954D200C770F8 /* PlantCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */; };
@@ -63,6 +65,7 @@
 		ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C94B2454AC1900A7DEBA /* Plant.swift */; };
 		ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF7740245573EC0075133D /* BaseViewModel.swift */; };
 		ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF77422455740C0075133D /* EventTransmitter.swift */; };
+		ABDFD1342559A4DD00A71929 /* PlantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFD1332559A4DC00A71929 /* PlantsService.swift */; };
 		ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0524531551001849FD /* AppDelegate.swift */; };
 		ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0924531551001849FD /* LoadingViewController.swift */; };
 		ABE8CA0D24531551001849FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0B24531551001849FD /* Main.storyboard */; };
@@ -149,6 +152,7 @@
 		ABB8C94B2454AC1900A7DEBA /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		ABBF7740245573EC0075133D /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		ABBF77422455740C0075133D /* EventTransmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTransmitter.swift; sourceTree = "<group>"; };
+		ABDFD1332559A4DC00A71929 /* PlantsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsService.swift; sourceTree = "<group>"; };
 		ABE8CA0224531551001849FD /* Plantasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plantasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE8CA0524531551001849FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABE8CA0924531551001849FD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 				AB901787245947BC0031369C /* PushNotificationService.swift */,
 				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
 				AB12B0C12555AFC500103E77 /* Constants.swift */,
+				ABDFD1332559A4DC00A71929 /* PlantsService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				ABA283472555A2C5006719B6 /* Sources */,
 				ABA283482555A2C5006719B6 /* Frameworks */,
 				ABA283492555A2C5006719B6 /* Resources */,
+				ABDFD1302559A07200A71929 /* Swiftlint Run Script */,
 			);
 			buildRules = (
 			);
@@ -628,6 +634,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		ABDFD1302559A07200A71929 /* Swiftlint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -635,6 +659,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */,
+				AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */,
 				ABA283502555A2C5006719B6 /* PlantsViewController.swift in Sources */,
 				ABA283862555A857006719B6 /* Plant.swift in Sources */,
 				ABA283912555A96B006719B6 /* UserDefaultsExtensions.swift in Sources */,
@@ -671,6 +697,7 @@
 				AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */,
 				AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
+				ABDFD1342559A4DD00A71929 /* PlantsService.swift in Sources */,
 				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
 				AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */,
 				AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */,

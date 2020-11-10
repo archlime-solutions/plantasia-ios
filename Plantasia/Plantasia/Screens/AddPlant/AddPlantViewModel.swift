@@ -7,7 +7,6 @@
 //
 
 import Bond
-import RealmSwift
 
 class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
@@ -43,6 +42,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     var placeholderTextColor = UIColor.greyC4C4C4
     var inputTextColor = UIColor.black232323
     private var plant: Plant?
+    private var plantsService = PlantsService()
 
     // MARK: - Lifecycle
     init(plant: Plant?) {
@@ -84,36 +84,35 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     func deletePlant() {
         guard let plant = plant else { return }
-        if let realm = try? Realm() {
-            try? realm.write {
-                realm.delete(plant)
-                self.event.value = .didRemovePlant
-            }
+        do {
+            try plantsService.delete(plant)
+            self.event.value = .didRemovePlant
+        } catch {
+            //TODO: log error
         }
     }
 
     // MARK: - Private
     private func create(_ plant: Plant) {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant.index = realm.objects(Plant.self).count
-                realm.add(plant)
-            }
-            PushNotificationService.shared.scheduleNotifications()
+        do {
+            try plantsService.create(plant)
+        } catch {
+            //TODO: log error
         }
     }
 
     private func updatePlant() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant?.name = name.value
-                plant?.descr = description.value
-                plant?.wateringFrequencyDays.value = watering.value
-                plant?.fertilizingFrequencyDays.value = fertilizing.value
-                plant?.setImage(plantImage.value)
-                plant?.ownedSinceDate = ownedSince.value
-            }
-            PushNotificationService.shared.scheduleNotifications()
+        guard let plant = plant else { return }
+        do {
+            try plantsService.update(plant,
+                                     name: name.value,
+                                     descr: description.value,
+                                     wateringFrequencyDays: watering.value,
+                                     fertilizingFrequencyDays: fertilizing.value,
+                                     image: plantImage.value,
+                                     ownedSinceDate: ownedSince.value)
+        } catch {
+            //TODO: log error
         }
     }
 
