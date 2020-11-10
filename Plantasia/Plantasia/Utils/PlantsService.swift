@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import FirebaseAnalytics
 
 class PlantsService {
 
@@ -115,14 +116,29 @@ class PlantsService {
     /// - Parameters:
     ///   - fromPosition: the starting position.
     ///   - toPosition: the destination position.
+    ///   - plant: the plant to be moved,
     /// - Throws: db error.
-    func movePlant(fromPosition: Int, toPosition: Int) throws {
+    func move(_ plant: Plant, fromPosition: Int, toPosition: Int) throws -> [Plant] {
         let realm = try Realm()
-        let plants = try getSortedPlants()
+        var plants = try getSortedPlants()
+        plants.remove(at: fromPosition)
+        plants.insert(plant, at: toPosition)
         for (index, plant) in plants.enumerated() {
             try realm.write {
                 plant.index = index
             }
+        }
+        return plants
+    }
+
+    /// Marks a plant as watered.
+    /// - Parameter plant: the plant to mark as watered.
+    /// - Throws: db error.
+    func water(_ plant: Plant) throws {
+        let realm = try Realm()
+        try realm.write {
+            plant.water()
+            PushNotificationService.shared.scheduleNotifications()
         }
     }
 
@@ -142,6 +158,17 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             try getSortedPlants().filter { $0.requiresWatering() }.forEach { $0.water() }
+            PushNotificationService.shared.scheduleNotifications()
+        }
+    }
+
+    /// Marks a plant as fertiized.
+    /// - Parameter plant: the plant to mark as fertilized.
+    /// - Throws: db error.
+    func fertilize(_ plant: Plant) throws {
+        let realm = try Realm()
+        try realm.write {
+            plant.fertilize()
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -166,6 +193,9 @@ class PlantsService {
         }
     }
 
+    /// Creates a plant and saves it in the db.
+    /// - Parameter plant: the plant to create.
+    /// - Throws: db error.
     func create(_ plant: Plant) throws {
         let realm = try Realm()
         try realm.write {
@@ -175,14 +205,27 @@ class PlantsService {
         PushNotificationService.shared.scheduleNotifications()
     }
 
+    /// Deletes a plant from the db.
+    /// - Parameter plant: the plant to remove.
+    /// - Throws: db error
     func delete(_ plant: Plant) throws {
         let realm = try Realm()
         try realm.write {
             realm.delete(plant)
-
+            Analytics.logEvent("delete_plant", parameters: nil)
         }
     }
 
+    /// Updates a plant in the db.
+    /// - Parameters:
+    ///   - plant: the plant to be updated.
+    ///   - name: the new name.
+    ///   - descr: the new description.
+    ///   - wateringFrequencyDays: the new watering frequency.
+    ///   - fertilizingFrequencyDays: the new fertilizing frequency.
+    ///   - image: the new image.
+    ///   - ownedSinceDate: the new owned-since.
+    /// - Throws: db error.
     // swiftlint:disable:next function_parameter_count
     func update(_ plant: Plant,
                 name: String?,
@@ -202,4 +245,5 @@ class PlantsService {
         }
         PushNotificationService.shared.scheduleNotifications()
     }
+
 }

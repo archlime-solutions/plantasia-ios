@@ -7,6 +7,7 @@
 //
 
 import Bond
+import FirebaseCrashlytics
 
 class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
@@ -87,8 +88,8 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
         do {
             try plantsService.delete(plant)
             self.event.value = .didRemovePlant
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -96,8 +97,8 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     private func create(_ plant: Plant) {
         do {
             try plantsService.create(plant)
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -111,8 +112,8 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                                      fertilizingFrequencyDays: fertilizing.value,
                                      image: plantImage.value,
                                      ownedSinceDate: ownedSince.value)
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 

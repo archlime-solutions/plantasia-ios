@@ -1,9 +1,12 @@
 ${PODS_ROOT}/Target Support Files/Pods-Plantasia/Pods-Plantasia-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Bond-iOS11.0/Bond.framework
+${BUILT_PRODUCTS_DIR}/Bond/Bond.framework
 ${BUILT_PRODUCTS_DIR}/DTPhotoViewerController/DTPhotoViewerController.framework
-${BUILT_PRODUCTS_DIR}/Differ-iOS11.0/Differ.framework
+${BUILT_PRODUCTS_DIR}/Differ/Differ.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework
-${BUILT_PRODUCTS_DIR}/ReactiveKit-iOS11.0/ReactiveKit.framework
-${BUILT_PRODUCTS_DIR}/Realm-iOS11.0/Realm.framework
-${BUILT_PRODUCTS_DIR}/RealmSwift-iOS11.0/RealmSwift.framework
+${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

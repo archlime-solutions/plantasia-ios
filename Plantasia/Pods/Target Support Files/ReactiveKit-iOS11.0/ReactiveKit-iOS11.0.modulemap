@@ -1,6 +1,0 @@
-framework module ReactiveKit {
-  umbrella header "ReactiveKit-iOS11.0-umbrella.h"
-
-  export *
-  module * { export * }
-}

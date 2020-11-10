@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
 
@@ -20,6 +20,8 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
     var plant: Observable<Plant>
+    private let plantsService = PlantsService()
+    private let plantPhotosService = PlantPhotosService()
 
     // MARK: - Lifecycle
     init(plant: Plant) {
@@ -28,43 +30,28 @@ class PlantDetailsViewModel: BaseViewModel, EventTransmitter {
 
     // MARK: - Internal
     func waterPlant() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant.value.water()
-                PushNotificationService.shared.scheduleNotifications()
-                event.value = .didWaterPlant
-            }
+        do {
+            try plantsService.water(plant.value)
+            event.value = .didWaterPlant
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     func fertilizePlant() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant.value.fertilize()
-                PushNotificationService.shared.scheduleNotifications()
-                event.value = .didFertilizePlant
-            }
+        do {
+            try plantsService.fertilize(plant.value)
+            event.value = .didFertilizePlant
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     func setPhotos(_ photos: [PlantPhoto]) {
-        if let realm = try? Realm() {
-            let existingPhotosSet = Set(plant.value.photos)
-            let newPhotosSet = Set(photos)
-            let photosToDelete = existingPhotosSet.subtracting(newPhotosSet)
-            let photosToAdd = newPhotosSet.subtracting(existingPhotosSet)
-
-            photosToAdd.forEach { photo in
-                try? realm.write {
-                    plant.value.photos.append(photo)
-                }
-            }
-
-            photosToDelete.forEach { photo in
-                try? realm.write {
-                    realm.delete(photo)
-                }
-            }
+        do {
+            try plantPhotosService.setPhotos(photos, forPlant: plant.value)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 }

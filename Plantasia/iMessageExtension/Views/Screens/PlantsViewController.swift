@@ -8,6 +8,7 @@
 
 import UIKit
 import Messages
+import FirebaseCrashlytics
 
 class PlantsViewController: MSMessagesAppViewController {
 
@@ -45,7 +46,7 @@ class PlantsViewController: MSMessagesAppViewController {
                             self.plantsCollectionView.reloadData()
                         }
                     } else {
-                        //TODO: log error
+                        Crashlytics.crashlytics().record(error: GeneralError(title: "", message: "Could not load plants"))
                     }
                 }
             }
@@ -96,11 +97,10 @@ extension PlantsViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let conversation = activeConversation else { return }
         conversation.insert(createMessage(with: viewModel.plants[indexPath.row])) { error in
-            if error != nil {
-                //TODO: log error
+            if let error = error {
+                Crashlytics.crashlytics().record(error: error)
             }
         }
-
     }
 
 }

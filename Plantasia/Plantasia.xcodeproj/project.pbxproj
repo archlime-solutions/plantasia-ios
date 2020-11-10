@@ -14,6 +14,12 @@
 		AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */; };
 		AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFD1332559A4DC00A71929 /* PlantsService.swift */; };
 		AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
+		AB239D13255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */; };
+		AB239D14255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */; };
+		AB239D75255A984200E9D2D7 /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0D2454BA740049966B /* GeneralError.swift */; };
+		AB239D79255AA4BF00E9D2D7 /* PlantPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */; };
+		AB239D7F255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */; };
+		AB239D80255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */; };
 		AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */; };
 		AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */; };
 		AB335FC8255954D200C770F8 /* PlantCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */; };
@@ -105,6 +111,9 @@
 		AB12B0C12555AFC500103E77 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AB12B0CA2555B12100103E77 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotosService.swift; sourceTree = "<group>"; };
+		AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConfigurator.swift; sourceTree = "<group>"; };
 		AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
 		AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -372,6 +381,7 @@
 		ABE8CA0424531551001849FD /* Plantasia */ = {
 			isa = PBXGroup;
 			children = (
+				AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */,
 				ABA283602555A4F4006719B6 /* Plantasia.entitlements */,
 				ABE8CA1A245315BD001849FD /* Models */,
 				ABE8CA1B2453164F001849FD /* Screens */,
@@ -433,6 +443,8 @@
 				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
 				AB12B0C12555AFC500103E77 /* Constants.swift */,
 				ABDFD1332559A4DC00A71929 /* PlantsService.swift */,
+				AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */,
+				AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -480,6 +492,7 @@
 				AB3EB61224531B1800203203 /* Swiftlint Run Script */,
 				49D395D75EB99824D898B8D0 /* [CP] Embed Pods Frameworks */,
 				ABA2835A2555A2C7006719B6 /* Embed App Extensions */,
+				AB239D5B255A8E0600E9D2D7 /* Crashlytics Run Script */,
 			);
 			buildRules = (
 			);
@@ -534,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA283552555A2C7006719B6 /* Assets.xcassets in Resources */,
+				AB239D14255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */,
 				AB335FF32559620E00C770F8 /* Assets.xcassets in Resources */,
 				ABA283532555A2C5006719B6 /* MainInterface.storyboard in Resources */,
 			);
@@ -549,6 +563,7 @@
 				AB4B06A12455BBDF0058174D /* AddPlantBarButtonItemView.xib in Resources */,
 				ABE8CA0F24531553001849FD /* Assets.xcassets in Resources */,
 				ABE8CA0D24531551001849FD /* Main.storyboard in Resources */,
+				AB239D13255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +631,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AB239D5B255A8E0600E9D2D7 /* Crashlytics Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Crashlytics Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		AB3EB61224531B1800203203 /* Swiftlint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -661,6 +696,7 @@
 			files = (
 				AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */,
 				AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */,
+				AB239D80255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */,
 				ABA283502555A2C5006719B6 /* PlantsViewController.swift in Sources */,
 				ABA283862555A857006719B6 /* Plant.swift in Sources */,
 				ABA283912555A96B006719B6 /* UserDefaultsExtensions.swift in Sources */,
@@ -671,6 +707,7 @@
 				ABA2838C2555A872006719B6 /* UIImageExtensions.swift in Sources */,
 				AB335FD92559572100C770F8 /* PlantsViewModel.swift in Sources */,
 				ABA283692555A584006719B6 /* DateExtensions.swift in Sources */,
+				AB239D75255A984200E9D2D7 /* GeneralError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +743,8 @@
 				AB5DB8F72455B2DB00F751D4 /* PlantDetailsCollectionViewCellViewModel.swift in Sources */,
 				AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */,
 				AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */,
+				AB239D7F255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */,
+				AB239D79255AA4BF00E9D2D7 /* PlantPhotosService.swift in Sources */,
 				AB6C2C5A245AA4460032233F /* PhotoGalleryViewController.swift in Sources */,
 				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
 				AB5DB8F42455823600F751D4 /* PlantDetailsCollectionViewCell.swift in Sources */,
@@ -934,6 +973,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -959,6 +999,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

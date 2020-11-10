@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class PlantsViewModel {
 
@@ -20,8 +20,9 @@ class PlantsViewModel {
     var plants: [Plant] = []
     private let plantsService = PlantsService()
 
+    // MARK: - Lifecycle
     init() {
-        setupDBConnection()
+        DatabaseConfigurator.shared.start()
     }
 
     // MARK: - Internal
@@ -30,23 +31,9 @@ class PlantsViewModel {
             plants = try plantsService.getSortedPlants().filter { $0.getImage() != nil }
             event.value = .didLoadPlants(success: true)
         } catch {
-            //TODO: log event
+            Crashlytics.crashlytics().record(error: error)
             event.value = .didLoadPlants(success: false)
         }
-    }
-
-    // MARK: - Private
-    private func setupDBConnection() {
-        var config = Realm.Configuration(
-            schemaVersion: Constants.realmDBVersion,
-            migrationBlock: nil)
-
-        if let sharedDirectory: URL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.applicationGroup) {
-            let sharedRealmURL = sharedDirectory.appendingPathComponent(Constants.sharedRealmUrl)
-            config.fileURL = sharedRealmURL
-        }
-
-        Realm.Configuration.defaultConfiguration = config
     }
 
 }

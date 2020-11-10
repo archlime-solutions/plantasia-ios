@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class PhotoGalleryViewModel: BaseViewModel {
 
@@ -22,41 +22,40 @@ class PhotoGalleryViewModel: BaseViewModel {
     var photos: [PlantPhoto]
     var selectedPlantPhoto: PlantPhoto?
     var selectedImage: UIImage?
-    var plant: Plant?
+    var plant: Plant
     private var plantId: Int?
+    private let plantPhotosService = PlantPhotosService()
 
     // MARK: - Lifecycle
-    init(plant: Plant?, photos: [PlantPhoto]) {
+    init(plant: Plant, photos: [PlantPhoto]) {
         self.plant = plant
-        self.plantName = plant?.name
-        self.plantId = plant?.id
+        self.plantName = plant.name
+        self.plantId = plant.id
         self.photos = photos
-        if plantId != nil {
-            getPlantPhotos()
-        }
+        getPlantPhotos()
     }
 
     // MARK: - Internal
     func movePhoto(_ photo: PlantPhoto, fromPosition: Int, toPosition: Int) {
-        photos.remove(at: fromPosition)
-        photos.insert(photo, at: toPosition)
+        guard let plantId = plantId else { return }
+//        photos.remove(at: fromPosition)
+//        photos.insert(photo, at: toPosition)
 
-        if let realm = try? Realm() {
-            for (index, photo) in photos.enumerated() {
-                try? realm.write {
-                    photo.index = index
-                }
-            }
+        do {
+            photos = try plantPhotosService.move(photo, fromPosition: fromPosition, toPosition: toPosition, plantId: plantId)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     func getPlantPhotos() {
-        if let realm = try? Realm(),
-            let photos = realm.object(ofType: Plant.self, forPrimaryKey: plantId)?.photos.sorted(by: { $0.index < $1.index }) {
-            self.photos = photos
+        guard let plantId = plantId else { return }
+        do {
+            try self.photos = plantPhotosService.getPhotosForPlant(withId: plantId)
             event.value = .didLoadPlantPhotos
-        } else {
-            error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
+            self.error.value = GeneralError(title: "Could not load your photos", message: "Please try again.")
         }
     }
 

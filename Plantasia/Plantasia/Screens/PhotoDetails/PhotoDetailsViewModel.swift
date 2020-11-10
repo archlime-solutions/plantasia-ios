@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class PhotoDetailsViewModel: BaseViewModel {
 
@@ -26,6 +26,7 @@ class PhotoDetailsViewModel: BaseViewModel {
     private let plant: Plant?
     private let index: Int
     private let editedPlantPhoto: PlantPhoto?
+    private let plantPhotosService = PlantPhotosService()
 
     // MARK: - Lifecycle
     init(plant: Plant?, editedPlantPhoto: PlantPhoto?, image: UIImage?, index: Int) {
@@ -52,23 +53,20 @@ class PhotoDetailsViewModel: BaseViewModel {
 
     // MARK: - Private
     private func createPlantPhoto() {
-        if let realm = try? Realm(), let plant = plant, let image = plantImage.value {
-            try? realm.write {
-                let plantPhoto = PlantPhoto(image: image)
-                plantPhoto.index = index
-                plantPhoto.descr = self.description.value
-                realm.add(plantPhoto)
-                plant.photos.append(plantPhoto)
-                realm.add(plant, update: .modified)
-            }
+        guard let plant = plant, let image = plantImage.value else { return }
+        do {
+            try plantPhotosService.createPlantPhoto(index: index, image: image, description: description.value, forPlant: plant)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     private func updatePlantPhoto() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                editedPlantPhoto?.descr = description.value
-            }
+        guard let editedPlantPhoto = editedPlantPhoto else { return }
+        do {
+            try plantPhotosService.update(editedPlantPhoto, newDescription: description.value)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 

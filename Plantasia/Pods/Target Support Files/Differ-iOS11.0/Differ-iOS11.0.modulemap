@@ -1,6 +1,0 @@
-framework module Differ {
-  umbrella header "Differ-iOS11.0-umbrella.h"
-
-  export *
-  module * { export * }
-}

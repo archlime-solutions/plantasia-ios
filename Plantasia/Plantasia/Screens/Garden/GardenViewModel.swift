@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class GardenViewModel: BaseViewModel, EventTransmitter {
 
@@ -47,19 +47,17 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             plants = try plantsService.getSortedPlants()
             event.value = .didLoadPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
             self.error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
         }
     }
 
     func movePlant(_ plant: Plant, fromPosition: Int, toPosition: Int) {
         do {
-            try plantsService.movePlant(fromPosition: fromPosition, toPosition: toPosition)
-            plants.remove(at: fromPosition)
-            plants.insert(plant, at: toPosition)
-        } catch {
-            //TODO: log error
+            plants = try plantsService.move(plant, fromPosition: fromPosition, toPosition: toPosition)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -67,8 +65,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             try plantsService.waterAllPlants()
             event.value = .didWaterPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -76,8 +74,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             try plantsService.waterDehydratedPlants()
             event.value = .didWaterPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -85,8 +83,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             try plantsService.fertilizeAllPlants()
             event.value = .didFertilizePlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -94,8 +92,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             try plantsService.fertilizeUnfertilizedPlants()
             event.value = .didFertilizePlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -103,8 +101,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             plants = try plantsService.sortByHydration()
             event.value = .didLoadPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -113,8 +111,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             plants = try plantsService.sortByFertilization()
             event.value = .didLoadPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
@@ -122,8 +120,8 @@ class GardenViewModel: BaseViewModel, EventTransmitter {
         do {
             plants = try plantsService.sortByOwnedSince()
             event.value = .didLoadPlants
-        } catch {
-            //TODO: log error
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
