@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-gm-e1l">
-                                <rect key="frame" x="20" y="64" width="280" height="444"/>
+                                <rect key="frame" x="20" y="64" width="280" height="464"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MQj-2F-g1L">
                                     <size key="itemSize" width="80" height="80"/>
@@ -95,7 +95,7 @@
                         <constraints>
                             <constraint firstItem="Ccn-49-evf" firstAttribute="top" secondItem="LDy-ih-0nr" secondAttribute="top" constant="20" id="5VS-93-oJf"/>
                             <constraint firstItem="LDy-ih-0nr" firstAttribute="trailing" secondItem="pJS-gm-e1l" secondAttribute="trailing" constant="20" id="EOH-8f-qbu"/>
-                            <constraint firstItem="LDy-ih-0nr" firstAttribute="bottom" secondItem="pJS-gm-e1l" secondAttribute="bottom" constant="20" id="Prb-TO-xwi"/>
+                            <constraint firstAttribute="bottom" secondItem="pJS-gm-e1l" secondAttribute="bottom" id="Prb-TO-xwi"/>
                             <constraint firstItem="pJS-gm-e1l" firstAttribute="leading" secondItem="LDy-ih-0nr" secondAttribute="leading" constant="20" id="abl-Qm-BkP"/>
                             <constraint firstItem="pJS-gm-e1l" firstAttribute="top" secondItem="LDy-ih-0nr" secondAttribute="top" constant="20" id="bjh-1r-pG9"/>
                             <constraint firstAttribute="trailing" secondItem="Ccn-49-evf" secondAttribute="trailing" constant="20" id="frp-1d-eh2"/>

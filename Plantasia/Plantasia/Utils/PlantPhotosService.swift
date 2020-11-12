@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import FirebaseAnalytics
 
 class PlantPhotosService {
 
@@ -19,6 +20,7 @@ class PlantPhotosService {
         let realm = try Realm()
         try realm.write {
             plantPhoto.descr = newDescription
+            Analytics.logEvent("update_plant_photo", parameters: nil)
         }
     }
 
@@ -38,6 +40,7 @@ class PlantPhotosService {
             realm.add(plantPhoto)
             plant.photos.append(plantPhoto)
             realm.add(plant, update: .modified)
+            Analytics.logEvent("add_plant_photo", parameters: nil)
         }
     }
 

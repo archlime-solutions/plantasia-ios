@@ -19,6 +19,14 @@ class PlantsService {
         return Array(realm.objects(Plant.self).sorted(by: { $0.index < $1.index }))
     }
 
+    /// Returns all plants from the DB.
+    /// - Returns: all plants from the DB.
+    /// - Throws: db error.
+    func getPlants() throws -> [Plant] {
+        let realm = try Realm()
+        return Array(realm.objects(Plant.self))
+    }
+
     /// Checks if plants exist in the DB.
     /// - Returns: the result of the check.
     func plantsExist() -> Bool {
@@ -29,26 +37,23 @@ class PlantsService {
     }
 
     ///
-    /// - Returns: Returns the number of days until any of the stored plants requires attention (watering or fertilizing)
-    func getPlantsAttentionRemainingDays() -> Int {
-        if let realm = try? Realm() {
-            let plants = Array(realm.objects(Plant.self))
-            if !plants.isEmpty {
-                var minNumberOfDays = Int.max
-                for plant in plants {
-                    let wateringRemainingDays = plant.getWateringRemainingDays()
-                    let fertilizingRemainingDays = plant.getFertilizingRemainingDays()
-                    if wateringRemainingDays < minNumberOfDays {
-                        minNumberOfDays = wateringRemainingDays
-                    }
-                    if fertilizingRemainingDays < minNumberOfDays {
-                        minNumberOfDays = fertilizingRemainingDays
-                    }
-                }
-                return minNumberOfDays
+    /// - Returns: Returns a set containing the number of days until all of the stored plants require attention (watering or fertilizing).
+    func getPlantsAttentionRemainingDays() throws -> Set<Int> {
+        var result = Set<Int>()
+
+        for plant in try getPlants() {
+            var minNumberOfDays = Int.max
+            let wateringRemainingDays = plant.getWateringRemainingDays()
+            let fertilizingRemainingDays = plant.getFertilizingRemainingDays()
+            if wateringRemainingDays < minNumberOfDays {
+                minNumberOfDays = wateringRemainingDays
             }
+            if fertilizingRemainingDays < minNumberOfDays {
+                minNumberOfDays = fertilizingRemainingDays
+            }
+            result.insert(minNumberOfDays)
         }
-        return 0
+        return result
     }
 
     /// Marks the plants which require attention as watered and fertilized.
@@ -138,6 +143,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             plant.water()
+            Analytics.logEvent("water_plant", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -148,6 +154,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             try getSortedPlants().forEach { $0.water() }
+            Analytics.logEvent("water_all_plants", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -158,6 +165,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             try getSortedPlants().filter { $0.requiresWatering() }.forEach { $0.water() }
+            Analytics.logEvent("water_dehydrated_plants", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -169,6 +177,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             plant.fertilize()
+            Analytics.logEvent("fertilize_plant", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -179,6 +188,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             try getSortedPlants().forEach { $0.fertilize() }
+            Analytics.logEvent("fertilize_all_plants", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -189,6 +199,7 @@ class PlantsService {
         let realm = try Realm()
         try realm.write {
             try getSortedPlants().filter { $0.requiresFertilizing() }.forEach { $0.fertilize() }
+            Analytics.logEvent("fertilize_unfertilized_plants", parameters: nil)
             PushNotificationService.shared.scheduleNotifications()
         }
     }
@@ -201,8 +212,9 @@ class PlantsService {
         try realm.write {
             plant.index = realm.objects(Plant.self).count
             realm.add(plant)
+            Analytics.logEvent("add_plant", parameters: nil)
+            PushNotificationService.shared.scheduleNotifications()
         }
-        PushNotificationService.shared.scheduleNotifications()
     }
 
     /// Deletes a plant from the db.
@@ -213,6 +225,7 @@ class PlantsService {
         try realm.write {
             realm.delete(plant)
             Analytics.logEvent("delete_plant", parameters: nil)
+            PushNotificationService.shared.scheduleNotifications()
         }
     }
 
@@ -242,8 +255,10 @@ class PlantsService {
             plant.fertilizingFrequencyDays.value = fertilizingFrequencyDays
             plant.setImage(image)
             plant.ownedSinceDate = ownedSinceDate
+            Analytics.logEvent("update_plant", parameters: nil)
+            PushNotificationService.shared.scheduleNotifications()
         }
-        PushNotificationService.shared.scheduleNotifications()
+
     }
 
 }

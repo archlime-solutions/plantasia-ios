@@ -124,6 +124,9 @@ class SettingsViewController: BaseViewController, AlertPresenter {
         timePicker.datePickerMode = .time
         timePicker.setDate(UserDefaults.standard.getRemindersTime(), animated: true)
         timePicker.backgroundColor = .whiteFFFFFF
+        if #available(iOS 13.4, *) {
+            timePicker.preferredDatePickerStyle = .wheels
+        }
         let timePickerToolbar = UIToolbar()
         timePickerToolbar.barTintColor = .whiteFFFFFF
         timePickerToolbar.tintColor = .black232323

@@ -9,6 +9,7 @@
 import UIKit
 import Messages
 import FirebaseCrashlytics
+import FirebaseAnalytics
 
 class PlantsViewController: MSMessagesAppViewController {
 
@@ -22,6 +23,8 @@ class PlantsViewController: MSMessagesAppViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        Analytics.logEvent("load_imessage_extension", parameters: nil)
+        plantsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
         setupBindings()
         viewModel.loadPlants()
     }
@@ -99,6 +102,8 @@ extension PlantsViewController: UICollectionViewDelegate, UICollectionViewDataSo
         conversation.insert(createMessage(with: viewModel.plants[indexPath.row])) { error in
             if let error = error {
                 Crashlytics.crashlytics().record(error: error)
+            } else {
+                Analytics.logEvent("share_imessage_plant", parameters: nil)
             }
         }
     }

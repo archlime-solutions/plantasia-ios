@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = PushNotificationService.shared
         UIApplication.shared.applicationIconBadgeNumber = 0
         FirebaseApp.configure()
+        Analytics.logEvent("load_app", parameters: nil)
         return true
     }
 
