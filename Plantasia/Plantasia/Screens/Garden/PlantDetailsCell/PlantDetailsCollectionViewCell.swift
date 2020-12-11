@@ -10,6 +10,7 @@ import UIKit
 
 class PlantDetailsCollectionViewCell: UICollectionViewCell {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var shadowContainerView: UIView!
     @IBOutlet weak var roundedContainerView: UIView!
     @IBOutlet weak var plantImageView: UIImageView!
@@ -18,17 +19,20 @@ class PlantDetailsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var wateringLabel: UILabel!
     @IBOutlet weak var fertilizingLabel: UILabel!
 
+    // MARK: - Properties
     var viewModel: PlantDetailsCollectionViewCellViewModel! {
         didSet {
             configurePlantDetails()
         }
     }
 
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
     }
 
+    // MARK: - Private
     private func configurePlantDetails() {
         let plant = viewModel.plant
         nameLabel.text = plant.name

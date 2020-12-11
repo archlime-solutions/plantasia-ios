@@ -17,7 +17,7 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     var pickImageCallback: ((UIImage) -> Void)?
 
     // MARK: - Media picking
-    func pickImage(_ viewController: UIViewController,
+    func pickImage(_ viewController: UIViewController, view: UIView,
                    _ callback: @escaping ((UIImage) -> Void)) {
         pickImageCallback = callback
         self.viewController = viewController
@@ -41,7 +41,10 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
-        alert.popoverPresentationController?.sourceView = self.viewController?.view
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.permittedArrowDirections = .any
+        alert.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+
         viewController.present(alert, animated: true, completion: nil)
         self.alert = alert
     }
@@ -50,6 +53,7 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         alert = nil
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.sourceType = .camera
+            picker.allowsEditing = true
             viewController?.present(picker, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Warning",
@@ -68,6 +72,7 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     func openGallery() {
         alert = nil
         picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
         viewController?.present(picker,
                                 animated: true,
                                 completion: nil)
@@ -80,7 +85,7 @@ class MediaPicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
-        guard let image = info[.originalImage] as? UIImage else {
+        guard let image = info[.editedImage] as? UIImage else {
             return
         }
         pickImageCallback?(image)

@@ -14,6 +14,7 @@ protocol PlantPhotoGalleryCellDelegate: class {
 
 class PlantPhotoGalleryCell: UICollectionViewCell {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var shadowContainerView: UIView!
     @IBOutlet weak var roundedContainerView: UIView!
     @IBOutlet weak var gradientView: UIView!
@@ -21,6 +22,7 @@ class PlantPhotoGalleryCell: UICollectionViewCell {
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
 
+    // MARK: - Properties
     var viewModel: PlantPhotoGalleryCellViewModel! {
         didSet {
             configurePlantDetails()
@@ -28,15 +30,18 @@ class PlantPhotoGalleryCell: UICollectionViewCell {
     }
     weak var delegate: PlantPhotoGalleryCellDelegate?
 
+    // MARK: - Overrides
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
     }
 
+    // MARK: - IBActions
     @IBAction func deleteButtonPressed(_ sender: Any) {
         delegate?.plantPhotoGalleryCellDidPressDelete(index: viewModel.index)
     }
 
+    // MARK: - Private
     private func configurePlantDetails() {
         plantImageView.image = viewModel.plantPhoto.getImage()
         creationDateLabel.text = viewModel.plantPhoto.creationDate?.toShortMonthDateString()

@@ -7,8 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A487FB8AFB47B9AE8FD123C /* Pods_Plantasia_iMessageExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492063B62A7109EF39DC7785 /* Pods_Plantasia_iMessageExtension.framework */; };
 		53EF422950E07B0B8837D959 /* Pods_Plantasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */; };
+		AB12B0C22555AFC500103E77 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB12B0C12555AFC500103E77 /* Constants.swift */; };
+		AB12B0C52555B08600103E77 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB12B0C12555AFC500103E77 /* Constants.swift */; };
 		AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */; };
+		AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFD1332559A4DC00A71929 /* PlantsService.swift */; };
+		AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
+		AB239D13255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */; };
+		AB239D14255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */; };
+		AB239D75255A984200E9D2D7 /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB748C0D2454BA740049966B /* GeneralError.swift */; };
+		AB239D79255AA4BF00E9D2D7 /* PlantPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */; };
+		AB239D7F255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */; };
+		AB239D80255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */; };
+		AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */; };
+		AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */; };
+		AB335FC8255954D200C770F8 /* PlantCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */; };
+		AB335FCB255954D500C770F8 /* PlantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB12B0CA2555B12100103E77 /* PlantCollectionViewCell.swift */; };
+		AB335FD92559572100C770F8 /* PlantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB335FD0255956AA00C770F8 /* PlantsViewModel.swift */; };
+		AB335FF32559620E00C770F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0E24531553001849FD /* Assets.xcassets */; };
 		AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D209A24557945001C5103 /* GardenViewModel.swift */; };
 		AB4B069F2455BBD20058174D /* AddPlantBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */; };
 		AB4B06A12455BBDF0058174D /* AddPlantBarButtonItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */; };
@@ -39,11 +56,22 @@
 		AB9017842458723E0031369C /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9017832458723E0031369C /* UserDefaultsExtensions.swift */; };
 		AB901786245872E90031369C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901785245872E90031369C /* DateExtensions.swift */; };
 		AB901788245947BC0031369C /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901787245947BC0031369C /* PushNotificationService.swift */; };
+		ABA2834D2555A2C5006719B6 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2834C2555A2C5006719B6 /* Messages.framework */; };
+		ABA283502555A2C5006719B6 /* PlantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA2834F2555A2C5006719B6 /* PlantsViewController.swift */; };
+		ABA283532555A2C5006719B6 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA283512555A2C5006719B6 /* MainInterface.storyboard */; };
+		ABA283552555A2C7006719B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA283542555A2C7006719B6 /* Assets.xcassets */; };
+		ABA283592555A2C7006719B6 /* Plantasia iMessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ABA2834B2555A2C5006719B6 /* Plantasia iMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ABA283692555A584006719B6 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB901785245872E90031369C /* DateExtensions.swift */; };
+		ABA283862555A857006719B6 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C94B2454AC1900A7DEBA /* Plant.swift */; };
+		ABA283892555A864006719B6 /* PlantPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C2C62245AAB300032233F /* PlantPhoto.swift */; };
+		ABA2838C2555A872006719B6 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536ECA2455CF0A00B942B9 /* UIImageExtensions.swift */; };
+		ABA283912555A96B006719B6 /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9017832458723E0031369C /* UserDefaultsExtensions.swift */; };
 		ABA8119224531D98006369C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA8119124531D98006369C1 /* BaseViewController.swift */; };
 		ABB8C94A2454A88000A7DEBA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C9492454A88000A7DEBA /* CustomTextField.swift */; };
 		ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8C94B2454AC1900A7DEBA /* Plant.swift */; };
 		ABBF7741245573EC0075133D /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF7740245573EC0075133D /* BaseViewModel.swift */; };
 		ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBF77422455740C0075133D /* EventTransmitter.swift */; };
+		ABDFD1342559A4DD00A71929 /* PlantsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFD1332559A4DC00A71929 /* PlantsService.swift */; };
 		ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0524531551001849FD /* AppDelegate.swift */; };
 		ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8CA0924531551001849FD /* LoadingViewController.swift */; };
 		ABE8CA0D24531551001849FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA0B24531551001849FD /* Main.storyboard */; };
@@ -51,10 +79,45 @@
 		ABE8CA1224531553001849FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE8CA1024531553001849FD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		ABA283572555A2C7006719B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABE8C9FA24531551001849FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABA2834A2555A2C5006719B6;
+			remoteInfo = iMessageExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ABA2835A2555A2C7006719B6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				ABA283592555A2C7006719B6 /* Plantasia iMessageExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.release.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.release.xcconfig"; sourceTree = "<group>"; };
+		492063B62A7109EF39DC7785 /* Pods_Plantasia_iMessageExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plantasia_iMessageExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia/Pods-Plantasia.debug.xcconfig"; sourceTree = "<group>"; };
+		9DD00D28FE75B41AA98B3000 /* Pods-Plantasia iMessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia iMessageExtension.debug.xcconfig"; path = "Target Support Files/Pods-Plantasia iMessageExtension/Pods-Plantasia iMessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		AB12B0C12555AFC500103E77 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AB12B0CA2555B12100103E77 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotosService.swift; sourceTree = "<group>"; };
+		AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConfigurator.swift; sourceTree = "<group>"; };
+		AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
+		AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		AB335FD0255956AA00C770F8 /* PlantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsViewModel.swift; sourceTree = "<group>"; };
 		AB3D209A24557945001C5103 /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
 		AB4B069E2455BBD20058174D /* AddPlantBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantBarButtonItemView.swift; sourceTree = "<group>"; };
 		AB4B06A02455BBDF0058174D /* AddPlantBarButtonItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlantBarButtonItemView.xib; sourceTree = "<group>"; };
@@ -85,11 +148,20 @@
 		AB9017832458723E0031369C /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		AB901785245872E90031369C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		AB901787245947BC0031369C /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
+		ABA2834B2555A2C5006719B6 /* Plantasia iMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Plantasia iMessageExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA2834C2555A2C5006719B6 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		ABA2834F2555A2C5006719B6 /* PlantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsViewController.swift; sourceTree = "<group>"; };
+		ABA283522555A2C5006719B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		ABA283542555A2C7006719B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABA283562555A2C7006719B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABA283602555A4F4006719B6 /* Plantasia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plantasia.entitlements; sourceTree = "<group>"; };
+		ABA283632555A4FC006719B6 /* iMessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iMessageExtension.entitlements; sourceTree = "<group>"; };
 		ABA8119124531D98006369C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		ABB8C9492454A88000A7DEBA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		ABB8C94B2454AC1900A7DEBA /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		ABBF7740245573EC0075133D /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		ABBF77422455740C0075133D /* EventTransmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTransmitter.swift; sourceTree = "<group>"; };
+		ABDFD1332559A4DC00A71929 /* PlantsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsService.swift; sourceTree = "<group>"; };
 		ABE8CA0224531551001849FD /* Plantasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plantasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE8CA0524531551001849FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABE8CA0924531551001849FD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -97,10 +169,20 @@
 		ABE8CA0E24531553001849FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABE8CA1124531553001849FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABE8CA1324531553001849FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFED5B684912FAFF081F7EE4 /* Pods-Plantasia iMessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plantasia iMessageExtension.release.xcconfig"; path = "Target Support Files/Pods-Plantasia iMessageExtension/Pods-Plantasia iMessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plantasia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		ABA283482555A2C5006719B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA2834D2555A2C5006719B6 /* Messages.framework in Frameworks */,
+				3A487FB8AFB47B9AE8FD123C /* Pods_Plantasia_iMessageExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABE8C9FF24531551001849FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,8 +199,47 @@
 			children = (
 				8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */,
 				0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */,
+				9DD00D28FE75B41AA98B3000 /* Pods-Plantasia iMessageExtension.debug.xcconfig */,
+				BFED5B684912FAFF081F7EE4 /* Pods-Plantasia iMessageExtension.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AB12B0C82555B10200103E77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB335FD4255956AE00C770F8 /* Screens */,
+				ABA283512555A2C5006719B6 /* MainInterface.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AB12B0C92555B11300103E77 /* PlantCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AB12B0CA2555B12100103E77 /* PlantCollectionViewCell.swift */,
+				AB335FC4255954D000C770F8 /* PlantCollectionViewCellViewModel.swift */,
+			);
+			path = PlantCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		AB2E6BAF2552F0F400D2A0EF /* PhotoDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E6BB02552F10700D2A0EF /* PhotoDetailsViewController.swift */,
+				AB2E6BB32552F11100D2A0EF /* PhotoDetailsViewModel.swift */,
+			);
+			path = PhotoDetails;
+			sourceTree = "<group>";
+		};
+		AB335FD4255956AE00C770F8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				AB12B0C92555B11300103E77 /* PlantCollectionViewCell */,
+				ABA2834F2555A2C5006719B6 /* PlantsViewController.swift */,
+				AB335FD0255956AA00C770F8 /* PlantsViewModel.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		AB3D209C24557AA5001C5103 /* Loading */ = {
@@ -214,6 +335,17 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		ABA2834E2555A2C5006719B6 /* iMessageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				AB12B0C82555B10200103E77 /* Views */,
+				ABA283632555A4FC006719B6 /* iMessageExtension.entitlements */,
+				ABA283542555A2C7006719B6 /* Assets.xcassets */,
+				ABA283562555A2C7006719B6 /* Info.plist */,
+			);
+			path = iMessageExtension;
+			sourceTree = "<group>";
+		};
 		ABBF773F2455726E0075133D /* Garden */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE8CA0424531551001849FD /* Plantasia */,
+				ABA2834E2555A2C5006719B6 /* iMessageExtension */,
 				ABE8CA0324531551001849FD /* Products */,
 				A67524212CC16FA52AF4731F /* Pods */,
 				EE605B6E8F03911EFBB7896C /* Frameworks */,
@@ -240,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE8CA0224531551001849FD /* Plantasia.app */,
+				ABA2834B2555A2C5006719B6 /* Plantasia iMessageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,6 +381,8 @@
 		ABE8CA0424531551001849FD /* Plantasia */ = {
 			isa = PBXGroup;
 			children = (
+				AB239D12255A8A4000E9D2D7 /* GoogleService-Info.plist */,
+				ABA283602555A4F4006719B6 /* Plantasia.entitlements */,
 				ABE8CA1A245315BD001849FD /* Models */,
 				ABE8CA1B2453164F001849FD /* Screens */,
 				ABE8CA1C24531657001849FD /* Resources */,
@@ -274,6 +410,7 @@
 				AB63DD302454639700EEAE2F /* AddPlant */,
 				AB536ECC2456C9D100B942B9 /* PlantDetails */,
 				AB6C2C58245AA42D0032233F /* PhotoGallery */,
+				AB2E6BAF2552F0F400D2A0EF /* PhotoDetails */,
 				AB90177C245869DE0031369C /* Settings */,
 				AB13E0E8245DE87C009C6263 /* TabBarViewController.swift */,
 			);
@@ -304,6 +441,10 @@
 				AB63DD33245467D500EEAE2F /* MediaPicker.swift */,
 				AB901787245947BC0031369C /* PushNotificationService.swift */,
 				AB63DD2A24544DA500EEAE2F /* SegueHandler.swift */,
+				AB12B0C12555AFC500103E77 /* Constants.swift */,
+				ABDFD1332559A4DC00A71929 /* PlantsService.swift */,
+				AB239D78255AA4BF00E9D2D7 /* PlantPhotosService.swift */,
+				AB239D7E255AC0BF00E9D2D7 /* DatabaseConfigurator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -312,6 +453,8 @@
 			isa = PBXGroup;
 			children = (
 				D635DDCA7B7EFB17AA09CB08 /* Pods_Plantasia.framework */,
+				ABA2834C2555A2C5006719B6 /* Messages.framework */,
+				492063B62A7109EF39DC7785 /* Pods_Plantasia_iMessageExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -319,6 +462,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		ABA2834A2555A2C5006719B6 /* Plantasia iMessageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA2835D2555A2C7006719B6 /* Build configuration list for PBXNativeTarget "Plantasia iMessageExtension" */;
+			buildPhases = (
+				7C2C2CD69C5EB9F2E6B042DA /* [CP] Check Pods Manifest.lock */,
+				ABA283472555A2C5006719B6 /* Sources */,
+				ABA283482555A2C5006719B6 /* Frameworks */,
+				ABA283492555A2C5006719B6 /* Resources */,
+				ABDFD1302559A07200A71929 /* Swiftlint Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Plantasia iMessageExtension";
+			productName = iMessageExtension;
+			productReference = ABA2834B2555A2C5006719B6 /* Plantasia iMessageExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
+		};
 		ABE8CA0124531551001849FD /* Plantasia */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABE8CA1624531553001849FD /* Build configuration list for PBXNativeTarget "Plantasia" */;
@@ -329,10 +491,13 @@
 				ABE8CA0024531551001849FD /* Resources */,
 				AB3EB61224531B1800203203 /* Swiftlint Run Script */,
 				49D395D75EB99824D898B8D0 /* [CP] Embed Pods Frameworks */,
+				ABA2835A2555A2C7006719B6 /* Embed App Extensions */,
+				AB239D5B255A8E0600E9D2D7 /* Crashlytics Run Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ABA283582555A2C7006719B6 /* PBXTargetDependency */,
 			);
 			name = Plantasia;
 			productName = Plantasia;
@@ -345,10 +510,13 @@
 		ABE8C9FA24531551001849FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "archlime solutions";
 				TargetAttributes = {
+					ABA2834A2555A2C5006719B6 = {
+						CreatedOnToolsVersion = 12.1;
+					};
 					ABE8CA0124531551001849FD = {
 						CreatedOnToolsVersion = 11.4;
 					};
@@ -368,11 +536,23 @@
 			projectRoot = "";
 			targets = (
 				ABE8CA0124531551001849FD /* Plantasia */,
+				ABA2834A2555A2C5006719B6 /* Plantasia iMessageExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		ABA283492555A2C5006719B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABA283552555A2C7006719B6 /* Assets.xcassets in Resources */,
+				AB239D14255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */,
+				AB335FF32559620E00C770F8 /* Assets.xcassets in Resources */,
+				ABA283532555A2C5006719B6 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABE8CA0024531551001849FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +563,7 @@
 				AB4B06A12455BBDF0058174D /* AddPlantBarButtonItemView.xib in Resources */,
 				ABE8CA0F24531553001849FD /* Assets.xcassets in Resources */,
 				ABE8CA0D24531551001849FD /* Main.storyboard in Resources */,
+				AB239D13255A8A4000E9D2D7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +609,67 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7C2C2CD69C5EB9F2E6B042DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Plantasia iMessageExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB239D5B255A8E0600E9D2D7 /* Crashlytics Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Crashlytics Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		AB3EB61224531B1800203203 /* Swiftlint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		ABDFD1302559A07200A71929 /* Swiftlint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -449,11 +690,33 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		ABA283472555A2C5006719B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB239D0F255A878E00E9D2D7 /* PushNotificationService.swift in Sources */,
+				AB239D0C255A870300E9D2D7 /* PlantsService.swift in Sources */,
+				AB239D80255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */,
+				ABA283502555A2C5006719B6 /* PlantsViewController.swift in Sources */,
+				ABA283862555A857006719B6 /* Plant.swift in Sources */,
+				ABA283912555A96B006719B6 /* UserDefaultsExtensions.swift in Sources */,
+				AB335FC8255954D200C770F8 /* PlantCollectionViewCellViewModel.swift in Sources */,
+				AB335FCB255954D500C770F8 /* PlantCollectionViewCell.swift in Sources */,
+				ABA283892555A864006719B6 /* PlantPhoto.swift in Sources */,
+				AB12B0C52555B08600103E77 /* Constants.swift in Sources */,
+				ABA2838C2555A872006719B6 /* UIImageExtensions.swift in Sources */,
+				AB335FD92559572100C770F8 /* PlantsViewModel.swift in Sources */,
+				ABA283692555A584006719B6 /* DateExtensions.swift in Sources */,
+				AB239D75255A984200E9D2D7 /* GeneralError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABE8C9FE24531551001849FD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AB901788245947BC0031369C /* PushNotificationService.swift in Sources */,
+				AB12B0C22555AFC500103E77 /* Constants.swift in Sources */,
 				ABBF77432455740C0075133D /* EventTransmitter.swift in Sources */,
 				AB63DD32245463AB00EEAE2F /* AddPlantViewModel.swift in Sources */,
 				ABB8C94C2454AC1900A7DEBA /* Plant.swift in Sources */,
@@ -469,7 +732,9 @@
 				AB63DD34245467D500EEAE2F /* MediaPicker.swift in Sources */,
 				AB4B06A62455BEF80058174D /* SortPlantsBarButtonItemView.swift in Sources */,
 				AB6C2C61245AA6AF0032233F /* PlantPhotoGalleryCellViewModel.swift in Sources */,
+				AB2E6BB42552F11100D2A0EF /* PhotoDetailsViewModel.swift in Sources */,
 				AB748C0E2454BA740049966B /* GeneralError.swift in Sources */,
+				ABDFD1342559A4DD00A71929 /* PlantsService.swift in Sources */,
 				AB3D209B24557945001C5103 /* GardenViewModel.swift in Sources */,
 				AB13E0E9245DE87C009C6263 /* TabBarViewController.swift in Sources */,
 				AB63DD2524544AFE00EEAE2F /* GardenViewController.swift in Sources */,
@@ -478,6 +743,8 @@
 				AB5DB8F72455B2DB00F751D4 /* PlantDetailsCollectionViewCellViewModel.swift in Sources */,
 				AB748C0C2454B9B60049966B /* AlertPresenter.swift in Sources */,
 				AB748C122454C21E0049966B /* UIViewExtensions.swift in Sources */,
+				AB239D7F255AC0BF00E9D2D7 /* DatabaseConfigurator.swift in Sources */,
+				AB239D79255AA4BF00E9D2D7 /* PlantPhotosService.swift in Sources */,
 				AB6C2C5A245AA4460032233F /* PhotoGalleryViewController.swift in Sources */,
 				ABE8CA0A24531551001849FD /* LoadingViewController.swift in Sources */,
 				AB5DB8F42455823600F751D4 /* PlantDetailsCollectionViewCell.swift in Sources */,
@@ -485,6 +752,7 @@
 				ABE8CA0624531551001849FD /* AppDelegate.swift in Sources */,
 				AB6C2C5C245AA44F0032233F /* PhotoGalleryViewModel.swift in Sources */,
 				AB63DD2F24545C7E00EEAE2F /* UIColorExtensions.swift in Sources */,
+				AB2E6BB12552F10700D2A0EF /* PhotoDetailsViewController.swift in Sources */,
 				AB6C2C5F245AA69B0032233F /* PlantPhotoGalleryCell.swift in Sources */,
 				AB90177E245869F00031369C /* SettingsViewController.swift in Sources */,
 				AB901780245870100031369C /* SettingsViewModel.swift in Sources */,
@@ -493,7 +761,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		ABA283582555A2C7006719B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABA2834A2555A2C5006719B6 /* Plantasia iMessageExtension */;
+			targetProxy = ABA283572555A2C7006719B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		ABA283512555A2C5006719B6 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABA283522555A2C5006719B6 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		ABE8CA0B24531551001849FD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -513,6 +797,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		ABA2835B2555A2C7006719B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DD00D28FE75B41AA98B3000 /* Pods-Plantasia iMessageExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = iMessageExtension/iMessageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B6W985PHBM;
+				INFOPLIST_FILE = iMessageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia.iMessageExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABA2835C2555A2C7006719B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFED5B684912FAFF081F7EE4 /* Pods-Plantasia iMessageExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = iMessageExtension/iMessageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B6W985PHBM;
+				INFOPLIST_FILE = iMessageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia.iMessageExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		ABE8CA1424531553001849FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -631,20 +967,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8624419AB94397A0F8D380B1 /* Pods-Plantasia.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plantasia/Plantasia.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -652,26 +993,40 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D215255879EAF1B3389B11C /* Pods-Plantasia.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plantasia/Plantasia.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.archlime-solutions.plantasia";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ABA2835D2555A2C7006719B6 /* Build configuration list for PBXNativeTarget "Plantasia iMessageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA2835B2555A2C7006719B6 /* Debug */,
+				ABA2835C2555A2C7006719B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ABE8C9FD24531551001849FD /* Build configuration list for PBXProject "Plantasia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

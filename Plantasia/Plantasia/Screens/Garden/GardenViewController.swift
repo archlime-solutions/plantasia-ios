@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import RealmSwift
 
 class GardenViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var emptyGardenContainerView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var filledGardenContainerView: UIView!
@@ -19,8 +19,10 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var fertilizeAllView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    // MARK: - Properties
     private let viewModel = GardenViewModel()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
@@ -42,14 +44,17 @@ class GardenViewController: BaseViewController, AlertPresenter {
         plusButton.layer.removeAllAnimations()
     }
 
+    // MARK: - IBActions
     @IBAction func plusButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: .presentAddPlant)
     }
 
+    // MARK: - Internal
     func loadPlants() {
         viewModel.loadPlants()
     }
 
+    // MARK: - Private
     private func setupBindings() {
         viewModel.event.observeNext { [weak self] event in
             guard let self = self else { return }
@@ -57,8 +62,13 @@ class GardenViewController: BaseViewController, AlertPresenter {
                 switch event {
                 case .didLoadPlants:
                     self.setupContainerViewsVisibility()
-                case .didWaterAllPlants, .didFertilizeAllPlants:
-                    self.collectionView.reloadData()
+                    self.displayWhatsNewAlert()
+                case .didWaterPlants:
+                    self.showAlert(title: "Your plants have been watered!")
+                    self.reloadCollectionViewAnimated()
+                case .didFertilizePlants:
+                    self.showAlert(title: "Your plants have been fertilized!")
+                    self.reloadCollectionViewAnimated()
                 }
             }
         }.dispose(in: bag)
@@ -74,14 +84,18 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @objc
     private func waterAllViewPressed() {
         waterAllView.flash()
-        let handler: () -> Void = {
+        let waterDehydratedHandler: () -> Void = {
+            self.viewModel.waterDehydratedPlants()
+        }
+        let waterAllHandler: () -> Void = {
             self.viewModel.waterAllPlants()
         }
-        showAlert(title: "Are you sure you want mark all plants as watered?",
-                  message: nil,
-                  buttonText: "Yes",
-                  buttonHandler: handler,
-                  showCancelButton: true)
+
+        showTwoActionsAlert(title: "Water Plants",
+                            firstButtonText: "Water dehydrated only",
+                            firstButtonHandler: waterDehydratedHandler,
+                            secondButtonText: "Water all",
+                            secondButtonHandler: waterAllHandler)
     }
 
     private func setupFertilizeAllView() {
@@ -94,14 +108,18 @@ class GardenViewController: BaseViewController, AlertPresenter {
     @objc
     private func fertilizeAllViewPressed() {
         fertilizeAllView.flash()
-        let handler: () -> Void = {
+        let fertilizeUnfertilizedHandler: () -> Void = {
+            self.viewModel.fertilizeUnfertilizedPlants()
+        }
+        let fertilizeAllHandler: () -> Void = {
             self.viewModel.fertilizeAllPlants()
         }
-        showAlert(title: "Are you sure you want to mark all plants as fertilized? ",
-                  message: nil,
-                  buttonText: "Yes",
-                  buttonHandler: handler,
-                  showCancelButton: true)
+
+        showTwoActionsAlert(title: "Fertilize Plants",
+                            firstButtonText: "Fertilize unfertilized only",
+                            firstButtonHandler: fertilizeUnfertilizedHandler,
+                            secondButtonText: "Fertilize all",
+                            secondButtonHandler: fertilizeAllHandler)
     }
 
     private func setupPlusButtonAnimation() {
@@ -146,7 +164,7 @@ class GardenViewController: BaseViewController, AlertPresenter {
             setupAddPlantBarButtonItem()
             setupSortPlantsBarButtonItem()
             collectionView.dragInteractionEnabled = true
-            collectionView.reloadData()
+            reloadCollectionViewAnimated()
         }
     }
 
@@ -155,6 +173,25 @@ class GardenViewController: BaseViewController, AlertPresenter {
         quickActionsContainerView.layer.shadowColor = UIColor.black.cgColor
         quickActionsContainerView.layer.shadowOpacity = 0.1
         quickActionsContainerView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+    }
+
+    private func reloadCollectionViewAnimated() {
+        UIView.transition(with: collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.collectionView.reloadData()
+        }, completion: nil)
+    }
+
+    private func displayWhatsNewAlert() {
+        if !UserDefaults.standard.didShowWhatsInV110() && !viewModel.plants.isEmpty {
+            showAlert(title: "Check out the new iMessage extension!",
+                           message: "Share your plants directly though iMessages. How cool is that? 🌼",
+                           buttonText: "Show me",
+                           buttonHandler: {
+                               UIApplication.shared.open(URL(string: "sms:")!, options: [:], completionHandler: nil)
+                           },
+                           showCancelButton: true)
+            UserDefaults.standard.setDidShowWhatsInV110()
+        }
     }
 
 }
@@ -185,79 +222,79 @@ extension GardenViewController: SegueHandler {
 extension GardenViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,
     UICollectionViewDragDelegate, UICollectionViewDropDelegate {
 
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return viewModel.plants.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.plants.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell =
+            collectionView.dequeueReusableCell(withReuseIdentifier: "PlantDetailsCollectionViewCell", for: indexPath) as? PlantDetailsCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.viewModel = PlantDetailsCollectionViewCellViewModel(plant: viewModel.plants[indexPath.row])
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 156, height: 200)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let item = viewModel.plants[indexPath.row]
+        let itemProvider = NSItemProvider(object: item)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = item
+        return [dragItem]
+    }
+
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath,
+            destinationIndexPath.row >= 0, coordinator.items.count == 1,
+            let item = coordinator.items.first,
+            let sourceIndexPath = item.sourceIndexPath,
+            let draggedPlant = item.dragItem.localObject as? Plant
+            else { return }
+
+        collectionView.performBatchUpdates({
+            self.viewModel.movePlant(draggedPlant, fromPosition: sourceIndexPath.row, toPosition: destinationIndexPath.row)
+            collectionView.deleteItems(at: [sourceIndexPath])
+            collectionView.insertItems(at: [destinationIndexPath])
+        })
+        coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        guard let destinationIndexPath = destinationIndexPath else {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
 
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell =
-                collectionView.dequeueReusableCell(withReuseIdentifier: "PlantDetailsCollectionViewCell", for: indexPath) as? PlantDetailsCollectionViewCell else {
-                    return UICollectionViewCell()
-            }
-            cell.viewModel = PlantDetailsCollectionViewCellViewModel(plant: viewModel.plants[indexPath.row])
-            return cell
+        if session.localDragSession != nil, destinationIndexPath.row >= 0 {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        } else {
+            return UICollectionViewDropProposal(operation: .forbidden)
         }
+    }
 
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 156, height: 200)
-        }
-
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                            minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 20
-        }
-
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                            minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 20
-        }
-
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        }
-
-        func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-            let item = viewModel.plants[indexPath.row]
-            let itemProvider = NSItemProvider(object: item)
-            let dragItem = UIDragItem(itemProvider: itemProvider)
-            dragItem.localObject = item
-            return [dragItem]
-        }
-
-        func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-            guard let destinationIndexPath = coordinator.destinationIndexPath,
-                destinationIndexPath.row >= 0, coordinator.items.count == 1,
-                let item = coordinator.items.first,
-                let sourceIndexPath = item.sourceIndexPath,
-                let draggedPlant = item.dragItem.localObject as? Plant
-                else { return }
-
-            collectionView.performBatchUpdates({
-                self.viewModel.movePlant(draggedPlant, fromPosition: sourceIndexPath.row, toPosition: destinationIndexPath.row)
-                collectionView.deleteItems(at: [sourceIndexPath])
-                collectionView.insertItems(at: [destinationIndexPath])
-            })
-            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
-        }
-
-        func collectionView(_ collectionView: UICollectionView,
-                            dropSessionDidUpdate session: UIDropSession,
-                            withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-            guard let destinationIndexPath = destinationIndexPath else {
-                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            }
-
-            if session.localDragSession != nil, destinationIndexPath.row >= 0 {
-                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            } else {
-                return UICollectionViewDropProposal(operation: .forbidden)
-            }
-        }
-
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            viewModel.selectedPlant = viewModel.plants[indexPath.row]
-            performSegue(withIdentifier: .pushPlantDetails)
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectedPlant = viewModel.plants[indexPath.row]
+        performSegue(withIdentifier: .pushPlantDetails)
+    }
 
 }
 
@@ -284,14 +321,15 @@ extension GardenViewController: SortPlantsBarButtonItemViewDelegate {
             self.viewModel.sortingCriteria = .fertilization
         }))
 
-        alert.addAction(UIAlertAction(title: "Date Added", style: .default, handler: { _ in
-            self.viewModel.sortingCriteria = .dateAdded
+        alert.addAction(UIAlertAction(title: "Owned Since", style: .default, handler: { _ in
+            self.viewModel.sortingCriteria = .ownedSince
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            print("User click Dismiss button")
-        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
 
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.permittedArrowDirections = .up
+        alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
         present(alert, animated: true, completion: nil)
     }
 

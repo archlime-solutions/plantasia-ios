@@ -12,6 +12,8 @@ import StoreKit
 
 class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var actionBarBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var actionBarTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var actionBarShadowContainerView: UIView!
@@ -30,10 +32,14 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     @IBOutlet weak var photoGalleryButton: UIButton!
     @IBOutlet weak var wateringPercentageStackView: UIStackView!
     @IBOutlet weak var fertilizingPercentageStackView: UIStackView!
+    @IBOutlet weak var ownedSinceStackView: UIStackView!
+    @IBOutlet weak var ownedSinceLabel: UILabel!
 
+    // MARK: - Properties
     var viewModel: PlantDetailsViewModel!
     private var gradientLayer: CAGradientLayer?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -59,6 +65,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         gradientLayer?.frame = imageTopGradientView.bounds
     }
 
+    // MARK: - IBActions
     @IBAction func waterButtonPressed(_ sender: Any) {
         viewModel.waterPlant()
         SKStoreReviewController.requestReview()
@@ -72,6 +79,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         performSegue(withIdentifier: .pushPhotoGallery)
     }
 
+    // MARK: - Private
     private func setupBindings() {
         viewModel.plant.observeNext { [weak self] _ in
             guard let self = self else { return }
@@ -108,6 +116,12 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
         imageView.image = plant.getImage()
         wateringPercentageLabel.text = "\(plant.getWateringPercentage())%"
         fertilizingPercentageLabel.text = "\(plant.getFertilizingPercentage())%"
+        if let ownedSinceDateString = plant.ownedSinceDate?.toShortMonthYearString() {
+            ownedSinceStackView.isHidden = false
+            ownedSinceLabel.text = "Owned since \(ownedSinceDateString)"
+        } else {
+            ownedSinceStackView.isHidden = true
+        }
     }
 
     private func setupWateringLabel() {
@@ -133,6 +147,7 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
     }
 
     private func setupUI() {
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 104, right: 0)
         actionBarRoundedContainerView.layer.cornerRadius = 10
         actionBarRoundedContainerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         setupActionBarShadowContainerView()
@@ -205,13 +220,13 @@ class PlantDetailsViewController: BaseViewController, AlertPresenter {
 
     private func hideActionBarView() {
         actionBarBottomConstraint.constant = -104
-        actionBarTopConstraint.constant = 104
+        actionBarTopConstraint.constant = 0
         view.layoutIfNeeded()
     }
 
     private func showActionBarView() {
         actionBarBottomConstraint.constant = 0
-        actionBarTopConstraint.constant = 0
+        actionBarTopConstraint.constant = 104
         view.layoutIfNeeded()
     }
 
@@ -244,7 +259,7 @@ extension PlantDetailsViewController: SegueHandler {
 
         case .pushPhotoGallery:
             guard let nextVC = segue.destination as? PhotoGalleryViewController else { return }
-            nextVC.viewModel = PhotoGalleryViewModel(plantName: viewModel.plant.value.name, photos: Array(viewModel.plant.value.photos))
+            nextVC.viewModel = PhotoGalleryViewModel(plant: viewModel.plant.value, photos: Array(viewModel.plant.value.photos))
             nextVC.delegate = self
         }
     }

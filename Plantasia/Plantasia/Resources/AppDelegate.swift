@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,25 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black232323]
-
-        setupRealmConfiguration()
+        DatabaseConfigurator.shared.start()
         UNUserNotificationCenter.current().delegate = PushNotificationService.shared
         UIApplication.shared.applicationIconBadgeNumber = 0
+        FirebaseApp.configure()
+        Analytics.logEvent("load_app", parameters: nil)
         return true
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        PushNotificationService.shared.scheduleNotifications()
-    }
-
-    /// Set the new schema version. This must be greater than the previously used version.
-    private func setupRealmConfiguration() {
-        let config = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: nil)
-
-        Realm.Configuration.defaultConfiguration = config
-        _ = try? Realm()
     }
 
 }

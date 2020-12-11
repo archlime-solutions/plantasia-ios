@@ -14,11 +14,14 @@ class SettingsViewModel: BaseViewModel, EventTransmitter {
         case didSetReminderTime
     }
 
+    // MARK: - Properties
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
 
+    // MARK: - Internal
     func setReminderTime(_ date: Date) {
         UserDefaults.standard.set(remindersTime: date)
+        PushNotificationService.shared.scheduleNotifications()
         event.value = .didSetReminderTime
     }
 

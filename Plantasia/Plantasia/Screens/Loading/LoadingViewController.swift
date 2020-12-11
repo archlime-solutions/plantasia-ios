@@ -10,6 +10,7 @@ import UIKit
 
 class LoadingViewController: BaseViewController, AlertPresenter {
 
+    // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {

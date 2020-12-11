@@ -7,7 +7,7 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
@@ -22,6 +22,7 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
         case fertilizing
     }
 
+    // MARK: - Properties
     var error = Observable<GeneralError?>(nil)
     var event = Observable<Event?>(nil)
     var isEditingExistingPlant: Bool {
@@ -31,17 +32,20 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
     }
     var name = Observable<String?>(nil)
     var description = Observable<String?>(nil)
-    var descriptionPlaceholder = "Description"
+    var descriptionPlaceholder = "Notes"
     var watering = Observable<Int>(2)
     var fertilizing = Observable<Int>(14)
+    var ownedSince = Observable<Date?>(nil)
     var currentPickerSelection: CurrentPickerSelection?
-    var pickerOptions: [Int] = Array(1...31)
+    var daysPickerOptions: [Int] = Array(1...31)
     var plantImage = Observable<UIImage?>(nil)
     var photos = [PlantPhoto]()
     var placeholderTextColor = UIColor.greyC4C4C4
     var inputTextColor = UIColor.black232323
     private var plant: Plant?
+    private var plantsService = PlantsService()
 
+    // MARK: - Lifecycle
     init(plant: Plant?) {
         self.plant = plant
         if let plant = plant {
@@ -49,10 +53,12 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
             description.value = plant.descr
             watering.value = plant.wateringFrequencyDays.value ?? 2
             fertilizing.value = plant.fertilizingFrequencyDays.value ?? 14
+            ownedSince.value = plant.ownedSinceDate
             plantImage.value = plant.getImage()
         }
     }
 
+    // MARK: - Internal
     func saveValidatedPlant() {
         if isInputDataComplete() {
             if isEditingExistingPlant {
@@ -66,7 +72,8 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
                                   image: plantImage.value,
                                   lastWateringDate: Date(),
                                   lastFertilizingDate: Date(),
-                                  photos: photos)
+                                  photos: photos,
+                                  ownedSinceDate: Date())
                 create(plant)
                 event.value = .didCreatePlant
             }
@@ -78,36 +85,35 @@ class AddPlantViewModel: BaseViewModel, EventTransmitter {
 
     func deletePlant() {
         guard let plant = plant else { return }
-        if let realm = try? Realm() {
-            try? realm.write {
-                realm.delete(plant)
-                self.event.value = .didRemovePlant
-            }
+        do {
+            try plantsService.delete(plant)
+            self.event.value = .didRemovePlant
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
-    func setPhotos(_ photos: [PlantPhoto]) {
-        self.photos = photos
-    }
-
+    // MARK: - Private
     private func create(_ plant: Plant) {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant.index = realm.objects(Plant.self).count
-                realm.add(plant)
-            }
+        do {
+            try plantsService.create(plant)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     private func updatePlant() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plant?.name = name.value
-                plant?.descr = description.value
-                plant?.wateringFrequencyDays.value = watering.value
-                plant?.fertilizingFrequencyDays.value = fertilizing.value
-                plant?.setImage(plantImage.value)
-            }
+        guard let plant = plant else { return }
+        do {
+            try plantsService.update(plant,
+                                     name: name.value,
+                                     descr: description.value,
+                                     wateringFrequencyDays: watering.value,
+                                     fertilizingFrequencyDays: fertilizing.value,
+                                     image: plantImage.value,
+                                     ownedSinceDate: ownedSince.value)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 

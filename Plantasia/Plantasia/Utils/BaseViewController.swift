@@ -10,8 +10,10 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    // MARK: - Properties
     private var viewModel: BaseViewModel!
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

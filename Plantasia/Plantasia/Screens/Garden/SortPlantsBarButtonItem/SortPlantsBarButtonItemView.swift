@@ -14,13 +14,16 @@ protocol SortPlantsBarButtonItemViewDelegate: class {
 
 class SortPlantsBarButtonItemView: UIView {
 
+    // MARK: - Properties
     weak var delegate: SortPlantsBarButtonItemViewDelegate?
 
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sortPlantsBarButtonItemViewPressed)))
     }
 
+    // MARK: - Private
     @objc
     private func sortPlantsBarButtonItemViewPressed() {
         flash()

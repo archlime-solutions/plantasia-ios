@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Plants View Controller-->
+        <scene sceneID="7MM-of-jgj">
+            <objects>
+                <viewController id="ObA-dk-sSI" customClass="PlantsViewController" customModule="Plantasia_iMessageExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zMn-AG-sqS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccn-49-evf">
+                                <rect key="frame" x="20" y="64" width="280" height="444"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GyO-74-x9O">
+                                        <rect key="frame" x="20" y="0.0" width="240" height="85"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your garden is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3q-ue-KGf">
+                                                <rect key="frame" x="2.5" y="0.0" width="235.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <color key="textColor" name="black-232323"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap here to launch Plantasia and add some plants 🌿" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZK-EW-anP">
+                                                <rect key="frame" x="0.0" y="49" width="240" height="36"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="textColor" name="black-232323"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="1Ky-t9-3xi" appends="YES" id="Cec-46-Q97"/>
+                                        </connections>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GyO-74-x9O" secondAttribute="trailing" constant="20" id="C9c-eg-MKi"/>
+                                    <constraint firstItem="GyO-74-x9O" firstAttribute="centerX" secondItem="Ccn-49-evf" secondAttribute="centerX" id="Dax-Xp-D8h"/>
+                                    <constraint firstItem="GyO-74-x9O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ccn-49-evf" secondAttribute="leading" constant="20" id="rCv-4x-Ms5"/>
+                                    <constraint firstItem="GyO-74-x9O" firstAttribute="top" secondItem="Ccn-49-evf" secondAttribute="top" id="sGW-D8-c62"/>
+                                </constraints>
+                            </view>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-gm-e1l">
+                                <rect key="frame" x="20" y="44" width="280" height="484"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MQj-2F-g1L">
+                                    <size key="itemSize" width="80" height="80"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlantCollectionViewCell" id="7Op-yw-U99" customClass="PlantCollectionViewCell" customModule="Plantasia_iMessageExtension" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OuB-TW-Uyq">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="udc-iJ-ZG9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="udc-iJ-ZG9" firstAttribute="leading" secondItem="OuB-TW-Uyq" secondAttribute="leading" id="DUm-ro-a83"/>
+                                                <constraint firstAttribute="bottom" secondItem="udc-iJ-ZG9" secondAttribute="bottom" id="Mip-Lr-4ky"/>
+                                                <constraint firstAttribute="trailing" secondItem="udc-iJ-ZG9" secondAttribute="trailing" id="ZcV-Fg-VDq"/>
+                                                <constraint firstItem="udc-iJ-ZG9" firstAttribute="top" secondItem="OuB-TW-Uyq" secondAttribute="top" id="gCa-VU-NYF"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="udc-iJ-ZG9" id="XDG-9c-d09"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ObA-dk-sSI" id="eL6-4P-FFO"/>
+                                    <outlet property="delegate" destination="ObA-dk-sSI" id="dzA-KQ-fs7"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LDy-ih-0nr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ccn-49-evf" firstAttribute="top" secondItem="LDy-ih-0nr" secondAttribute="top" constant="20" id="5VS-93-oJf"/>
+                            <constraint firstItem="LDy-ih-0nr" firstAttribute="trailing" secondItem="pJS-gm-e1l" secondAttribute="trailing" constant="20" id="EOH-8f-qbu"/>
+                            <constraint firstAttribute="bottom" secondItem="pJS-gm-e1l" secondAttribute="bottom" id="Prb-TO-xwi"/>
+                            <constraint firstItem="pJS-gm-e1l" firstAttribute="leading" secondItem="LDy-ih-0nr" secondAttribute="leading" constant="20" id="abl-Qm-BkP"/>
+                            <constraint firstItem="pJS-gm-e1l" firstAttribute="top" secondItem="LDy-ih-0nr" secondAttribute="top" id="bjh-1r-pG9"/>
+                            <constraint firstAttribute="trailing" secondItem="Ccn-49-evf" secondAttribute="trailing" constant="20" id="frp-1d-eh2"/>
+                            <constraint firstAttribute="bottom" secondItem="Ccn-49-evf" secondAttribute="bottom" constant="20" id="h2A-0L-2hx"/>
+                            <constraint firstItem="Ccn-49-evf" firstAttribute="leading" secondItem="LDy-ih-0nr" secondAttribute="leading" constant="20" id="k2H-ha-jij"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="320" height="528"/>
+                    <connections>
+                        <outlet property="emptyContainerView" destination="GyO-74-x9O" id="Ehf-mH-Tmb"/>
+                        <outlet property="plantsCollectionView" destination="pJS-gm-e1l" id="R3u-l8-rgA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Ky-t9-3xi">
+                    <connections>
+                        <action selector="emptyContainerViewPressed:" destination="ObA-dk-sSI" id="0ZE-vx-Eg2"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-233.33333333333334" y="52.901785714285715"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="black-232323">
+            <color red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

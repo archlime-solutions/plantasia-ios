@@ -10,11 +10,14 @@ import RealmSwift
 
 class PlantPhoto: Object {
 
+    // MARK: - Properties
     @objc dynamic var creationDate: Date?
     @objc dynamic var photoUUID: String?
     @objc dynamic var index: Int = 0
+    @objc dynamic var descr: String?
     private var image: UIImage?
 
+    // MARK: - Lifecycle
     convenience init (
         image: UIImage?
     ) {
@@ -23,10 +26,12 @@ class PlantPhoto: Object {
         setImage(image)
     }
 
+    // MARK: - Overrides
     override static func primaryKey() -> String? {
         return "photoUUID"
     }
 
+    // MARK: - Internal
     func getImage() -> UIImage? {
         if let image = image {
             return image
@@ -36,6 +41,7 @@ class PlantPhoto: Object {
         }
     }
 
+    // MARK: - Private
     private func loadImage() {
         guard let photoUUID = photoUUID,
             let filePath = imageFilePath(imageUUID: photoUUID),
@@ -64,6 +70,7 @@ class PlantPhoto: Object {
 
 }
 
+// MARK: - NSItemProviderWriting
 extension PlantPhoto: NSItemProviderWriting {
     static var writableTypeIdentifiersForItemProvider: [String] {
         return []

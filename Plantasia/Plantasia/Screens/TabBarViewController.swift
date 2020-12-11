@@ -11,6 +11,7 @@ import RAMAnimatedTabBarController
 
 class TabBarViewController: RAMAnimatedTabBarController {
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = UIColor.black232323

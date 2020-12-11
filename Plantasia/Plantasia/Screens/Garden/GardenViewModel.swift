@@ -7,115 +7,122 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class GardenViewModel: BaseViewModel, EventTransmitter {
 
     enum Event {
         case didLoadPlants
-        case didWaterAllPlants
-        case didFertilizeAllPlants
+        case didWaterPlants
+        case didFertilizePlants
     }
 
     enum SortingCriteria {
         case hydration
         case fertilization
-        case dateAdded
+        case ownedSince
     }
 
-    var error = Observable<GeneralError?>(nil)
-    var event = Observable<Event?>(nil)
+    // MARK: - Properties
+    let error = Observable<GeneralError?>(nil)
+    let event = Observable<Event?>(nil)
     var plants = [Plant]()
     var selectedPlant: Plant?
-
-    var sortingCriteria: SortingCriteria = .dateAdded {
+    var sortingCriteria: SortingCriteria = .ownedSince {
         didSet {
             switch sortingCriteria {
             case .hydration:
                 sortByHydration()
             case .fertilization:
                 sortByFertilization()
-            case .dateAdded:
-                sortByDateAdded()
+            case .ownedSince:
+                sortByOwnedSince()
             }
         }
     }
+    private var plantsService = PlantsService()
 
+    // MARK: - Internal
     func loadPlants() {
-        if let realm = try? Realm() {
-            plants = Array(realm.objects(Plant.self).sorted(by: { $0.index < $1.index }))
+        do {
+            plants = try plantsService.getSortedPlants()
             event.value = .didLoadPlants
-        } else {
-            error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
+            self.error.value = GeneralError(title: "Could not load your plants", message: "Please try restarting the application.")
         }
     }
 
     func movePlant(_ plant: Plant, fromPosition: Int, toPosition: Int) {
-        plants.remove(at: fromPosition)
-        plants.insert(plant, at: toPosition)
-
-        if let realm = try? Realm() {
-            for (index, plant) in plants.enumerated() {
-                try? realm.write {
-                    plant.index = index
-                }
-            }
+        do {
+            plants = try plantsService.move(plant, fromPosition: fromPosition, toPosition: toPosition)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     func waterAllPlants() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plants.forEach { $0.water() }
-                event.value = .didWaterAllPlants
-            }
+        do {
+            try plantsService.waterAllPlants()
+            event.value = .didWaterPlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
+        }
+    }
+
+    func waterDehydratedPlants() {
+        do {
+            try plantsService.waterDehydratedPlants()
+            event.value = .didWaterPlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     func fertilizeAllPlants() {
-        if let realm = try? Realm() {
-            try? realm.write {
-                plants.forEach { $0.fertilize() }
-                event.value = .didFertilizeAllPlants
-            }
+        do {
+            try plantsService.fertilizeAllPlants()
+            event.value = .didFertilizePlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
+        }
+    }
+
+    func fertilizeUnfertilizedPlants() {
+        do {
+            try plantsService.fertilizeUnfertilizedPlants()
+            event.value = .didFertilizePlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
     private func sortByHydration() {
-        plants = plants.sorted(by: { $0.getWateringPercentage() < $1.getWateringPercentage() })
-        if let realm = try? Realm() {
-            for (index, plant) in plants.enumerated() {
-                try? realm.write {
-                    plant.index = index
-                    event.value = .didFertilizeAllPlants
-                }
-            }
+        do {
+            plants = try plantsService.sortByHydration()
+            event.value = .didLoadPlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
-        event.value = .didLoadPlants
     }
 
+    // MARK: - Private
     private func sortByFertilization() {
-        plants = plants.sorted(by: { $0.getFertilizingPercentage() < $1.getFertilizingPercentage() })
-        if let realm = try? Realm() {
-            for (index, plant) in plants.enumerated() {
-                try? realm.write {
-                    plant.index = index
-                }
-            }
+        do {
+            plants = try plantsService.sortByFertilization()
+            event.value = .didLoadPlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
-        event.value = .didLoadPlants
     }
 
-    private func sortByDateAdded() {
-        plants = plants.sorted(by: { $0.id < $1.id })
-        if let realm = try? Realm() {
-            for (index, plant) in plants.enumerated() {
-                try? realm.write {
-                    plant.index = index
-                }
-            }
+    private func sortByOwnedSince() {
+        do {
+            plants = try plantsService.sortByOwnedSince()
+            event.value = .didLoadPlants
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
-        event.value = .didLoadPlants
     }
 
 }

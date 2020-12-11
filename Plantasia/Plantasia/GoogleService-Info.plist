@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>655122304663-9ve9jhpjhiao6rhf8pbaqnp53a1hoa4d.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.655122304663-9ve9jhpjhiao6rhf8pbaqnp53a1hoa4d</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByeBEPHp1zPICGYFkX5zXkAjNStxcTyaU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>655122304663</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.archlime-solutions.plantasia</string>
+	<key>PROJECT_ID</key>
+	<string>plantasia-cd028</string>
+	<key>STORAGE_BUCKET</key>
+	<string>plantasia-cd028.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:655122304663:ios:6b04616c95819f3e6463d2</string>
+	<key>DATABASE_URL</key>
+	<string>https://plantasia-cd028.firebaseio.com</string>
+</dict>
+</plist>

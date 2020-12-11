@@ -7,40 +7,55 @@
 //
 
 import Bond
-import RealmSwift
+import FirebaseCrashlytics
 
 class PhotoGalleryViewModel: BaseViewModel {
 
-    var error = Observable<GeneralError?>(nil)
-    var plantName: String?
-    var photos: [PlantPhoto]
-
-    init(plantName: String?, photos: [PlantPhoto]) {
-        self.plantName = plantName
-        self.photos = Array(photos.sorted(by: { $0.index < $1.index }))
+    enum Event {
+        case didLoadPlantPhotos
     }
 
-    func movePhoto(_ photo: PlantPhoto, fromPosition: Int, toPosition: Int) {
-        photos.remove(at: fromPosition)
-        photos.insert(photo, at: toPosition)
+    // MARK: - Properties
+    let error = Observable<GeneralError?>(nil)
+    let event = Observable<Event?>(nil)
+    var plantName: String?
+    var photos: [PlantPhoto]
+    var selectedPlantPhoto: PlantPhoto?
+    var selectedImage: UIImage?
+    var plant: Plant
+    private var plantId: Int?
+    private let plantPhotosService = PlantPhotosService()
 
-        if let realm = try? Realm() {
-            for (index, photo) in photos.enumerated() {
-                try? realm.write {
-                    photo.index = index
-                }
-            }
+    // MARK: - Lifecycle
+    init(plant: Plant, photos: [PlantPhoto]) {
+        self.plant = plant
+        self.plantName = plant.name
+        self.plantId = plant.id
+        self.photos = photos
+        getPlantPhotos()
+    }
+
+    // MARK: - Internal
+    func movePhoto(_ photo: PlantPhoto, fromPosition: Int, toPosition: Int) {
+        guard let plantId = plantId else { return }
+//        photos.remove(at: fromPosition)
+//        photos.insert(photo, at: toPosition)
+
+        do {
+            photos = try plantPhotosService.move(photo, fromPosition: fromPosition, toPosition: toPosition, plantId: plantId)
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 
-    func addPhoto(_ image: UIImage) {
-        if let realm = try? Realm() {
-            try? realm.write {
-                let plantPhoto = PlantPhoto(image: image)
-                plantPhoto.index = photos.count
-                realm.add(plantPhoto)
-                photos.append(plantPhoto)
-            }
+    func getPlantPhotos() {
+        guard let plantId = plantId else { return }
+        do {
+            try self.photos = plantPhotosService.getPhotosForPlant(withId: plantId)
+            event.value = .didLoadPlantPhotos
+        } catch let error {
+            Crashlytics.crashlytics().record(error: error)
+            self.error.value = GeneralError(title: "Could not load your photos", message: "Please try again.")
         }
     }
 
