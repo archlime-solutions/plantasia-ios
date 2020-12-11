@@ -223,6 +223,9 @@ class AddPlantViewController: BaseViewController, AlertPresenter {
             ownedSinceStackView.isHidden = false
             ownedSincePicker.datePickerMode = .date
             ownedSincePicker.maximumDate = Date()
+            if #available(iOS 13.4, *) {
+                ownedSincePicker.preferredDatePickerStyle = .wheels
+            }
             ownedSincePicker.backgroundColor = .whiteFFFFFF
             ownedSinceTextField.inputView = ownedSincePicker
             ownedSinceTextField.inputAccessoryView = pickerToolbar()

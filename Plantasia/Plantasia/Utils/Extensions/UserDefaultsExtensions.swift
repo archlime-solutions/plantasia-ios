@@ -14,6 +14,7 @@ extension UserDefaults {
         static let remindersTime = "RemindersTimeKey"
         static let didMigratePlantImagesToAppGroup = "DidMigratePlantImagesToAppGroupKey"
         static let didMigrateRealmConfigToAppGroup = "DidMigrateRealmConfigToAppGroupKey"
+        static let didShowWhatsInV110 = "DidShowWhatsInV1.1.0"
     }
 
     func getRemindersTime() -> Date {
@@ -42,6 +43,14 @@ extension UserDefaults {
 
     func setDidMigrateRealmConfigToAppGroup() {
         set(true, forKey: Keys.didMigrateRealmConfigToAppGroup)
+    }
+
+    func didShowWhatsInV110() -> Bool {
+        return bool(forKey: Keys.didShowWhatsInV110)
+    }
+
+    func setDidShowWhatsInV110() {
+        set(true, forKey: Keys.didShowWhatsInV110)
     }
 
 }

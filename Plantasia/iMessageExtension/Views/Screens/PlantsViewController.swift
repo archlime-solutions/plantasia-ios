@@ -24,7 +24,7 @@ class PlantsViewController: MSMessagesAppViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Analytics.logEvent("load_imessage_extension", parameters: nil)
-        plantsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+        plantsCollectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
         setupBindings()
         viewModel.loadPlants()
     }

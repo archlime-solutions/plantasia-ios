@@ -102,6 +102,10 @@ class Plant: Object {
         }
     }
 
+    func getRequiredAttentionRemainingDays() -> Int {
+        return min(getWateringRemainingDays(), getFertilizingRemainingDays())
+    }
+
     func getWateringRemainingDays() -> Int {
         guard let lastWateringDate = lastWateringDate,
             let wateringFrequencyDays = wateringFrequencyDays.value,

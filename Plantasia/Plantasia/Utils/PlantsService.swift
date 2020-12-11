@@ -36,24 +36,10 @@ class PlantsService {
         return false
     }
 
-    ///
-    /// - Returns: Returns a set containing the number of days until all of the stored plants require attention (watering or fertilizing).
-    func getPlantsAttentionRemainingDays() throws -> Set<Int> {
-        var result = Set<Int>()
-
-        for plant in try getPlants() {
-            var minNumberOfDays = Int.max
-            let wateringRemainingDays = plant.getWateringRemainingDays()
-            let fertilizingRemainingDays = plant.getFertilizingRemainingDays()
-            if wateringRemainingDays < minNumberOfDays {
-                minNumberOfDays = wateringRemainingDays
-            }
-            if fertilizingRemainingDays < minNumberOfDays {
-                minNumberOfDays = fertilizingRemainingDays
-            }
-            result.insert(minNumberOfDays)
-        }
-        return result
+    /// - Returns: Returns the number of days until the next stored plant requires attention (watering or fertilizing).
+    /// - Throws: db error.
+    func getRequiredAttentionRemainingDays() throws -> Int {
+        return try getPlants().map { $0.getRequiredAttentionRemainingDays() }.min() ?? 0
     }
 
     /// Marks the plants which require attention as watered and fertilized.
