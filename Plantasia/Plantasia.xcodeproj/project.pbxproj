@@ -974,7 +974,7 @@
 				CODE_SIGN_ENTITLEMENTS = Plantasia/Plantasia.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
@@ -1000,7 +1000,7 @@
 				CODE_SIGN_ENTITLEMENTS = Plantasia/Plantasia.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B6W985PHBM;
 				INFOPLIST_FILE = Plantasia/Resources/Info.plist;
